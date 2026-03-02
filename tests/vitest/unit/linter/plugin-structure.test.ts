@@ -57,9 +57,9 @@ describe('ESLint Plugin Structure', () => {
 
   it('should have meta information', () => {
     expect(eslintPlugin.meta).toBeDefined()
-    expect(eslintPlugin.meta.name).toBe('eslint-plugin-test-a11y-js')
-    expect(eslintPlugin.meta.version).toBeDefined()
-    expect(typeof eslintPlugin.meta.version).toBe('string')
+    expect(eslintPlugin.meta!.name).toBe('eslint-plugin-test-a11y-js')
+    expect(eslintPlugin.meta!.version).toBeDefined()
+    expect(typeof eslintPlugin.meta!.version).toBe('string')
   })
 
   it('should have rules object (even if empty)', () => {
@@ -73,13 +73,17 @@ describe('ESLint Plugin Structure', () => {
   })
 
   it('should have recommended config', () => {
-    expect(eslintPlugin.configs.recommended).toBeDefined()
-    expect(eslintPlugin.configs.recommended.plugins).toContain('test-a11y-js')
-    expect(eslintPlugin.configs.recommended.rules).toBeDefined()
+    expect(eslintPlugin.configs).toBeDefined()
+    const recommended = eslintPlugin.configs!.recommended as { plugins?: string[]; rules?: Record<string, unknown> } | undefined
+    expect(recommended).toBeDefined()
+    expect(recommended?.plugins).toContain('test-a11y-js')
+    expect(recommended?.rules).toBeDefined()
   })
 
   it('should have recommended rules configured', () => {
-    const rules = eslintPlugin.configs.recommended.rules
+    const recommended = eslintPlugin.configs!.recommended as { rules?: Record<string, unknown> }
+    const rules = recommended?.rules
+    expect(rules).toBeDefined()
     // Critical/Serious violations
     expect(rules).toHaveProperty('test-a11y-js/image-alt')
     expect(rules).toHaveProperty('test-a11y-js/button-label')
@@ -110,7 +114,7 @@ describe('ESLint Plugin Structure', () => {
 
   it('should export all 43 rules', () => {
     expect(eslintPlugin.rules).toBeDefined()
-    const ruleNames = Object.keys(eslintPlugin.rules)
+    const ruleNames = Object.keys(eslintPlugin.rules ?? {})
     expect(ruleNames).toHaveLength(43)
 
     for (const name of ALL_RULE_NAMES) {

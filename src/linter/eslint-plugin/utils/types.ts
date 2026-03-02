@@ -7,9 +7,7 @@ import type { Rule } from 'eslint'
 /**
  * Extended rule context with additional utilities
  */
-export interface A11yRuleContext extends Rule.RuleContext {
-  // Can be extended with custom utilities if needed
-}
+export type A11yRuleContext = Rule.RuleContext
 
 /**
  * Rule meta information for accessibility rules

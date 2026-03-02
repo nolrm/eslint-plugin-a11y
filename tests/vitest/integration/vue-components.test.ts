@@ -194,12 +194,7 @@ describe('Vue Component Integration', () => {
       // Note: Table structure checks work on actual DOM elements
       // Vue mount may not fully render table structure, so we check if any violations exist
       // In real usage, table checks work correctly
-      const tableViolations = results.violations.filter(v => 
-        v.id === 'table-caption' || 
-        v.id === 'table-headers' ||
-        v.id === 'table-header-scope'
-      )
-      // This test verifies the check runs; actual violations depend on DOM structure
+      // Table structure violations (table-caption, table-headers, etc.) depend on DOM; this test verifies the check runs
       // See a11y-checker.test.ts for full table structure tests
       expect(results.violations).toBeDefined()
     })

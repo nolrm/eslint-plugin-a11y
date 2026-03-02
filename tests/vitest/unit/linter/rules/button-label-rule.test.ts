@@ -119,7 +119,8 @@ describe('button-label rule - suggestions', () => {
               messageId: 'missingLabel',
               suggestions: [
                 {
-                  desc: 'Add aria-label attribute for icon-only button'
+                  desc: 'Add aria-label attribute for icon-only button',
+                  output: ''
                 }
               ]
             }

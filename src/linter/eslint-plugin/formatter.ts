@@ -36,7 +36,7 @@ const colors = {
 /**
  * Format a single file's results
  */
-function formatFile(result: FormatterResult, useColors: boolean = true): string {
+function formatFile(result: FormatterResult, useColors = true): string {
   const { filePath, messages, errorCount, warningCount } = result
   
   if (messages.length === 0) {
@@ -101,7 +101,7 @@ function formatFile(result: FormatterResult, useColors: boolean = true): string 
 /**
  * Main formatter function
  */
-export function format(results: FormatterResult[], useColors: boolean = true): string {
+export function format(results: FormatterResult[], useColors = true): string {
   const c = useColors ? colors : { reset: '', bright: '', dim: '', red: '', green: '', yellow: '', blue: '', cyan: '', gray: '' }
   
   const lines: string[] = []

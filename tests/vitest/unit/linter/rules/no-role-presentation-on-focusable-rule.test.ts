@@ -89,8 +89,8 @@ describe('no-role-presentation-on-focusable rule - JSX', () => {
           errors: [{
             messageId: 'noRolePresentationOnFocusable',
             suggestions: [
-              { desc: 'Remove role attribute' },
-              { desc: 'Add tabindex="-1" to make element non-focusable' }
+              { desc: 'Remove role attribute', output: '' },
+              { desc: 'Add tabindex="-1" to make element non-focusable', output: '' }
             ]
           }]
         }

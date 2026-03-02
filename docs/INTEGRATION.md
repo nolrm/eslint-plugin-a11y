@@ -137,7 +137,7 @@ npx eslint your-file.jsx
 
 The plugin should export:
 - `meta` - Plugin metadata
-- `rules` - All 36 accessibility rules
+- `rules` - All 43 accessibility rules
 - `configs` - All 5 configuration presets (minimal, recommended, strict, react, vue)
 
 ## Troubleshooting

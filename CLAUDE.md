@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-eslint-plugin-test-a11y-js is an ESLint accessibility (a11y) plugin for React, Vue, and JSX with flat-config (ESLint v9+) support. It provides 36 accessibility rules and a dual API: ESLint plugin for static analysis + A11yChecker runtime API for programmatic testing.
+eslint-plugin-test-a11y-js is an ESLint accessibility (a11y) plugin for React, Vue, and JSX with flat-config (ESLint v9+) support. It provides 43 accessibility rules and a dual API: ESLint plugin for static analysis + A11yChecker runtime API for programmatic testing.
 
 ## Common Commands
 
@@ -41,7 +41,7 @@ Each rule in `src/linter/eslint-plugin/rules/` follows ESLint standard:
 - Supports JSX, Vue templates, and HTML nodes
 
 ### Key Directories
-- `src/linter/eslint-plugin/rules/` - 36 accessibility rules
+- `src/linter/eslint-plugin/rules/` - 43 accessibility rules
 - `src/linter/eslint-plugin/configs/` - Presets (minimal, recommended, strict, react, vue, flat)
 - `src/linter/eslint-plugin/utils/` - Shared utilities (JSX/Vue/HTML AST parsing, component mapping)
 - `src/core/aria-spec.ts` - ARIA role/property/relationship database (784 lines)

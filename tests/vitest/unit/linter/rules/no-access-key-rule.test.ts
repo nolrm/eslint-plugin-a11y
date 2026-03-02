@@ -61,7 +61,8 @@ describe('no-access-key rule - JSX', () => {
           errors: [{
             messageId: 'noAccessKey',
             suggestions: [{
-              desc: 'Remove accesskey attribute'
+              desc: 'Remove accesskey attribute',
+              output: ''
             }]
           }]
         }

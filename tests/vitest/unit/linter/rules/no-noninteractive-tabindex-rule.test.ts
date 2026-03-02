@@ -82,7 +82,8 @@ describe('no-noninteractive-tabindex rule - JSX', () => {
           errors: [{
             messageId: 'noNonInteractiveTabindex',
             suggestions: [{
-              desc: 'Remove tabindex attribute'
+              desc: 'Remove tabindex attribute',
+              output: ''
             }]
           }]
         }

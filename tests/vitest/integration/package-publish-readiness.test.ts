@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { readFileSync, existsSync, statSync } from 'fs'
+import { readFileSync, statSync } from 'fs'
 import { join } from 'path'
 import { execSync } from 'child_process'
 import { createRequire } from 'module'

@@ -1,9 +1,23 @@
-import { describe, it, expect, beforeAll } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { ESLint } from 'eslint'
-import { join } from 'path'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { existsSync } from 'fs'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
+
+function getProjectRoot(): string {
+  const fromCwd = process.cwd()
+  const pluginFromCwd = resolve(fromCwd, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromCwd)) return fromCwd
+  const fromFile = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
+  const pluginFromFile = resolve(fromFile, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromFile)) return fromFile
+  throw new Error(
+    `dist/linter/eslint-plugin/index.js not found. Tried cwd=${fromCwd} and fileRoot=${fromFile}. Ensure npm run build ran first.`
+  )
+}
 
 /**
  * Component mapping integration tests
@@ -13,7 +27,8 @@ const require = createRequire(import.meta.url)
 describe('Component Mapping Integration', () => {
 
   it('should lint custom Link component as anchor', async () => {
-    const pluginPath = join(process.cwd(), 'dist/linter/eslint-plugin/index.js')
+    const projectRoot = getProjectRoot()
+    const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
     const plugin = require(pluginPath).default
     
     const eslintWithSettings = new ESLint({
@@ -54,7 +69,8 @@ describe('Component Mapping Integration', () => {
   })
 
   it('should lint custom Button component as button', async () => {
-    const pluginPath = join(process.cwd(), 'dist/linter/eslint-plugin/index.js')
+    const projectRoot = getProjectRoot()
+    const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
     const plugin = require(pluginPath).default
     
     const eslintWithSettings = new ESLint({
@@ -95,7 +111,8 @@ describe('Component Mapping Integration', () => {
   })
 
   it('should handle polymorphic components', async () => {
-    const pluginPath = join(process.cwd(), 'dist/linter/eslint-plugin/index.js')
+    const projectRoot = getProjectRoot()
+    const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
     const plugin = require(pluginPath).default
     
     const eslintWithSettings = new ESLint({

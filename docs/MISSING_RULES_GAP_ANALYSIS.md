@@ -1,13 +1,22 @@
 # Gap Analysis: Missing Rules vs jsx-a11y + vuejs-accessibility
 
-This document lists what **eslint-plugin-test-a11y-js** is missing compared to using **eslint-plugin-jsx-a11y** (React) and **eslint-plugin-vuejs-accessibility** (Vue) together. Use it for roadmap planning and contribution prioritization.
+> **Historical document.** This analysis was written when the plugin had a **16-rule baseline**. As of 1.0, the plugin ships **43 rules** and achieves broad parity with jsx-a11y. See **Current state** below and [MIGRATION_FROM_JSX_A11Y.md](./MIGRATION_FROM_JSX_A11Y.md) for the authoritative mapping.
+
+This document lists what **eslint-plugin-test-a11y-js** was missing compared to **eslint-plugin-jsx-a11y** and **eslint-plugin-vuejs-accessibility**. It is retained for roadmap context and contribution prioritization of post-1.0 work.
 
 ---
 
-## Scope
+## Current state (1.0)
 
-- **Baseline:** Current plugin has **16 rules** (image-alt, button-label, link-text, form-label, heading-order, iframe-title, fieldset-legend, table-structure, details-summary, video-captions, audio-captions, landmark-roles, dialog-modal, aria-validation, semantic-html, form-validation).
-- **Comparison:** jsx-a11y has **38 rules**; vuejs-accessibility has **23 rules** (many overlapping jsx-a11y). This doc covers every rule from both that we do **not** fully replace.
+- **43 rules** are implemented and registered. All rules previously listed in this doc as "missing" static/event/keyboard rules are now implemented: `no-access-key`, `no-autofocus`, `tabindex-no-positive`, `no-distracting-elements`, `click-events-have-key-events`, `mouse-events-have-key-events`, `no-static-element-interactions`, `no-noninteractive-element-interactions`, `interactive-supports-focus`, `no-noninteractive-tabindex`, `aria-activedescendant-has-tabindex`, `heading-has-content`, `html-has-lang`, `anchor-is-valid`, `no-interactive-element-to-noninteractive-role`, `no-noninteractive-element-to-interactive-role`, `no-redundant-roles`, `prefer-tag-over-role`, `control-has-associated-label`, `scope`, `img-redundant-alt`, and related rules.
+- **Intentionally out of scope** for the ESLint plugin (use A11yChecker or other tools): cross-file `aria-labelledby`/`aria-describedby` resolution, full keyboard/focus runtime checks, color-contrast.
+
+---
+
+## Scope (historical baseline)
+
+- **Baseline:** At the time of writing, the plugin had **16 rules** (image-alt, button-label, link-text, form-label, heading-order, iframe-title, fieldset-legend, table-structure, details-summary, video-captions, audio-captions, landmark-roles, dialog-modal, aria-validation, semantic-html, form-validation).
+- **Comparison:** jsx-a11y has **38 rules**; vuejs-accessibility has **23 rules** (many overlapping jsx-a11y). This doc covered every rule from both that we did **not** fully replace at that time.
 
 ---
 

@@ -89,7 +89,8 @@ describe('interactive-supports-focus rule - JSX', () => {
           errors: [{
             messageId: 'interactiveMustBeFocusable',
             suggestions: [{
-              desc: 'Add tabindex="0" to make element focusable'
+              desc: 'Add tabindex="0" to make element focusable',
+              output: ''
             }]
           }]
         }

@@ -157,7 +157,8 @@ describe('iframe-title rule - Vue', () => {
               messageId: 'missingTitle',
               suggestions: [
                 {
-                  desc: 'Add title attribute placeholder'
+                  desc: 'Add title attribute placeholder',
+                  output: ''
                 }
               ]
             }
@@ -180,7 +181,8 @@ describe('iframe-title rule - suggestions', () => {
               messageId: 'missingTitle',
               suggestions: [
                 {
-                  desc: 'Add title attribute placeholder'
+                  desc: 'Add title attribute placeholder',
+                  output: ''
                 }
               ]
             }

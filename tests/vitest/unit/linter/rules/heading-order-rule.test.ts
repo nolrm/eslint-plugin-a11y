@@ -128,7 +128,8 @@ describe('heading-order rule - suggestions', () => {
               },
               suggestions: [
                 {
-                  desc: 'Consider using h2 instead of h3 to maintain proper heading hierarchy'
+                  desc: 'Consider using h2 instead of h3 to maintain proper heading hierarchy',
+                  output: ''
                 }
               ]
             }

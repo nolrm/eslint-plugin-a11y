@@ -102,11 +102,11 @@ describe('accessible-emoji rule - JSX', () => {
           errors: [
             {
               messageId: 'emojiNeedsRole',
-              suggestions: [{ desc: 'Add role="img"' }]
+              suggestions: [{ desc: 'Add role="img"', output: '' }]
             },
             {
               messageId: 'emojiNeedsLabel',
-              suggestions: [{ desc: 'Add aria-label' }]
+              suggestions: [{ desc: 'Add aria-label', output: '' }]
             }
           ]
         }

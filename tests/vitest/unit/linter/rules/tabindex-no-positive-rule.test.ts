@@ -63,7 +63,8 @@ describe('tabindex-no-positive rule - JSX', () => {
           errors: [{
             messageId: 'noPositiveTabindex',
             suggestions: [{
-              desc: 'Change to tabindex="0" (focusable in DOM order)'
+              desc: 'Change to tabindex="0" (focusable in DOM order)',
+              output: ''
             }]
           }]
         }

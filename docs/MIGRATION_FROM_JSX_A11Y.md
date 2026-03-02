@@ -13,41 +13,42 @@ This guide helps you migrate from `eslint-plugin-jsx-a11y` to `eslint-plugin-tes
 
 ## Rule Mapping
 
-| jsx-a11y Rule | test-a11y-js Rule | Notes |
-|---------------|-------------------|-------|
-| `jsx-a11y/alt-text` | `test-a11y-js/image-alt` | Enhanced with decorative image options |
-| `jsx-a11y/anchor-is-valid` | `test-a11y-js/link-text` | Enhanced with denylist options |
-| `jsx-a11y/aria-activedescendant-has-tabindex` | ❌ Not available | Use A11yChecker runtime API |
-| `jsx-a11y/aria-props` | `test-a11y-js/aria-validation` | ✅ Available (AST-based) |
-| `jsx-a11y/aria-proptypes` | `test-a11y-js/aria-validation` | ✅ Available (AST-based) |
-| `jsx-a11y/aria-role` | `test-a11y-js/aria-validation` | ✅ Available (AST-based) |
-| `jsx-a11y/aria-unsupported-elements` | `test-a11y-js/aria-validation` | ✅ Available (AST-based) |
-| `jsx-a11y/click-events-have-key-events` | ❌ Not available | Runtime-only concern |
-| `jsx-a11y/heading-has-content` | `test-a11y-js/heading-order` | Different approach (hierarchy) |
-| `jsx-a11y/html-has-lang` | ❌ Not available | Use A11yChecker runtime API |
-| `jsx-a11y/iframe-has-title` | `test-a11y-js/iframe-title` | ✅ Available |
-| `jsx-a11y/img-redundant-alt` | Built into `test-a11y-js/image-alt` | Checks empty alt |
-| `jsx-a11y/interactive-supports-focus` | ❌ Not available | Runtime-only concern |
-| `jsx-a11y/label-has-associated-control` | `test-a11y-js/form-label` | ✅ Available |
-| `jsx-a11y/media-has-caption` | `test-a11y-js/video-captions`, `test-a11y-js/audio-captions` | ✅ Available |
-| `jsx-a11y/mouse-events-have-key-events` | ❌ Not available | Runtime-only concern |
-| `jsx-a11y/no-access-key` | ❌ Not available | Use A11yChecker runtime API |
-| `jsx-a11y/no-autofocus` | ❌ Not available | Use A11yChecker runtime API |
-| `jsx-a11y/no-distracting-elements` | ❌ Not available | Use A11yChecker runtime API |
-| `jsx-a11y/no-interactive-element-to-noninteractive-role` | `test-a11y-js/semantic-html` | ✅ Available (AST-based) |
-| `jsx-a11y/no-noninteractive-element-interactions` | ❌ Not available | Runtime-only concern |
-| `jsx-a11y/no-noninteractive-element-to-interactive-role` | `test-a11y-js/semantic-html` | ✅ Available (AST-based) |
-| `jsx-a11y/no-noninteractive-tabindex` | ❌ Not available | Runtime-only concern |
-| `jsx-a11y/no-redundant-roles` | `test-a11y-js/semantic-html` | ✅ Available (AST-based) |
-| `jsx-a11y/no-static-element-interactions` | ❌ Not available | Runtime-only concern |
-| `jsx-a11y/role-has-required-aria-props` | `test-a11y-js/aria-validation` | ✅ Available (AST-based) |
-| `jsx-a11y/role-supports-aria-props` | `test-a11y-js/aria-validation` | ✅ Available (AST-based) |
-| `jsx-a11y/scope` | `test-a11y-js/table-structure` | ✅ Available |
-| `jsx-a11y/tabindex-no-positive` | ❌ Not available | Runtime-only concern |
+Audited against `src/linter/eslint-plugin/index.ts` (43 rules). Config Preset indicates which 1.0 presets include the rule: **minimal** (3 rules), **recommended** (30 rules), **strict** (43 rules).
+
+| jsx-a11y Rule | test-a11y-js Rule | Config Preset | Notes |
+|---------------|-------------------|---------------|-------|
+| `jsx-a11y/alt-text` | `test-a11y-js/image-alt` | minimal, recommended, strict | Enhanced with decorative image options |
+| `jsx-a11y/anchor-is-valid` | `test-a11y-js/anchor-is-valid` | recommended, strict | Href/link validation; see also `link-text` for descriptive text |
+| `jsx-a11y/aria-activedescendant-has-tabindex` | `test-a11y-js/aria-activedescendant-has-tabindex` | recommended, strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-props` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-proptypes` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-role` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-unsupported-elements` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/click-events-have-key-events` | `test-a11y-js/click-events-have-key-events` | recommended, strict | ✅ Available |
+| `jsx-a11y/heading-has-content` | `test-a11y-js/heading-has-content` | recommended, strict | ✅ Available; see also `heading-order` for hierarchy |
+| `jsx-a11y/html-has-lang` | `test-a11y-js/html-has-lang` | recommended, strict | ✅ Available (contextual: &lt;html&gt; in scope) |
+| `jsx-a11y/iframe-has-title` | `test-a11y-js/iframe-title` | recommended, strict | ✅ Available |
+| `jsx-a11y/img-redundant-alt` | `test-a11y-js/img-redundant-alt` | strict | ✅ Available (dedicated rule) |
+| `jsx-a11y/interactive-supports-focus` | `test-a11y-js/interactive-supports-focus` | recommended, strict | ✅ Available |
+| `jsx-a11y/label-has-associated-control` | `test-a11y-js/form-label` | minimal, recommended, strict | ✅ Available |
+| `jsx-a11y/media-has-caption` | `test-a11y-js/video-captions`, `test-a11y-js/audio-captions` | recommended, strict | ✅ Available |
+| `jsx-a11y/mouse-events-have-key-events` | `test-a11y-js/mouse-events-have-key-events` | strict | ✅ Available |
+| `jsx-a11y/no-access-key` | `test-a11y-js/no-access-key` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-autofocus` | `test-a11y-js/no-autofocus` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-distracting-elements` | `test-a11y-js/no-distracting-elements` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-interactive-element-to-noninteractive-role` | `test-a11y-js/no-interactive-element-to-noninteractive-role` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-noninteractive-element-interactions` | `test-a11y-js/no-noninteractive-element-interactions` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-noninteractive-element-to-interactive-role` | `test-a11y-js/no-noninteractive-element-to-interactive-role` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-noninteractive-tabindex` | `test-a11y-js/no-noninteractive-tabindex` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-redundant-roles` | `test-a11y-js/no-redundant-roles` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-static-element-interactions` | `test-a11y-js/no-static-element-interactions` | recommended, strict | ✅ Available |
+| `jsx-a11y/role-has-required-aria-props` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/role-supports-aria-props` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/scope` | `test-a11y-js/scope` | recommended, strict | ✅ Available; see also `table-structure` |
+| `jsx-a11y/tabindex-no-positive` | `test-a11y-js/tabindex-no-positive` | recommended, strict | ✅ Available |
 
 **Legend:**
-- ✅ Available now
-- ❌ Not available (runtime-only concerns, use A11yChecker API)
+- ✅ All listed jsx-a11y rules have a corresponding test-a11y-js rule or are covered by a combined rule (e.g. aria-validation). Use the Config Preset column to see which preset includes each rule.
 
 ## Step-by-Step Migration
 
@@ -146,22 +147,9 @@ module.exports = {
 }
 ```
 
-### Step 5: Handle Missing Rules
+### Step 5: Optional and Strict-Only Rules
 
-For rules not available in test-a11y-js:
-
-1. **Runtime-only rules** (keyboard events, focus, etc.):
-   - Use `A11yChecker` programmatic API in tests
-   - See [Integration Guide](./INTEGRATION.md)
-
-2. **ARIA rules**:
-   - ✅ Available in `test-a11y-js/aria-validation` (v0.12.0+)
-   - ✅ Semantic HTML rules available in `test-a11y-js/semantic-html` (v0.12.0+)
-   - ✅ Form validation available in `test-a11y-js/form-validation` (v0.12.0+)
-
-3. **Other missing rules**:
-   - Check if A11yChecker API covers it
-   - Consider if it's truly needed (some jsx-a11y rules are overly strict)
+All jsx-a11y rules listed above are implemented in test-a11y-js. Some are only in the **strict** preset (e.g. `aria-validation`, `img-redundant-alt`, `mouse-events-have-key-events`). For runtime-only checks (e.g. focus traps, keyboard navigation), use the `A11yChecker` programmatic API; see [Integration Guide](./INTEGRATION.md).
 
 ## Compatibility Bridge Preset
 

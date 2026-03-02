@@ -111,13 +111,13 @@ With cache enabled, subsequent runs should be 5-10x faster.
 - ~30% faster than recommended
 - Best for large projects starting out
 
-### Recommended Config (36 rules)
+### Recommended Config (30 rules)
 - Balanced performance
 - Standard execution time
 - Good for most projects
 
-### Strict Config (36 rules, all errors)
-- Same performance as recommended
+### Strict Config (43 rules, all errors)
+- Same performance characteristics as recommended
 - More errors reported (not slower)
 
 ## Tips for Large Projects

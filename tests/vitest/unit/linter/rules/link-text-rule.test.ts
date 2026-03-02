@@ -224,7 +224,8 @@ describe('link-text rule - suggestions', () => {
               messageId: 'nonDescriptive',
               suggestions: [
                 {
-                  desc: 'Replace with descriptive text placeholder'
+                  desc: 'Replace with descriptive text placeholder',
+                  output: ''
                 }
               ]
             }

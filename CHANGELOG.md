@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Planned for 1.0.0
+- After 0.17.0 is validated in production with no issues, the next release will be **1.0.0** with a formal API stability contract (package name, rule names, config names, exports unchanged until next major). See [ROADMAP_1.0.md](./docs/ROADMAP_1.0.md).
+
+## [0.17.0] - 2026-03-03
+
+### Added
+- Coverage and documentation updates per [ROADMAP_1.0.md](./docs/ROADMAP_1.0.md): runtime-comment and ast-utils test coverage, migration and gap-analysis doc audits, PERFORMANCE.md and ROADMAP.md updated for 43 rules and correct preset counts.
+
+### Changed
+- Documentation: `docs/MIGRATION_FROM_JSX_A11Y.md` audited against all 43 rules; added Config Preset column (minimal / recommended / strict).
+- Documentation: `docs/MISSING_RULES_GAP_ANALYSIS.md` marked historical (16-rule baseline) with current-state summary.
+- Documentation: `docs/PERFORMANCE.md` and `docs/ROADMAP.md` updated (30 recommended, 43 strict; current state and post-1.0 intentions).
+
+---
+
+## [Unreleased]
+
 ### Changed
 - Internal: ContextKit integration; `prepare` script sets `core.hooksPath` to `.contextkit/hooks`; `.gitignore` updated for `.contextkit/` and `.cursor/`.
 - Performance: `component-mapping` — `NATIVE_TAGS` is now a module-level `Set` (was recreated as an array on every `getElementRoleFromJSX` call); `includes()` replaced with `Set.has()` for O(1) lookups.

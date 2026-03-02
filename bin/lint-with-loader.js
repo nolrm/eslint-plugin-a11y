@@ -19,14 +19,14 @@ try {
   if (typeof format !== 'function') {
     const formatter = formatterModule.default || formatterModule
     if (formatter && typeof formatter.format === 'function') {
-      format = (results, useColors) => formatter.format(results)
+      format = (results, _useColors) => formatter.format(results)
     } else {
       throw new Error('Formatter format function not found')
     }
   }
 } catch (e) {
   // Fallback formatter
-  format = (results, useColors) => {
+  format = (results, _useColors) => {
     const totalErrors = results.reduce((sum, r) => sum + r.errorCount, 0)
     const totalWarnings = results.reduce((sum, r) => sum + r.warningCount, 0)
     const filesLinted = results.length
@@ -125,7 +125,7 @@ async function main() {
     
     // Calculate totals
     const totalErrors = results.reduce((sum, r) => sum + r.errorCount, 0)
-    const totalWarnings = results.reduce((sum, r) => sum + r.warningCount, 0)
+    const _totalWarnings = results.reduce((sum, r) => sum + r.warningCount, 0)
     
     // Exit with appropriate code
     process.exit(totalErrors > 0 ? 1 : 0)

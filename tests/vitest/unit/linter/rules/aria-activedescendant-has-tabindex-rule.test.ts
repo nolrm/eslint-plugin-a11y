@@ -78,7 +78,8 @@ describe('aria-activedescendant-has-tabindex rule - JSX', () => {
           errors: [{
             messageId: 'missingTabindex',
             suggestions: [{
-              desc: 'Add tabindex="0" to make element focusable'
+              desc: 'Add tabindex="0" to make element focusable',
+              output: ''
             }]
           }]
         }

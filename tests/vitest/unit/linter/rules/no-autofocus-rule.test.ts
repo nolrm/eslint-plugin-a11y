@@ -61,7 +61,8 @@ describe('no-autofocus rule - JSX', () => {
           errors: [{
             messageId: 'noAutofocus',
             suggestions: [{
-              desc: 'Remove autofocus attribute'
+              desc: 'Remove autofocus attribute',
+              output: ''
             }]
           }]
         }

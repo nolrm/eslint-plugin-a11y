@@ -1,10 +1,23 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ESLint } from 'eslint'
-import { join } from 'path'
+import { join, resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import { existsSync } from 'fs'
 import { createRequire } from 'module'
 
 const require = createRequire(import.meta.url)
+
+function getProjectRoot(): string {
+  const fromCwd = process.cwd()
+  const pluginFromCwd = resolve(fromCwd, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromCwd)) return fromCwd
+  const fromFile = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
+  const pluginFromFile = resolve(fromFile, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromFile)) return fromFile
+  throw new Error(
+    `dist/linter/eslint-plugin/index.js not found. Tried cwd=${fromCwd} and fileRoot=${fromFile}. Ensure npm run build ran first.`
+  )
+}
 
 /**
  * End-to-End tests that run the actual ESLint linter on real files
@@ -12,16 +25,19 @@ const require = createRequire(import.meta.url)
  */
 
 describe('ESLint - End-to-End with Real Files', () => {
-  const fixturesDir = join(process.cwd(), 'tests/e2e/fixtures')
-  const reactAppDir = join(fixturesDir, 'react-app')
+  let fixturesDir: string
+  let reactAppDir: string
   let eslint: ESLint
 
   beforeAll(() => {
+    const projectRoot = getProjectRoot()
+    fixturesDir = join(projectRoot, 'tests/e2e/fixtures')
+    reactAppDir = join(fixturesDir, 'react-app')
     // Verify fixtures exist
     expect(existsSync(reactAppDir)).toBe(true)
     
     // Load the built plugin
-    const pluginPath = join(process.cwd(), 'dist/linter/eslint-plugin/index.js')
+    const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
     const plugin = require(pluginPath).default
     
     // Create ESLint instance with the plugin

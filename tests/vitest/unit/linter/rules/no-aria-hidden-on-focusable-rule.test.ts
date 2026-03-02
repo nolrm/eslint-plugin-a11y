@@ -99,8 +99,8 @@ describe('no-aria-hidden-on-focusable rule - JSX', () => {
           errors: [{
             messageId: 'noAriaHiddenOnFocusable',
             suggestions: [
-              { desc: 'Remove aria-hidden attribute' },
-              { desc: 'Add tabindex="-1" to make element non-focusable' }
+              { desc: 'Remove aria-hidden attribute', output: '' },
+              { desc: 'Add tabindex="-1" to make element non-focusable', output: '' }
             ]
           }]
         }

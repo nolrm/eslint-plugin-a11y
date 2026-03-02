@@ -9,7 +9,7 @@ import type { Rule } from 'eslint'
 /**
  * Create a mock ESLint rule context
  */
-export function createMockContext(source: string = '', filename: string = 'test.jsx'): Rule.RuleContext {
+export function createMockContext(source = '', filename = 'test.jsx'): Rule.RuleContext {
   return {
     getFilename: () => filename,
     getSourceCode: () => ({
@@ -66,12 +66,7 @@ export function createMockContext(source: string = '', filename: string = 'test.
     }),
     getAncestors: () => [],
     getDeclaredVariables: () => [],
-    markVariableAsUsed: () => {},
-    getSourceCode: () => ({
-      getText: () => source,
-      getAllComments: () => [],
-      parserServices: {}
-    })
+    markVariableAsUsed: () => {}
   } as any
 }
 
@@ -159,7 +154,7 @@ export function validateRuleStructure(rule: any) {
  * Test rule with multiple frameworks
  */
 export async function testRuleWithFrameworks(
-  rule: any,
+  _rule: any,
   validCode: string[],
   invalidCode: Array<{ code: string; errors: any[] }>,
   frameworks: ('jsx' | 'vue' | 'html')[] = ['jsx', 'vue', 'html']

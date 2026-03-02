@@ -1,14 +1,28 @@
 import { describe, it, expect } from 'vitest'
 import {
-  getNodeText,
   isJSXElement,
   isVueElement,
   isHTMLLiteral,
   extractTextContent
 } from '../../../../src/linter/eslint-plugin/utils/ast-utils.js'
-import { jsxToElement, hasJSXAttribute, getJSXAttribute } from '../../../../src/linter/eslint-plugin/utils/jsx-ast-utils.js'
-import { parseHTMLString, extractHTMLFromNode, htmlNodeToElement } from '../../../../src/linter/eslint-plugin/utils/html-ast-utils.js'
-import { vueElementToDOM } from '../../../../src/linter/eslint-plugin/utils/vue-ast-utils.js'
+import {
+  jsxToElement,
+  hasJSXAttribute,
+  getJSXAttribute,
+  isJSXAttributeDynamic
+} from '../../../../src/linter/eslint-plugin/utils/jsx-ast-utils.js'
+import {
+  parseHTMLString,
+  extractHTMLFromNode,
+  htmlNodeToElement,
+  isHTMLTemplate
+} from '../../../../src/linter/eslint-plugin/utils/html-ast-utils.js'
+import {
+  vueElementToDOM,
+  isVueAttributeDynamic,
+  getVueAttribute,
+  hasVueAttribute
+} from '../../../../src/linter/eslint-plugin/utils/vue-ast-utils.js'
 
 // Mock ESLint context
 function createMockContext(source: string): any {
@@ -145,6 +159,40 @@ describe('AST Utils', () => {
       expect(attr).toBeDefined()
       expect(attr?.name.name).toBe('alt')
     })
+
+    it('should report dynamic JSX attribute when value is JSXExpressionContainer with non-Literal', () => {
+      const attrLiteral = {
+        name: { name: 'alt' },
+        value: { type: 'Literal', value: 'Test' }
+      } as any
+      const attrDynamic = {
+        name: { name: 'alt' },
+        value: {
+          type: 'JSXExpressionContainer',
+          expression: { type: 'Identifier', name: 'altText' }
+        }
+      } as any
+      expect(isJSXAttributeDynamic(attrLiteral)).toBe(false)
+      expect(isJSXAttributeDynamic(attrDynamic)).toBe(true)
+    })
+
+    it('should skip JSXSpreadAttribute in getJSXAttribute', () => {
+      const jsxNode = {
+        type: 'JSXOpeningElement',
+        name: { name: 'div' },
+        attributes: [
+          { type: 'JSXSpreadAttribute', argument: { name: 'props' } },
+          {
+            type: 'JSXAttribute',
+            name: { name: 'role' },
+            value: { type: 'Literal', value: 'button' }
+          }
+        ]
+      } as any
+      const attr = getJSXAttribute(jsxNode, 'role')
+      expect(attr).toBeDefined()
+      expect(attr?.name.name).toBe('role')
+    })
   })
 
   describe('html-ast-utils', () => {
@@ -214,6 +262,83 @@ describe('AST Utils', () => {
       expect(html).toBeNull() // Can't analyze dynamic content
     })
 
+    it('should extract HTML from tagged template expression (static)', () => {
+      const node = {
+        type: 'TaggedTemplateExpression',
+        tag: { name: 'html' },
+        quasi: {
+          quasis: [{ value: { cooked: '<div>Hello</div>' } }],
+          expressions: []
+        },
+        range: [0, 25]
+      } as any
+
+      const context = createMockContext('html`<div>Hello</div>`')
+      const html = extractHTMLFromNode(node, context)
+
+      expect(html).toBe('<div>Hello</div>')
+    })
+
+    it('should return null for tagged template with expressions', () => {
+      const node = {
+        type: 'TaggedTemplateExpression',
+        tag: { name: 'html' },
+        quasi: {
+          quasis: [
+            { value: { cooked: '<div>' } },
+            { value: { cooked: '</div>' } }
+          ],
+          expressions: [{ type: 'Identifier', name: 'x' }]
+        },
+        range: [0, 20]
+      } as any
+
+      const context = createMockContext('html`<div>${x}</div>`')
+      const html = extractHTMLFromNode(node, context)
+
+      expect(html).toBeNull()
+    })
+
+    it('should return null from extractHTMLFromNode for non-Literal/Template/Tagged node', () => {
+      const node = { type: 'Identifier', name: 'x' } as any
+      const context = createMockContext('')
+      expect(extractHTMLFromNode(node, context)).toBeNull()
+    })
+
+    it('should return null from htmlNodeToElement when extractHTML returns null', () => {
+      const node = { type: 'Identifier', name: 'x' } as any
+      const context = createMockContext('')
+      expect(htmlNodeToElement(node, context)).toBeNull()
+    })
+
+    it('should detect HTML-like content in TemplateLiteral via isHTMLTemplate', () => {
+      const node = {
+        type: 'TemplateLiteral',
+        quasis: [{ value: { cooked: '<span>hi</span>' } }],
+        expressions: [],
+        range: [0, 20]
+      } as any
+      const context = createMockContext('`<span>hi</span>`')
+      expect(isHTMLTemplate(node, context)).toBe(true)
+    })
+
+    it('should return false from isHTMLTemplate for non-HTML-like template', () => {
+      const node = {
+        type: 'TemplateLiteral',
+        quasis: [{ value: { cooked: 'just text' } }],
+        expressions: [],
+        range: [0, 10]
+      } as any
+      const context = createMockContext('`just text`')
+      expect(isHTMLTemplate(node, context)).toBe(false)
+    })
+
+    it('should return false from isHTMLTemplate for non-template node', () => {
+      const node = { type: 'Literal', value: '<div>x</div>' } as any
+      const context = createMockContext('')
+      expect(isHTMLTemplate(node, context)).toBe(false)
+    })
+
     it('should convert HTML node to DOM element', () => {
       const node = {
         type: 'Literal',
@@ -248,6 +373,37 @@ describe('AST Utils', () => {
           throw error
         }
       }
+    })
+
+    it('should detect dynamic Vue attribute via isVueAttributeDynamic', () => {
+      const staticAttr = { key: { name: 'id' }, value: { value: 'x' } } as any
+      const dynamicAttr = { key: { name: 'id' }, value: { expression: {} } } as any
+      expect(isVueAttributeDynamic(staticAttr)).toBe(false)
+      expect(isVueAttributeDynamic(dynamicAttr)).toBe(true)
+    })
+
+    it('should get Vue attribute by name or argument', () => {
+      const element = {
+        startTag: {
+          attributes: [
+            { key: { name: 'id' }, value: { value: 'root' } },
+            { key: { argument: 'aria-label' }, value: { value: 'Label' } }
+          ]
+        }
+      } as any
+      expect(getVueAttribute(element, 'id')).toBeDefined()
+      expect(getVueAttribute(element, 'aria-label')).toBeDefined()
+      expect(getVueAttribute(element, 'missing')).toBeUndefined()
+    })
+
+    it('should check hasVueAttribute', () => {
+      const element = {
+        startTag: {
+          attributes: [{ key: { name: 'role' }, value: { value: 'button' } }]
+        }
+      } as any
+      expect(hasVueAttribute(element, 'role')).toBe(true)
+      expect(hasVueAttribute(element, 'aria-label')).toBe(false)
     })
   })
 })

@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-test-a11y-js",
-  "version": "0.16.2",
+  "version": "0.17.0",
   "description": "ESLint accessibility (a11y) plugin for React, Vue, and JSX with flat-config (ESLint v9+) support and a matching runtime A11yChecker API. Alternative to eslint-plugin-jsx-a11y for modern design systems.",
   "main": "dist/linter/eslint-plugin/index.js",
   "module": "dist/linter/eslint-plugin/index.mjs",

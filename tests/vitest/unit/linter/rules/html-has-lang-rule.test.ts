@@ -65,7 +65,8 @@ describe('html-has-lang rule - JSX', () => {
           errors: [{
             messageId: 'htmlMustHaveLang',
             suggestions: [{
-              desc: 'Add lang="en" attribute'
+              desc: 'Add lang="en" attribute',
+              output: ''
             }]
           }]
         }
