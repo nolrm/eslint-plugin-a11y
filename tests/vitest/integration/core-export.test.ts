@@ -53,7 +53,8 @@ describe('./core export', () => {
   })
 
   it('should export A11yChecker via ESM dist (import)', async () => {
-    const coreModule = await import('../../../dist/index.mjs')
+    const coreMjsPath = join(process.cwd(), 'dist/index.mjs')
+    const coreModule = await import(coreMjsPath)
     expect(coreModule.A11yChecker).toBeDefined()
     expect(typeof coreModule.A11yChecker).toBe('function')
   })

@@ -14,13 +14,13 @@ const require = createRequire(import.meta.url)
 
 function getProjectRoot(): string {
   const fromCwd = process.cwd()
-  const distFromCwd = resolve(fromCwd, 'dist/linter/eslint-plugin/formatter.js')
-  if (existsSync(distFromCwd)) return fromCwd
+  const pluginFromCwd = resolve(fromCwd, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromCwd)) return fromCwd
   const fromFile = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
-  const distFromFile = resolve(fromFile, 'dist/linter/eslint-plugin/formatter.js')
-  if (existsSync(distFromFile)) return fromFile
+  const pluginFromFile = resolve(fromFile, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromFile)) return fromFile
   throw new Error(
-    `dist/formatter.js not found. Tried cwd=${fromCwd} and fileRoot=${fromFile}. Ensure npm run build ran first.`
+    `dist/linter/eslint-plugin/index.js not found. Tried cwd=${fromCwd} and fileRoot=${fromFile}. Ensure npm run build ran first.`
   )
 }
 

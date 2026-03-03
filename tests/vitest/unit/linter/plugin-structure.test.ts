@@ -1,7 +1,24 @@
-import { describe, it, expect } from 'vitest'
-// Import from built version to test the actual export
-// In a real scenario, users would import from 'eslint-plugin-test-a11y-js'
-import eslintPlugin from '../../../../dist/linter/eslint-plugin/index.js'
+import { describe, it, expect, beforeAll } from 'vitest'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import { existsSync } from 'fs'
+import { createRequire } from 'module'
+
+const require = createRequire(import.meta.url)
+
+function getProjectRoot(): string {
+  const fromCwd = process.cwd()
+  const pluginFromCwd = resolve(fromCwd, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromCwd)) return fromCwd
+  const fromFile = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..')
+  const pluginFromFile = resolve(fromFile, 'dist/linter/eslint-plugin/index.js')
+  if (existsSync(pluginFromFile)) return fromFile
+  throw new Error(
+    'dist/linter/eslint-plugin/index.js not found. Ensure npm run build ran first.'
+  )
+}
+
+let eslintPlugin: { meta?: { name?: string; version?: string }; rules?: Record<string, unknown>; configs?: Record<string, unknown> }
 
 const ALL_RULE_NAMES = [
   'accessible-emoji',
@@ -50,6 +67,11 @@ const ALL_RULE_NAMES = [
 ]
 
 describe('ESLint Plugin Structure', () => {
+  beforeAll(() => {
+    const root = getProjectRoot()
+    eslintPlugin = require(resolve(root, 'dist/linter/eslint-plugin/index.js')).default
+  })
+
   it('should export a plugin object', () => {
     expect(eslintPlugin).toBeDefined()
     expect(typeof eslintPlugin).toBe('object')
