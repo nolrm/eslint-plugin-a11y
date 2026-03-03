@@ -13,14 +13,19 @@ import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 
 function getProjectRoot(): string {
+  const pluginPath = 'dist/linter/eslint-plugin/index.js'
+  // CI (e.g. GitHub Actions): workers may have different cwd; use workspace when set
+  const fromEnv = process.env.GITHUB_WORKSPACE
+  if (fromEnv) {
+    const envPath = resolve(fromEnv, pluginPath)
+    if (existsSync(envPath)) return fromEnv
+  }
   const fromCwd = process.cwd()
-  const pluginFromCwd = resolve(fromCwd, 'dist/linter/eslint-plugin/index.js')
-  if (existsSync(pluginFromCwd)) return fromCwd
+  if (existsSync(resolve(fromCwd, pluginPath))) return fromCwd
   const fromFile = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..', '..')
-  const pluginFromFile = resolve(fromFile, 'dist/linter/eslint-plugin/index.js')
-  if (existsSync(pluginFromFile)) return fromFile
+  if (existsSync(resolve(fromFile, pluginPath))) return fromFile
   throw new Error(
-    `dist/linter/eslint-plugin/index.js not found. Tried cwd=${fromCwd} and fileRoot=${fromFile}. Ensure npm run build ran first.`
+    `dist/linter/eslint-plugin/index.js not found. Tried GITHUB_WORKSPACE=${fromEnv ?? '(unset)'}, cwd=${fromCwd}, fileRoot=${fromFile}. Ensure npm run build ran first.`
   )
 }
 

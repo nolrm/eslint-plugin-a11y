@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Performance: `runtime-comment` — `getAllComments()` is now cached per file via `WeakMap` (was called once per node); cached comments are sorted by position so the proximity scan exits early once past the node.
 
 ### Fixed
-- CI: integration tests (config-presets, formatter-output) resolve dist path from test file location for reliable runs in GitHub Actions.
+- CI: integration tests (config-presets, formatter-output) resolve dist path from `GITHUB_WORKSPACE` (when set) or test file location for reliable runs in GitHub Actions.
 
 ## [0.16.1] - 2026-02-26
 
