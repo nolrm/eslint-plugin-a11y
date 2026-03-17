@@ -8,7 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned for 1.0.0
-- After 0.17.0 is validated in production with no issues, the next release will be **1.0.0** with a formal API stability contract (package name, rule names, config names, exports unchanged until next major). See [ROADMAP_1.0.md](./docs/ROADMAP_1.0.md).
+- After 0.18.0 is validated in production with no issues, the next release will be **1.0.0** with a formal API stability contract (package name, rule names, config names, exports unchanged until next major). See [ROADMAP_1.0.md](./docs/ROADMAP_1.0.md).
+
+## [0.18.0] - 2026-03-18
+
+### Added
+- Test coverage for `jsx-ast-utils.ts` and `vue-ast-utils.ts`: 36 new unit tests covering previously untested branches (boolean attributes, fallback tag names, JSXExpressionContainer with literal expressions, dynamic attribute skipping, jsdom-null path, Vue boolean attributes, parser string detection).
+
+### Changed
+- Branch coverage raised from 72.26% → 75.71%, clearing the ≥75% threshold required for 1.0.0.
 
 ## [0.17.0] - 2026-03-03
 
