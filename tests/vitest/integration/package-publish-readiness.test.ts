@@ -23,7 +23,9 @@ describe('Package Publish Readiness', () => {
     beforeAll(() => {
       // npm pack --json output gets contaminated by the prepare script's build output,
       // so we parse the human-readable dry-run output instead.
-      const output = execSync('npm pack --dry-run 2>&1', {
+      // --ignore-scripts prevents the prepare script from re-running npm run build
+      // (which clears dist/ with clean:true) while other parallel test files load from dist/.
+      const output = execSync('npm pack --dry-run --ignore-scripts 2>&1', {
         cwd: root,
         encoding: 'utf-8',
       })
