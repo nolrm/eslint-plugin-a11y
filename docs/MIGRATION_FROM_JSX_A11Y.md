@@ -1,6 +1,6 @@
-# Migration Guide: From eslint-plugin-jsx-a11y to test-a11y-js
+# Migration Guide: From eslint-plugin-jsx-a11y to a11y
 
-This guide helps you migrate from `eslint-plugin-jsx-a11y` to `eslint-plugin-test-a11y-js`.
+This guide helps you migrate from `eslint-plugin-jsx-a11y` to `eslint-plugin-a11y`.
 
 ## Why Migrate?
 
@@ -15,48 +15,48 @@ This guide helps you migrate from `eslint-plugin-jsx-a11y` to `eslint-plugin-tes
 
 Audited against `src/linter/eslint-plugin/index.ts` (43 rules). Config Preset indicates which 1.0 presets include the rule: **minimal** (3 rules), **recommended** (30 rules), **strict** (43 rules).
 
-| jsx-a11y Rule | test-a11y-js Rule | Config Preset | Notes |
+| jsx-a11y Rule | a11y Rule | Config Preset | Notes |
 |---------------|-------------------|---------------|-------|
-| `jsx-a11y/alt-text` | `test-a11y-js/image-alt` | minimal, recommended, strict | Enhanced with decorative image options |
-| `jsx-a11y/anchor-is-valid` | `test-a11y-js/anchor-is-valid` | recommended, strict | Href/link validation; see also `link-text` for descriptive text |
-| `jsx-a11y/aria-activedescendant-has-tabindex` | `test-a11y-js/aria-activedescendant-has-tabindex` | recommended, strict | ✅ Available (AST-based) |
-| `jsx-a11y/aria-props` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
-| `jsx-a11y/aria-proptypes` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
-| `jsx-a11y/aria-role` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
-| `jsx-a11y/aria-unsupported-elements` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
-| `jsx-a11y/click-events-have-key-events` | `test-a11y-js/click-events-have-key-events` | recommended, strict | ✅ Available |
-| `jsx-a11y/heading-has-content` | `test-a11y-js/heading-has-content` | recommended, strict | ✅ Available; see also `heading-order` for hierarchy |
-| `jsx-a11y/html-has-lang` | `test-a11y-js/html-has-lang` | recommended, strict | ✅ Available (contextual: &lt;html&gt; in scope) |
-| `jsx-a11y/iframe-has-title` | `test-a11y-js/iframe-title` | recommended, strict | ✅ Available |
-| `jsx-a11y/img-redundant-alt` | `test-a11y-js/img-redundant-alt` | strict | ✅ Available (dedicated rule) |
-| `jsx-a11y/interactive-supports-focus` | `test-a11y-js/interactive-supports-focus` | recommended, strict | ✅ Available |
-| `jsx-a11y/label-has-associated-control` | `test-a11y-js/form-label` | minimal, recommended, strict | ✅ Available |
-| `jsx-a11y/media-has-caption` | `test-a11y-js/video-captions`, `test-a11y-js/audio-captions` | recommended, strict | ✅ Available |
-| `jsx-a11y/mouse-events-have-key-events` | `test-a11y-js/mouse-events-have-key-events` | strict | ✅ Available |
-| `jsx-a11y/no-access-key` | `test-a11y-js/no-access-key` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-autofocus` | `test-a11y-js/no-autofocus` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-distracting-elements` | `test-a11y-js/no-distracting-elements` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-interactive-element-to-noninteractive-role` | `test-a11y-js/no-interactive-element-to-noninteractive-role` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-noninteractive-element-interactions` | `test-a11y-js/no-noninteractive-element-interactions` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-noninteractive-element-to-interactive-role` | `test-a11y-js/no-noninteractive-element-to-interactive-role` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-noninteractive-tabindex` | `test-a11y-js/no-noninteractive-tabindex` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-redundant-roles` | `test-a11y-js/no-redundant-roles` | recommended, strict | ✅ Available |
-| `jsx-a11y/no-static-element-interactions` | `test-a11y-js/no-static-element-interactions` | recommended, strict | ✅ Available |
-| `jsx-a11y/role-has-required-aria-props` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
-| `jsx-a11y/role-supports-aria-props` | `test-a11y-js/aria-validation` | strict | ✅ Available (AST-based) |
-| `jsx-a11y/scope` | `test-a11y-js/scope` | recommended, strict | ✅ Available; see also `table-structure` |
-| `jsx-a11y/tabindex-no-positive` | `test-a11y-js/tabindex-no-positive` | recommended, strict | ✅ Available |
+| `jsx-a11y/alt-text` | `a11y/image-alt` | minimal, recommended, strict | Enhanced with decorative image options |
+| `jsx-a11y/anchor-is-valid` | `a11y/anchor-is-valid` | recommended, strict | Href/link validation; see also `link-text` for descriptive text |
+| `jsx-a11y/aria-activedescendant-has-tabindex` | `a11y/aria-activedescendant-has-tabindex` | recommended, strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-props` | `a11y/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-proptypes` | `a11y/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-role` | `a11y/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/aria-unsupported-elements` | `a11y/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/click-events-have-key-events` | `a11y/click-events-have-key-events` | recommended, strict | ✅ Available |
+| `jsx-a11y/heading-has-content` | `a11y/heading-has-content` | recommended, strict | ✅ Available; see also `heading-order` for hierarchy |
+| `jsx-a11y/html-has-lang` | `a11y/html-has-lang` | recommended, strict | ✅ Available (contextual: &lt;html&gt; in scope) |
+| `jsx-a11y/iframe-has-title` | `a11y/iframe-title` | recommended, strict | ✅ Available |
+| `jsx-a11y/img-redundant-alt` | `a11y/img-redundant-alt` | strict | ✅ Available (dedicated rule) |
+| `jsx-a11y/interactive-supports-focus` | `a11y/interactive-supports-focus` | recommended, strict | ✅ Available |
+| `jsx-a11y/label-has-associated-control` | `a11y/form-label` | minimal, recommended, strict | ✅ Available |
+| `jsx-a11y/media-has-caption` | `a11y/video-captions`, `a11y/audio-captions` | recommended, strict | ✅ Available |
+| `jsx-a11y/mouse-events-have-key-events` | `a11y/mouse-events-have-key-events` | strict | ✅ Available |
+| `jsx-a11y/no-access-key` | `a11y/no-access-key` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-autofocus` | `a11y/no-autofocus` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-distracting-elements` | `a11y/no-distracting-elements` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-interactive-element-to-noninteractive-role` | `a11y/no-interactive-element-to-noninteractive-role` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-noninteractive-element-interactions` | `a11y/no-noninteractive-element-interactions` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-noninteractive-element-to-interactive-role` | `a11y/no-noninteractive-element-to-interactive-role` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-noninteractive-tabindex` | `a11y/no-noninteractive-tabindex` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-redundant-roles` | `a11y/no-redundant-roles` | recommended, strict | ✅ Available |
+| `jsx-a11y/no-static-element-interactions` | `a11y/no-static-element-interactions` | recommended, strict | ✅ Available |
+| `jsx-a11y/role-has-required-aria-props` | `a11y/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/role-supports-aria-props` | `a11y/aria-validation` | strict | ✅ Available (AST-based) |
+| `jsx-a11y/scope` | `a11y/scope` | recommended, strict | ✅ Available; see also `table-structure` |
+| `jsx-a11y/tabindex-no-positive` | `a11y/tabindex-no-positive` | recommended, strict | ✅ Available |
 
 **Legend:**
-- ✅ All listed jsx-a11y rules have a corresponding test-a11y-js rule or are covered by a combined rule (e.g. aria-validation). Use the Config Preset column to see which preset includes each rule.
+- ✅ All listed jsx-a11y rules have a corresponding a11y rule or are covered by a combined rule (e.g. aria-validation). Use the Config Preset column to see which preset includes each rule.
 
 ## Step-by-Step Migration
 
-### Step 1: Install test-a11y-js
+### Step 1: Install a11y
 
 ```bash
 npm uninstall eslint-plugin-jsx-a11y
-npm install --save-dev eslint-plugin-test-a11y-js
+npm install --save-dev eslint-plugin-a11y
 ```
 
 ### Step 2: Update ESLint Configuration
@@ -71,11 +71,11 @@ module.exports = {
 }
 ```
 
-**After (test-a11y-js):**
+**After (a11y):**
 ```javascript
 module.exports = {
-  extends: ['plugin:test-a11y-js/recommended'],
-  plugins: ['test-a11y-js']
+  extends: ['plugin:a11y/recommended'],
+  plugins: ['a11y']
 }
 ```
 
@@ -90,14 +90,14 @@ export default [
 ]
 ```
 
-**After (test-a11y-js):**
+**After (a11y):**
 ```javascript
-import testA11yJs from 'eslint-plugin-test-a11y-js'
+import testA11yJs from 'eslint-plugin-a11y'
 
 export default [
   {
     plugins: {
-      'test-a11y-js': testA11yJs
+      'a11y': testA11yJs
     },
     ...testA11yJs.configs['flat/recommended']
   }
@@ -111,16 +111,16 @@ Update rule names in your config:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  extends: ['plugin:test-a11y-js/recommended'],
-  plugins: ['test-a11y-js'],
+  extends: ['plugin:a11y/recommended'],
+  plugins: ['a11y'],
   rules: {
-    // Map jsx-a11y rules to test-a11y-js
-    'test-a11y-js/image-alt': 'error',        // was: jsx-a11y/alt-text
-    'test-a11y-js/link-text': 'warn',         // was: jsx-a11y/anchor-is-valid
-    'test-a11y-js/form-label': 'error',       // was: jsx-a11y/label-has-associated-control
-    'test-a11y-js/iframe-title': 'error',    // was: jsx-a11y/iframe-has-title
-    'test-a11y-js/heading-order': 'warn',    // was: jsx-a11y/heading-has-content
-    'test-a11y-js/table-structure': 'error'   // was: jsx-a11y/scope
+    // Map jsx-a11y rules to a11y
+    'a11y/image-alt': 'error',        // was: jsx-a11y/alt-text
+    'a11y/link-text': 'warn',         // was: jsx-a11y/anchor-is-valid
+    'a11y/form-label': 'error',       // was: jsx-a11y/label-has-associated-control
+    'a11y/iframe-title': 'error',    // was: jsx-a11y/iframe-has-title
+    'a11y/heading-order': 'warn',    // was: jsx-a11y/heading-has-content
+    'a11y/table-structure': 'error'   // was: jsx-a11y/scope
   }
 }
 ```
@@ -132,10 +132,10 @@ If you use design-system components, add component mapping:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  extends: ['plugin:test-a11y-js/recommended'],
-  plugins: ['test-a11y-js'],
+  extends: ['plugin:a11y/recommended'],
+  plugins: ['a11y'],
   settings: {
-    'test-a11y-js': {
+    'a11y': {
       components: {
         Link: 'a',
         Button: 'button',
@@ -149,7 +149,7 @@ module.exports = {
 
 ### Step 5: Optional and Strict-Only Rules
 
-All jsx-a11y rules listed above are implemented in test-a11y-js. Some are only in the **strict** preset (e.g. `aria-validation`, `img-redundant-alt`, `mouse-events-have-key-events`). For runtime-only checks (e.g. focus traps, keyboard navigation), use the `A11yChecker` programmatic API; see [Integration Guide](./INTEGRATION.md).
+All jsx-a11y rules listed above are implemented in a11y. Some are only in the **strict** preset (e.g. `aria-validation`, `img-redundant-alt`, `mouse-events-have-key-events`). For runtime-only checks (e.g. focus traps, keyboard navigation), use the `A11yChecker` programmatic API; see [Integration Guide](./INTEGRATION.md).
 
 ## Compatibility Bridge Preset
 
@@ -159,12 +159,12 @@ For a smoother transition, you can use both plugins temporarily:
 // .eslintrc.js
 module.exports = {
   extends: [
-    'plugin:test-a11y-js/recommended',
+    'plugin:a11y/recommended',
     'plugin:jsx-a11y/recommended' // Keep for missing rules
   ],
-  plugins: ['test-a11y-js', 'jsx-a11y'],
+  plugins: ['a11y', 'jsx-a11y'],
   rules: {
-    // Disable jsx-a11y rules that test-a11y-js covers
+    // Disable jsx-a11y rules that a11y covers
     'jsx-a11y/alt-text': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
@@ -177,7 +177,7 @@ module.exports = {
 
 ## Feature Comparison
 
-| Feature | jsx-a11y | test-a11y-js |
+| Feature | jsx-a11y | a11y |
 |---------|----------|--------------|
 | React support | ✅ | ✅ |
 | Vue support | ❌ | ✅ |
@@ -197,13 +197,13 @@ module.exports = {
 ```javascript
 // ✅ Correct
 {
-  extends: ['plugin:test-a11y-js/recommended'],
-  plugins: ['test-a11y-js']
+  extends: ['plugin:a11y/recommended'],
+  plugins: ['a11y']
 }
 
 // ❌ Wrong - missing plugin
 {
-  extends: ['plugin:test-a11y-js/recommended']
+  extends: ['plugin:a11y/recommended']
 }
 ```
 
@@ -214,7 +214,7 @@ module.exports = {
 ```javascript
 {
   settings: {
-    'test-a11y-js': {
+    'a11y': {
       components: { Link: 'a', Button: 'button' }
     }
   }
@@ -223,12 +223,12 @@ module.exports = {
 
 ### Issue: "Different error messages"
 
-**Solution:** test-a11y-js uses different message IDs. Update your CI/CD or tooling that parses ESLint output.
+**Solution:** a11y uses different message IDs. Update your CI/CD or tooling that parses ESLint output.
 
 ## Next Steps
 
-1. ✅ Complete migration to test-a11y-js
-2. ✅ Enable ARIA rules: `test-a11y-js/aria-validation`, `test-a11y-js/semantic-html`, `test-a11y-js/form-validation`
+1. ✅ Complete migration to a11y
+2. ✅ Enable ARIA rules: `a11y/aria-validation`, `a11y/semantic-html`, `a11y/form-validation`
 3. 📚 Read [Configuration Guide](./CONFIGURATION.md) for advanced options
 4. 🧪 Set up A11yChecker for runtime testing (see [Integration Guide](./INTEGRATION.md))
 5. 🔗 Use runtime comment convention for static + runtime workflow (see [ESLint Plugin Guide](./ESLINT_PLUGIN.md#static--runtime-workflow))

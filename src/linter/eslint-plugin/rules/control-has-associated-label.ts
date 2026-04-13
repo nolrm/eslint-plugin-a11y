@@ -75,7 +75,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce interactive ARIA-role controls have an accessible label',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingLabel: 'Element with role="{{role}}" must have an accessible label. Add aria-label, aria-labelledby, title, or visible text content.'

@@ -5,10 +5,10 @@
  * 
  * Usage:
  * ```js
- * import testA11yJs from 'eslint-plugin-test-a11y-js'
- * 
+ * import a11y from 'eslint-plugin-a11y'
+ *
  * export default [
- *   ...testA11yJs.configs['flat/recommended']
+ *   ...a11y.configs['flat/recommended']
  * ]
  * ```
  */
@@ -55,7 +55,7 @@ function createFlatConfig(
  * Flat config: recommended (rules only, minimal assumptions)
  * Users must add the plugin themselves:
  * ```js
- * { plugins: { 'test-a11y-js': testA11yJs }, ...flatRecommended }
+ * { plugins: { 'a11y': a11y }, ...flatRecommended }
  * ```
  */
 export const flatRecommended: FlatConfig = createFlatConfig(recommended as any)

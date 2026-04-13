@@ -14,7 +14,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce proper heading hierarchy (no skipped levels)',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       skippedLevel: 'Heading level skipped from h{{previous}} to h{{current}}'

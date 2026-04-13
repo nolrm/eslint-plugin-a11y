@@ -50,7 +50,7 @@ We now have **two distinct use cases** with **two separate tools**:
 **Usage:**
 ```json
 {
-  "extends": ["plugin:test-a11y-js/recommended"]
+  "extends": ["plugin:a11y/recommended"]
 }
 ```
 
@@ -66,7 +66,7 @@ We now have **two distinct use cases** with **two separate tools**:
 
 **Usage:**
 ```javascript
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 
 // Test actual rendered output
 const html = document.getElementById('myComponent').outerHTML
@@ -145,7 +145,7 @@ These rules require more complex refactoring and are disabled until they can be 
 
 ```json
 {
-  "extends": ["plugin:test-a11y-js/recommended"]
+  "extends": ["plugin:a11y/recommended"]
 }
 ```
 
@@ -159,7 +159,7 @@ These rules require more complex refactoring and are disabled until they can be 
 **No change!** The A11yChecker API is identical:
 
 ```javascript
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 
 // Still works exactly the same
 const violations = A11yChecker.check('<img src="test.jpg">')

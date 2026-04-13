@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * ESLint wrapper with loader and nice formatting
- * Usage: node node_modules/eslint-plugin-test-a11y-js/bin/lint-with-loader.js
- * Or add to package.json: "lint": "node node_modules/eslint-plugin-test-a11y-js/bin/lint-with-loader.js"
+ * Usage: node node_modules/eslint-plugin-a11y/bin/lint-with-loader.js
+ * Or add to package.json: "lint": "node node_modules/eslint-plugin-a11y/bin/lint-with-loader.js"
  */
 
 const { ESLint } = require('eslint')

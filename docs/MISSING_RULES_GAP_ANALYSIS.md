@@ -2,7 +2,7 @@
 
 > **Historical document.** This analysis was written when the plugin had a **16-rule baseline**. As of 1.0, the plugin ships **43 rules** and achieves broad parity with jsx-a11y. See **Current state** below and [MIGRATION_FROM_JSX_A11Y.md](./MIGRATION_FROM_JSX_A11Y.md) for the authoritative mapping.
 
-This document lists what **eslint-plugin-test-a11y-js** was missing compared to **eslint-plugin-jsx-a11y** and **eslint-plugin-vuejs-accessibility**. It is retained for roadmap context and contribution prioritization of post-1.0 work.
+This document lists what **eslint-plugin-a11y** was missing compared to **eslint-plugin-jsx-a11y** and **eslint-plugin-vuejs-accessibility**. It is retained for roadmap context and contribution prioritization of post-1.0 work.
 
 ---
 
@@ -41,7 +41,7 @@ This document lists what **eslint-plugin-test-a11y-js** was missing compared to 
 
 ## Rules We Already Cover
 
-These jsx-a11y / vuejs-accessibility rules are covered by existing test-a11y-js rules (same or broader behavior). Mappings are conservative: we only claim “covered” when semantics match; otherwise we call out partial or missing.
+These jsx-a11y / vuejs-accessibility rules are covered by existing a11y rules (same or broader behavior). Mappings are conservative: we only claim “covered” when semantics match; otherwise we call out partial or missing.
 
 | Their rule | Our rule(s) | Notes |
 |------------|------------|-------|

@@ -38,7 +38,7 @@ export function hasRuntimeCheckedComment(
   node: Rule.Node
 ): { hasComment: boolean; mode: 'downgrade' | 'suppress' | null } {
   const settings = (context.settings || {}) as A11yPluginSettings
-  const pluginSettings = settings['test-a11y-js']
+  const pluginSettings = settings['a11y']
   
   // If not configured, return no comment
   if (!pluginSettings?.runtimeCheckedComment) {

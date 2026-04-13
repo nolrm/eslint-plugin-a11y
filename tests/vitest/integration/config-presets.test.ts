@@ -61,9 +61,9 @@ describe('ESLint Config Presets', () => {
 
     it('should include button-label, form-label, and image-alt as error', () => {
       const rules = plugin.configs.minimal.rules
-      expect(rules['test-a11y-js/button-label']).toBe('error')
-      expect(rules['test-a11y-js/form-label']).toBe('error')
-      expect(rules['test-a11y-js/image-alt']).toBe('error')
+      expect(rules['a11y/button-label']).toBe('error')
+      expect(rules['a11y/form-label']).toBe('error')
+      expect(rules['a11y/image-alt']).toBe('error')
     })
   })
 
@@ -76,19 +76,19 @@ describe('ESLint Config Presets', () => {
 
     it('should have critical rules as error', () => {
       const rules = plugin.configs.recommended.rules
-      expect(rules['test-a11y-js/button-label']).toBe('error')
-      expect(rules['test-a11y-js/form-label']).toBe('error')
-      expect(rules['test-a11y-js/image-alt']).toBe('error')
-      expect(rules['test-a11y-js/iframe-title']).toBe('error')
-      expect(rules['test-a11y-js/video-captions']).toBe('error')
-      expect(rules['test-a11y-js/audio-captions']).toBe('error')
+      expect(rules['a11y/button-label']).toBe('error')
+      expect(rules['a11y/form-label']).toBe('error')
+      expect(rules['a11y/image-alt']).toBe('error')
+      expect(rules['a11y/iframe-title']).toBe('error')
+      expect(rules['a11y/video-captions']).toBe('error')
+      expect(rules['a11y/audio-captions']).toBe('error')
     })
 
     it('should have moderate rules as warn', () => {
       const rules = plugin.configs.recommended.rules
-      expect(rules['test-a11y-js/link-text']).toBe('warn')
-      expect(rules['test-a11y-js/heading-order']).toBe('warn')
-      expect(rules['test-a11y-js/landmark-roles']).toBe('warn')
+      expect(rules['a11y/link-text']).toBe('warn')
+      expect(rules['a11y/heading-order']).toBe('warn')
+      expect(rules['a11y/landmark-roles']).toBe('warn')
     })
   })
 

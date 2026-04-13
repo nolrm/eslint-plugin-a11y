@@ -17,7 +17,7 @@ describe('ESLint Plugin Export Configuration', () => {
     it('should have correct package name for ESLint auto-resolution', () => {
       const pkg = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
       
-      expect(pkg.name).toBe('eslint-plugin-test-a11y-js')
+      expect(pkg.name).toBe('eslint-plugin-a11y')
       expect(pkg.name).toMatch(/^eslint-plugin-/)
     })
 

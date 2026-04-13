@@ -36,13 +36,13 @@ module.exports = {
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   overrides: [
     {
       files: ['**/*.test.{js,ts,jsx,tsx}'],
       rules: {
-        'test-a11y-js/**': 'off' // Skip tests for speed
+        'a11y/**': 'off' // Skip tests for speed
       }
     }
   ]
@@ -58,8 +58,8 @@ Some rules are slower on large files:
 module.exports = {
   rules: {
     // These can be slow on very large files
-    'test-a11y-js/heading-order': 'warn', // Checks all headings
-    'test-a11y-js/landmark-roles': 'warn' // Checks all landmarks
+    'a11y/heading-order': 'warn', // Checks all headings
+    'a11y/landmark-roles': 'warn' // Checks all landmarks
   }
 }
 ```
@@ -122,7 +122,7 @@ With cache enabled, subsequent runs should be 5-10x faster.
 
 ## Tips for Large Projects
 
-1. **Start with minimal**: Use `plugin:test-a11y-js/minimal` initially
+1. **Start with minimal**: Use `plugin:a11y/minimal` initially
 2. **Use cache**: Always enable `--cache` flag
 3. **Limit scope**: Use `ignorePatterns` to exclude build outputs
 4. **Incremental adoption**: Check only new/modified files first

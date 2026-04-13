@@ -12,7 +12,7 @@ The plugin includes an optional custom ESLint formatter with Vite-style output t
 Use the formatter directly with ESLint's `-f` flag:
 
 ```bash
-npx eslint -f eslint-plugin-test-a11y-js/formatter .
+npx eslint -f eslint-plugin-a11y/formatter .
 ```
 
 Or in your `package.json`:
@@ -20,7 +20,7 @@ Or in your `package.json`:
 ```json
 {
   "scripts": {
-    "lint": "eslint -f eslint-plugin-test-a11y-js/formatter ."
+    "lint": "eslint -f eslint-plugin-a11y/formatter ."
   }
 }
 ```
@@ -29,8 +29,8 @@ Or in your `package.json`:
 
 ```
 src/components/Button.tsx
-  5:12  ✖ Image missing alt attribute (test-a11y-js/image-alt)
-  8:3   ⚠ Button should have accessible label (test-a11y-js/button-label)
+  5:12  ✖ Image missing alt attribute (a11y/image-alt)
+  8:3   ⚠ Button should have accessible label (a11y/button-label)
   2 errors, 1 warning
 
 ────────────────────────────────────────────────────────────
@@ -57,6 +57,6 @@ The formatter works with all standard ESLint options:
 Example:
 
 ```bash
-npx eslint --format eslint-plugin-test-a11y-js/formatter src/ --cache --fix
+npx eslint --format eslint-plugin-a11y/formatter src/ --cache --fix
 ```
 

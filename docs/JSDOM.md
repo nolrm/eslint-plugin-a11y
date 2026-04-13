@@ -37,7 +37,7 @@ npm list jsdom
 If not installed, you'll see a warning in ESLint output (non-blocking):
 
 ```
-[test-a11y-js] jsdom not found. HTML string parsing will be skipped.
+[a11y] jsdom not found. HTML string parsing will be skipped.
 Install jsdom if you need HTML string accessibility checks: npm install --save-dev jsdom
 ```
 

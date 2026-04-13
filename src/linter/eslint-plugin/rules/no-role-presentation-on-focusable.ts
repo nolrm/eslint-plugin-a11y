@@ -21,7 +21,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow role="presentation" or role="none" on focusable elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noRolePresentationOnFocusable: 'role="{{role}}" must not be used on focusable elements. This hides the element\'s semantics from screen readers while the element remains focusable, causing confusion. Either remove the role or make the element non-focusable.'

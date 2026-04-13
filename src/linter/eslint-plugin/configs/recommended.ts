@@ -1,5 +1,5 @@
 /**
- * Recommended ESLint configuration for test-a11y-js
+ * Recommended ESLint configuration for a11y
  * 
  * This configuration enables all accessibility rules with recommended severity levels
  * based on the impact of violations (critical/serious = error, moderate/minor = warn)
@@ -9,44 +9,44 @@ import type { RuleConfig } from '../utils/types'
 
 const recommended: RuleConfig = {
   // Critical/Serious violations - set to error
-  'test-a11y-js/image-alt': 'error',
-  'test-a11y-js/button-label': 'error',
-  'test-a11y-js/form-label': 'error',
-  'test-a11y-js/iframe-title': 'error',
-  'test-a11y-js/fieldset-legend': 'error',
-  'test-a11y-js/table-structure': 'error',
-  'test-a11y-js/details-summary': 'error',
-  'test-a11y-js/video-captions': 'error',
-  'test-a11y-js/audio-captions': 'error',
-  'test-a11y-js/landmark-roles': 'warn',
-  'test-a11y-js/dialog-modal': 'error',
+  'a11y/image-alt': 'error',
+  'a11y/button-label': 'error',
+  'a11y/form-label': 'error',
+  'a11y/iframe-title': 'error',
+  'a11y/fieldset-legend': 'error',
+  'a11y/table-structure': 'error',
+  'a11y/details-summary': 'error',
+  'a11y/video-captions': 'error',
+  'a11y/audio-captions': 'error',
+  'a11y/landmark-roles': 'warn',
+  'a11y/dialog-modal': 'error',
 
   // Moderate/Minor violations - set to warn
-  'test-a11y-js/link-text': 'warn',
-  'test-a11y-js/heading-order': 'warn',
+  'a11y/link-text': 'warn',
+  'a11y/heading-order': 'warn',
 
   // New rules - Critical/Serious violations
-  'test-a11y-js/no-access-key': 'error',
-  'test-a11y-js/no-autofocus': 'error',
-  'test-a11y-js/tabindex-no-positive': 'error',
-  'test-a11y-js/no-distracting-elements': 'error',
-  'test-a11y-js/no-aria-hidden-on-focusable': 'error',
-  'test-a11y-js/no-role-presentation-on-focusable': 'error',
-  'test-a11y-js/heading-has-content': 'error',
-  'test-a11y-js/html-has-lang': 'error',
+  'a11y/no-access-key': 'error',
+  'a11y/no-autofocus': 'error',
+  'a11y/tabindex-no-positive': 'error',
+  'a11y/no-distracting-elements': 'error',
+  'a11y/no-aria-hidden-on-focusable': 'error',
+  'a11y/no-role-presentation-on-focusable': 'error',
+  'a11y/heading-has-content': 'error',
+  'a11y/html-has-lang': 'error',
 
   // New rules - Moderate violations (warn)
-  'test-a11y-js/click-events-have-key-events': 'warn',
-  'test-a11y-js/no-static-element-interactions': 'warn',
-  'test-a11y-js/interactive-supports-focus': 'warn',
+  'a11y/click-events-have-key-events': 'warn',
+  'a11y/no-static-element-interactions': 'warn',
+  'a11y/interactive-supports-focus': 'warn',
 
   // Phase 6: New rules
-  'test-a11y-js/anchor-is-valid': 'error',
-  'test-a11y-js/no-interactive-element-to-noninteractive-role': 'error',
-  'test-a11y-js/no-noninteractive-element-to-interactive-role': 'warn',
-  'test-a11y-js/no-redundant-roles': 'warn',
-  'test-a11y-js/control-has-associated-label': 'error',
-  'test-a11y-js/scope': 'error'
+  'a11y/anchor-is-valid': 'error',
+  'a11y/no-interactive-element-to-noninteractive-role': 'error',
+  'a11y/no-noninteractive-element-to-interactive-role': 'warn',
+  'a11y/no-redundant-roles': 'warn',
+  'a11y/control-has-associated-label': 'error',
+  'a11y/scope': 'error'
 
   // Not included in recommended (available in strict):
   // - aria-validation, semantic-html, form-validation

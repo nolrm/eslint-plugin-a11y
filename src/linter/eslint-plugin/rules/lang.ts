@@ -75,7 +75,7 @@ const rule: Rule.RuleModule = {
       description: 'Validate lang attribute contains a valid BCP 47 language tag',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       invalidLang: 'The lang attribute value "{{value}}" is not a valid BCP 47 language tag. Use a valid language code like "en", "es", "fr", or "en-US".',

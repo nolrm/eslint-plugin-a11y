@@ -17,7 +17,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow positive tabindex values',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noPositiveTabindex: 'Avoid positive tabindex values (found: {{value}}). Use tabindex="0" to make elements focusable in DOM order, or tabindex="-1" for programmatic focus only.'

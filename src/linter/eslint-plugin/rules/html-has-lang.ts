@@ -17,7 +17,7 @@ const rule: Rule.RuleModule = {
       description: 'Require lang attribute on <html> element',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       htmlMustHaveLang: '<html> element must have a lang attribute for screen readers to announce content correctly.'

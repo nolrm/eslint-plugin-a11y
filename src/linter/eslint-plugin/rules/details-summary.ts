@@ -13,7 +13,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce details elements have a summary element as first child',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingSummary: 'details element must have a summary element as its first child',

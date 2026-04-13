@@ -1,6 +1,6 @@
 # Testing Checklist
 
-This document tracks testing improvements and coverage for `test-a11y-js`.
+This document tracks testing improvements and coverage for `a11y`.
 
 ## ✅ Completed
 

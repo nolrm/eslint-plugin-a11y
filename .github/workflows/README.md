@@ -31,11 +31,11 @@ Automatically publishes to npm when `package.json` changes on the `main` branch.
 
 This workflow uses npm's Trusted Publisher feature with OpenID Connect (OIDC) for secure authentication. No secrets needed!
 
-1. Go to your package on npm: https://www.npmjs.com/package/eslint-plugin-test-a11y-js
+1. Go to your package on npm: https://www.npmjs.com/package/eslint-plugin-a11y
 2. Navigate to: **Settings → Access → Trusted Publishers**
 3. Click **"Add Trusted Publisher"**
 4. Fill in:
-   - **Repository**: `nolrm/eslint-plugin-test-a11y-js`
+   - **Repository**: `nolrm/eslint-plugin-a11y`
    - **Workflow name**: `Publish to npm`
    - **Environment**: (leave empty unless using GitHub Environments)
 5. Click **"Add"**
@@ -106,7 +106,7 @@ If any step fails, the publish job will **not** run, preventing broken releases.
 ### Workflow fails at publish
 - Verify Trusted Publisher is configured correctly on npm
 - Check that the workflow name matches exactly: `Publish to npm`
-- Check that the repository name matches exactly: `nolrm/eslint-plugin-test-a11y-js`
+- Check that the repository name matches exactly: `nolrm/eslint-plugin-a11y`
 - If using token fallback, verify `NPM_TOKEN` secret is set correctly
 - Check that the version doesn't already exist on npm
 - Ensure you have publish permissions on npm

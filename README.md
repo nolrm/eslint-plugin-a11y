@@ -1,12 +1,16 @@
-# eslint-plugin-test-a11y-js
+# eslint-plugin-a11y
+
+> **DEPRECATED:** This package has been renamed to [`eslint-plugin-a11y`](https://www.npmjs.com/package/eslint-plugin-a11y).
+> Run: `npm install --save-dev eslint-plugin-a11y`
+> See the [migration guide](./docs/MIGRATION_TO_A11Y.md) for details.
 
 > **Catch accessibility issues in your editor, not in production.** Zero-config ESLint plugin + programmatic API for React, Vue, and JSX.
 
-[![npm version](https://img.shields.io/npm/v/eslint-plugin-test-a11y-js.svg)](https://www.npmjs.com/package/eslint-plugin-test-a11y-js)
+[![npm version](https://img.shields.io/npm/v/eslint-plugin-a11y.svg)](https://www.npmjs.com/package/eslint-plugin-a11y)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-## Why test-a11y-js?
+## Why a11y?
 
 - ✅ **Zero config** - Works out of the box with React, Vue, and JSX
 - ✅ **Real-time feedback** - Catch issues in your editor, not in production
@@ -20,7 +24,7 @@
 ## Installation
 
 ```bash
-npm install --save-dev eslint-plugin-test-a11y-js
+npm install --save-dev eslint-plugin-a11y
 ```
 
 ### Peer Dependencies
@@ -40,8 +44,8 @@ Add to your `.eslintrc.js` or `.eslintrc.json`:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended']
 }
 ```
 
@@ -49,8 +53,8 @@ Or for React/JSX projects:
 
 ```javascript
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/react']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/react']
 }
 ```
 
@@ -61,7 +65,7 @@ That's it! Start catching accessibility issues immediately in your editor.
 Use in your tests:
 
 ```typescript
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 
 // Test a DOM element for accessibility violations
 const violations = await A11yChecker.check(element)
@@ -92,11 +96,11 @@ const buttonViolations = A11yChecker.checkButtonLabel(element)
 ### Available Presets
 
 **Classic Config (.eslintrc.js):**
-- `plugin:test-a11y-js/minimal` - Only 3 critical rules (best for large projects)
-- `plugin:test-a11y-js/recommended` - Balanced approach (default)
-- `plugin:test-a11y-js/strict` - All rules as errors
-- `plugin:test-a11y-js/react` - Optimized for React/JSX
-- `plugin:test-a11y-js/vue` - Optimized for Vue SFC
+- `plugin:a11y/minimal` - Only 3 critical rules (best for large projects)
+- `plugin:a11y/recommended` - Balanced approach (default)
+- `plugin:a11y/strict` - All rules as errors
+- `plugin:a11y/react` - Optimized for React/JSX
+- `plugin:a11y/vue` - Optimized for Vue SFC
 
 **Flat Config (eslint.config.js) - ESLint v9+:**
 - `flat/recommended` - Rules only (minimal assumptions)
@@ -115,8 +119,8 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: { jsx: true }
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/react']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/react']
 }
 ```
 
@@ -127,8 +131,8 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser'
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/vue']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/vue']
 }
 ```
 
@@ -136,20 +140,20 @@ module.exports = {
 
 **Ignore a single line:**
 ```jsx
-// eslint-disable-next-line test-a11y-js/image-alt
+// eslint-disable-next-line a11y/image-alt
 <img src="decorative.jpg" alt="" />
 ```
 
 **Ignore an entire file:**
 ```jsx
-/* eslint-disable test-a11y-js/heading-order */
+/* eslint-disable a11y/heading-order */
 ```
 
 **Ignore directories:**
 ```javascript
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   ignorePatterns: [
     '**/node_modules/**',
     '**/dist/**',
@@ -165,7 +169,7 @@ Many rules support configuration options for fine-tuned control:
 **image-alt - Decorative images:**
 ```javascript
 {
-  'test-a11y-js/image-alt': ['error', {
+  'a11y/image-alt': ['error', {
     allowMissingAltOnDecorative: true,
     decorativeMatcher: {
       markerAttributes: ['data-decorative']
@@ -177,7 +181,7 @@ Many rules support configuration options for fine-tuned control:
 **link-text - Custom denylist:**
 ```javascript
 {
-  'test-a11y-js/link-text': ['warn', {
+  'a11y/link-text': ['warn', {
     denylist: ['click here', 'read more'],
     caseInsensitive: true
   }]
@@ -187,7 +191,7 @@ Many rules support configuration options for fine-tuned control:
 **heading-order - Skip tolerance:**
 ```javascript
 {
-  'test-a11y-js/heading-order': ['warn', {
+  'a11y/heading-order': ['warn', {
     allowSameLevel: true,
     maxSkip: 2
   }]
@@ -202,10 +206,10 @@ Map your design-system components to native HTML elements:
 
 ```javascript
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   settings: {
-    'test-a11y-js': {
+    'a11y': {
       components: {
         Link: 'a',        // Treat <Link> as <a>
         Button: 'button', // Treat <Button> as <button>
@@ -230,7 +234,7 @@ Now rules apply to your components:
 import js from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import react from 'eslint-plugin-react'
-import testA11y from 'eslint-plugin-test-a11y-js'
+import testA11y from 'eslint-plugin-a11y'
 
 export default [
   js.configs.recommended,
@@ -239,7 +243,7 @@ export default [
   {
     plugins: {
       react,
-      'test-a11y-js': testA11y
+      'a11y': testA11y
     },
     languageOptions: {
       parserOptions: {
@@ -263,14 +267,14 @@ export default [
       }
     },
     plugins: {
-      'test-a11y-js': testA11y
+      'a11y': testA11y
     },
     ...testA11y.configs['flat/vue']
   }
 ]
 ```
 
-These presets mirror the classic `.eslintrc` presets and are the easiest way to drop `eslint-plugin-test-a11y-js` into a modern ESLint v9+ setup, alongside `@eslint/js`, `typescript-eslint`, and `eslint-plugin-react`.
+These presets mirror the classic `.eslintrc` presets and are the easiest way to drop `eslint-plugin-a11y` into a modern ESLint v9+ setup, alongside `@eslint/js`, `typescript-eslint`, and `eslint-plugin-react`.
 
 See [Configuration Guide](./docs/CONFIGURATION.md) for more flat-config examples and advanced setups.
 
@@ -292,64 +296,64 @@ In VS Code and other editors with ESLint support, suggestions appear as Quick Fi
 The plugin provides **43 accessibility rules**:
 
 **Core rules:**
-- `test-a11y-js/image-alt` - Enforce images, `input[type=image]`, and `area` elements have alt attributes
-- `test-a11y-js/button-label` - Enforce buttons have labels
-- `test-a11y-js/link-text` - Enforce links have descriptive text
-- `test-a11y-js/form-label` - Enforce form controls have labels
-- `test-a11y-js/heading-order` - Enforce proper heading hierarchy
-- `test-a11y-js/iframe-title` - Enforce iframes have title attributes
-- `test-a11y-js/fieldset-legend` - Enforce fieldsets have legend elements
-- `test-a11y-js/table-structure` - Enforce tables have proper structure
-- `test-a11y-js/details-summary` - Enforce details elements have summary
-- `test-a11y-js/video-captions` - Enforce video elements have caption tracks
-- `test-a11y-js/audio-captions` - Enforce audio elements have tracks or transcripts
-- `test-a11y-js/landmark-roles` - Enforce proper use of landmark elements
-- `test-a11y-js/dialog-modal` - Enforce dialog elements have proper accessibility attributes
-- `test-a11y-js/aria-validation` - Validate ARIA roles, properties, and ID references (AST-first)
-- `test-a11y-js/semantic-html` - Enforce proper use of semantic HTML elements (AST-first)
-- `test-a11y-js/form-validation` - Validate form validation patterns (AST-first)
+- `a11y/image-alt` - Enforce images, `input[type=image]`, and `area` elements have alt attributes
+- `a11y/button-label` - Enforce buttons have labels
+- `a11y/link-text` - Enforce links have descriptive text
+- `a11y/form-label` - Enforce form controls have labels
+- `a11y/heading-order` - Enforce proper heading hierarchy
+- `a11y/iframe-title` - Enforce iframes have title attributes
+- `a11y/fieldset-legend` - Enforce fieldsets have legend elements
+- `a11y/table-structure` - Enforce tables have proper structure
+- `a11y/details-summary` - Enforce details elements have summary
+- `a11y/video-captions` - Enforce video elements have caption tracks
+- `a11y/audio-captions` - Enforce audio elements have tracks or transcripts
+- `a11y/landmark-roles` - Enforce proper use of landmark elements
+- `a11y/dialog-modal` - Enforce dialog elements have proper accessibility attributes
+- `a11y/aria-validation` - Validate ARIA roles, properties, and ID references (AST-first)
+- `a11y/semantic-html` - Enforce proper use of semantic HTML elements (AST-first)
+- `a11y/form-validation` - Validate form validation patterns (AST-first)
 
 **Attribute & document rules:**
-- `test-a11y-js/no-access-key` - Disallow accessKey on elements
-- `test-a11y-js/no-autofocus` - Disallow autoFocus
-- `test-a11y-js/tabindex-no-positive` - Disallow positive tabIndex
-- `test-a11y-js/no-distracting-elements` - Disallow blink and marquee
-- `test-a11y-js/lang` - Enforce valid lang attribute values
-- `test-a11y-js/html-has-lang` - Enforce html element has lang attribute
+- `a11y/no-access-key` - Disallow accessKey on elements
+- `a11y/no-autofocus` - Disallow autoFocus
+- `a11y/tabindex-no-positive` - Disallow positive tabIndex
+- `a11y/no-distracting-elements` - Disallow blink and marquee
+- `a11y/lang` - Enforce valid lang attribute values
+- `a11y/html-has-lang` - Enforce html element has lang attribute
 
 **Focusable & ARIA rules:**
-- `test-a11y-js/no-aria-hidden-on-focusable` - Disallow aria-hidden on focusable elements
-- `test-a11y-js/no-role-presentation-on-focusable` - Disallow role="presentation" on focusable elements
-- `test-a11y-js/no-interactive-element-to-noninteractive-role` - Disallow role="none/presentation" on interactive elements (button, a, input, etc.)
-- `test-a11y-js/no-noninteractive-element-to-interactive-role` - Disallow interactive roles on non-interactive elements without keyboard support
-- `test-a11y-js/no-redundant-roles` - Disallow explicit roles that match the element's implicit ARIA role
-- `test-a11y-js/prefer-tag-over-role` - Prefer semantic native HTML elements over ARIA role attributes on generic elements
-- `test-a11y-js/control-has-associated-label` - Enforce ARIA-role interactive controls have an accessible label
-- `test-a11y-js/scope` - Enforce valid use of the scope attribute on `<th>` elements
-- `test-a11y-js/aria-activedescendant-has-tabindex` - Enforce aria-activedescendant targets are focusable
+- `a11y/no-aria-hidden-on-focusable` - Disallow aria-hidden on focusable elements
+- `a11y/no-role-presentation-on-focusable` - Disallow role="presentation" on focusable elements
+- `a11y/no-interactive-element-to-noninteractive-role` - Disallow role="none/presentation" on interactive elements (button, a, input, etc.)
+- `a11y/no-noninteractive-element-to-interactive-role` - Disallow interactive roles on non-interactive elements without keyboard support
+- `a11y/no-redundant-roles` - Disallow explicit roles that match the element's implicit ARIA role
+- `a11y/prefer-tag-over-role` - Prefer semantic native HTML elements over ARIA role attributes on generic elements
+- `a11y/control-has-associated-label` - Enforce ARIA-role interactive controls have an accessible label
+- `a11y/scope` - Enforce valid use of the scope attribute on `<th>` elements
+- `a11y/aria-activedescendant-has-tabindex` - Enforce aria-activedescendant targets are focusable
 
 **Event & keyboard rules:**
-- `test-a11y-js/click-events-have-key-events` - Enforce onClick has keyboard equivalent
-- `test-a11y-js/mouse-events-have-key-events` - Enforce mouse handlers have keyboard equivalent
-- `test-a11y-js/no-static-element-interactions` - Disallow static handlers on non-interactive elements
-- `test-a11y-js/no-noninteractive-element-interactions` - Disallow interactive handlers on non-interactive elements
-- `test-a11y-js/interactive-supports-focus` - Enforce interactive elements are focusable
-- `test-a11y-js/no-noninteractive-tabindex` - Disallow tabindex on non-interactive elements
+- `a11y/click-events-have-key-events` - Enforce onClick has keyboard equivalent
+- `a11y/mouse-events-have-key-events` - Enforce mouse handlers have keyboard equivalent
+- `a11y/no-static-element-interactions` - Disallow static handlers on non-interactive elements
+- `a11y/no-noninteractive-element-interactions` - Disallow interactive handlers on non-interactive elements
+- `a11y/interactive-supports-focus` - Enforce interactive elements are focusable
+- `a11y/no-noninteractive-tabindex` - Disallow tabindex on non-interactive elements
 
 **Content & media rules:**
-- `test-a11y-js/heading-has-content` - Enforce headings have content
-- `test-a11y-js/img-redundant-alt` - Enforce img alt does not contain redundant words
-- `test-a11y-js/anchor-ambiguous-text` - Enforce link text is not generic
-- `test-a11y-js/anchor-is-valid` - Enforce anchors have valid href (not empty, `#`, or `javascript:`)
-- `test-a11y-js/accessible-emoji` - Enforce emoji have accessible labels
-- `test-a11y-js/autocomplete-valid` - Enforce autocomplete attribute is valid
+- `a11y/heading-has-content` - Enforce headings have content
+- `a11y/img-redundant-alt` - Enforce img alt does not contain redundant words
+- `a11y/anchor-ambiguous-text` - Enforce link text is not generic
+- `a11y/anchor-is-valid` - Enforce anchors have valid href (not empty, `#`, or `javascript:`)
+- `a11y/accessible-emoji` - Enforce emoji have accessible labels
+- `a11y/autocomplete-valid` - Enforce autocomplete attribute is valid
 
 ## Programmatic API
 
 ### A11yChecker Methods
 
 ```typescript
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 
 // Comprehensive check
 const results = await A11yChecker.check(element)
@@ -440,7 +444,7 @@ function MyComponent() {
 
 ```typescript
 import { render } from '@testing-library/react'
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 
 test('component is accessible', async () => {
   const { container } = render(<MyComponent />)
@@ -456,8 +460,8 @@ For large codebases, start with minimal rules:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/minimal'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/minimal'],
   ignorePatterns: ['**/node_modules/**', '**/dist/**']
 }
 ```
@@ -475,8 +479,8 @@ Replace `next lint` with the progress wrapper in your `package.json`:
 ```json
 {
   "scripts": {
-    "lint": "node node_modules/eslint-plugin-test-a11y-js/bin/eslint-with-progress.js",
-    "lint:fix": "node node_modules/eslint-plugin-test-a11y-js/bin/eslint-with-progress.js --fix"
+    "lint": "node node_modules/eslint-plugin-a11y/bin/eslint-with-progress.js",
+    "lint:fix": "node node_modules/eslint-plugin-a11y/bin/eslint-with-progress.js --fix"
   }
 }
 ```
@@ -500,8 +504,8 @@ Example output:
 Linting files...
 
 src/components/Button.tsx
-  5:12  ✖ Image missing alt attribute (test-a11y-js/image-alt)
-  8:3   ⚠ Button should have accessible label (test-a11y-js/button-label)
+  5:12  ✖ Image missing alt attribute (a11y/image-alt)
+  8:3   ⚠ Button should have accessible label (a11y/button-label)
 
 ────────────────────────────────────────────────────────────
 
@@ -547,13 +551,13 @@ See [Performance Guide](./docs/PERFORMANCE.md) for optimization tips.
 
 - **vs `eslint-plugin-jsx-a11y`**: Similar JSX accessibility coverage, plus Vue SFC support, flat-config presets, and a matching runtime `A11yChecker` API. You can run both plugins side by side and selectively disable overlapping rules in either one.
 - **vs `eslint-plugin-vuejs-accessibility`**: This plugin covers both Vue templates *and* JSX/TSX with a single rule set, which is useful in mixed React/Vue or design-system-heavy codebases.
-- **vs runtime-only tools (e.g. `@axe-core/react`)**: `test-a11y-js` focuses on **static**, editor-time feedback and CI linting, while the runtime A11yChecker API complements it for dynamic DOM testing.
+- **vs runtime-only tools (e.g. `@axe-core/react`)**: `a11y` focuses on **static**, editor-time feedback and CI linting, while the runtime A11yChecker API complements it for dynamic DOM testing.
 
-For rule-by-rule mapping from `eslint-plugin-jsx-a11y` to `eslint-plugin-test-a11y-js`, see the [Migration Guide](./docs/MIGRATION_FROM_JSX_A11Y.md).
+For rule-by-rule mapping from `eslint-plugin-jsx-a11y` to `eslint-plugin-a11y`, see the [Migration Guide](./docs/MIGRATION_FROM_JSX_A11Y.md).
 
 ### Feature comparison
 
-| Feature | test-a11y-js | eslint-plugin-jsx-a11y | @axe-core/react |
+| Feature | a11y | eslint-plugin-jsx-a11y | @axe-core/react |
 |---------|--------------|------------------------|-----------------|
 | Zero config | ✅ | ❌ | ❌ |
 | Vue support | ✅ | ❌ | ❌ |
@@ -567,7 +571,7 @@ For rule-by-rule mapping from `eslint-plugin-jsx-a11y` to `eslint-plugin-test-a1
 - **Does this replace `eslint-plugin-jsx-a11y`?**  
   Not necessarily. It can replace it in many React-only projects, but it also adds Vue SFC support, flat-config presets, and a runtime A11yChecker API. You can also run both plugins side by side and disable overlapping rules where needed.
 
-- **Can I run `eslint-plugin-test-a11y-js` and `eslint-plugin-jsx-a11y` together?**  
+- **Can I run `eslint-plugin-a11y` and `eslint-plugin-jsx-a11y` together?**  
   Yes. Add both plugins to your config and then selectively turn off overlapping rules in one or the other. The [Migration Guide](./docs/MIGRATION_FROM_JSX_A11Y.md) shows rule mappings and suggestions.
 
 - **Does it support ESLint v9 flat config?**  

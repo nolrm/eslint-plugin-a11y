@@ -44,7 +44,7 @@ describe('ESLint - End-to-End with Real Files', () => {
     eslint = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
         parser: require.resolve('@typescript-eslint/parser'),
@@ -55,8 +55,8 @@ describe('ESLint - End-to-End with Real Files', () => {
             jsx: true
           }
         },
-        plugins: ['test-a11y-js'],
-        extends: ['plugin:test-a11y-js/react']
+        plugins: ['a11y'],
+        extends: ['plugin:a11y/react']
       },
       cwd: reactAppDir
     })
@@ -85,19 +85,19 @@ describe('ESLint - End-to-End with Real Files', () => {
       
       // Should detect missing labels in MissingLabels function
       const formLabelViolations = messages.filter((m: any) =>
-        m.ruleId === 'test-a11y-js/form-label'
+        m.ruleId === 'a11y/form-label'
       )
       expect(formLabelViolations.length).toBeGreaterThan(0)
       
       // Should detect missing alt in MissingAlt function
       const imageAltViolations = messages.filter((m: any) =>
-        m.ruleId === 'test-a11y-js/image-alt'
+        m.ruleId === 'a11y/image-alt'
       )
       expect(imageAltViolations.length).toBeGreaterThan(0)
       
       // Should detect empty buttons
       const buttonViolations = messages.filter((m: any) =>
-        m.ruleId === 'test-a11y-js/button-label'
+        m.ruleId === 'a11y/button-label'
       )
       expect(buttonViolations.length).toBeGreaterThan(0)
     })
@@ -137,11 +137,11 @@ describe('ESLint - End-to-End with Real Files', () => {
       const config = await eslint.calculateConfigForFile(filePath)
       
       // Should have loaded the plugin
-      expect(config.plugins).toContain('test-a11y-js')
+      expect(config.plugins).toContain('a11y')
       
       // Should have some rules enabled
       const a11yRules = Object.keys(config.rules || {}).filter(r => 
-        r.startsWith('test-a11y-js/')
+        r.startsWith('a11y/')
       )
       expect(a11yRules.length).toBeGreaterThan(0)
     })

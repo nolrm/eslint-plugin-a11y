@@ -45,7 +45,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow assigning role="none" or role="presentation" to interactive elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noInteractiveToNoninteractive: 'Interactive element <{{element}}> cannot have role="{{role}}". This removes its interactive semantics from assistive technologies while keeping it focusable, causing confusion for screen reader users.'

@@ -1,6 +1,6 @@
 # Integration Guide
 
-This document explains how to integrate the `eslint-plugin-test-a11y-js` ESLint plugin into your project.
+This document explains how to integrate the `eslint-plugin-a11y` ESLint plugin into your project.
 
 > **Note:** For detailed ESLint configuration options, see [Configuration Guide](./CONFIGURATION.md). For comprehensive plugin documentation, see [ESLint Plugin Guide](./ESLINT_PLUGIN.md).
 
@@ -12,20 +12,20 @@ The package provides two main export paths:
 
 ```javascript
 // ESM
-import plugin from 'eslint-plugin-test-a11y-js'
+import plugin from 'eslint-plugin-a11y'
 
 // CJS
-const plugin = require('eslint-plugin-test-a11y-js')
+const plugin = require('eslint-plugin-a11y')
 ```
 
 ### Core Library Export
 
 ```javascript
 // ESM
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 
 // CJS
-const { A11yChecker } = require('eslint-plugin-test-a11y-js/core')
+const { A11yChecker } = require('eslint-plugin-a11y/core')
 ```
 
 ## Build Output
@@ -48,7 +48,7 @@ The package.json is configured with proper exports:
 
 ```json
 {
-  "name": "eslint-plugin-test-a11y-js",
+  "name": "eslint-plugin-a11y",
   "main": "dist/linter/eslint-plugin/index.js",
   "module": "dist/linter/eslint-plugin/index.mjs",
   "types": "dist/linter/eslint-plugin/index.d.ts",
@@ -73,15 +73,15 @@ The package.json is configured with proper exports:
 
 1. Install the package:
 ```bash
-npm install --save-dev eslint-plugin-test-a11y-js eslint
+npm install --save-dev eslint-plugin-a11y eslint
 ```
 
 2. Configure ESLint:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended']
 }
 ```
 
@@ -94,8 +94,8 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: { jsx: true }
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/react']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/react']
 }
 ```
 
@@ -110,8 +110,8 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser'
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/vue']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/vue']
 }
 ```
 
@@ -122,7 +122,7 @@ module.exports = {
 Verify the plugin is installed correctly:
 
 ```bash
-npm list test-a11y-js
+npm list a11y
 ```
 
 ### Test ESLint Configuration
@@ -146,15 +146,15 @@ The plugin should export:
 
 If ESLint can't find the plugin:
 
-1. Verify installation: `npm list eslint-plugin-test-a11y-js`
-2. Check plugin name in ESLint config: `plugins: ['test-a11y-js']`
+1. Verify installation: `npm list eslint-plugin-a11y`
+2. Check plugin name in ESLint config: `plugins: ['a11y']`
 3. Ensure the package is in `node_modules`
 
 ### Rules not working
 
 If rules aren't being applied:
 
-1. Verify the config extends the plugin: `extends: ['plugin:test-a11y-js/recommended']`
+1. Verify the config extends the plugin: `extends: ['plugin:a11y/recommended']`
 2. Check that your parser supports JSX (for React) or Vue (for Vue)
 3. Ensure file extensions are included in ESLint's file patterns
 

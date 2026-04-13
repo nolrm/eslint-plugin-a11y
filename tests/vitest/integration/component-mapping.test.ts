@@ -34,7 +34,7 @@ describe('Component Mapping Integration', () => {
     const eslintWithSettings = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
         parser: require.resolve('@typescript-eslint/parser'),
@@ -46,10 +46,10 @@ describe('Component Mapping Integration', () => {
           }
         },
         rules: {
-          'test-a11y-js/link-text': 'warn'
+          'a11y/link-text': 'warn'
         },
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             components: {
               Link: 'a'
             }
@@ -64,7 +64,7 @@ describe('Component Mapping Integration', () => {
     )
 
     expect(results).toHaveLength(1)
-    const linkTextErrors = results[0].messages.filter(m => m.ruleId === 'test-a11y-js/link-text')
+    const linkTextErrors = results[0].messages.filter(m => m.ruleId === 'a11y/link-text')
     expect(linkTextErrors.length).toBeGreaterThan(0)
   })
 
@@ -76,7 +76,7 @@ describe('Component Mapping Integration', () => {
     const eslintWithSettings = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
         parser: require.resolve('@typescript-eslint/parser'),
@@ -88,10 +88,10 @@ describe('Component Mapping Integration', () => {
           }
         },
         rules: {
-          'test-a11y-js/button-label': 'error'
+          'a11y/button-label': 'error'
         },
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             components: {
               Button: 'button'
             }
@@ -106,7 +106,7 @@ describe('Component Mapping Integration', () => {
     )
 
     expect(results).toHaveLength(1)
-    const buttonErrors = results[0].messages.filter(m => m.ruleId === 'test-a11y-js/button-label')
+    const buttonErrors = results[0].messages.filter(m => m.ruleId === 'a11y/button-label')
     expect(buttonErrors.length).toBeGreaterThan(0)
   })
 
@@ -118,7 +118,7 @@ describe('Component Mapping Integration', () => {
     const eslintWithSettings = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
         parser: require.resolve('@typescript-eslint/parser'),
@@ -130,10 +130,10 @@ describe('Component Mapping Integration', () => {
           }
         },
         rules: {
-          'test-a11y-js/link-text': 'warn'
+          'a11y/link-text': 'warn'
         },
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             polymorphicPropNames: ['as']
           }
         }
@@ -146,7 +146,7 @@ describe('Component Mapping Integration', () => {
     )
 
     expect(results).toHaveLength(1)
-    const linkTextErrors = results[0].messages.filter(m => m.ruleId === 'test-a11y-js/link-text')
+    const linkTextErrors = results[0].messages.filter(m => m.ruleId === 'a11y/link-text')
     expect(linkTextErrors.length).toBeGreaterThan(0)
   })
 })

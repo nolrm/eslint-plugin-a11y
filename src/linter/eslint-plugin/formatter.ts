@@ -151,7 +151,7 @@ export function format(results: FormatterResult[], useColors = true): string {
 
 /**
  * ESLint formatter export
- * Usage: eslint -f eslint-plugin-test-a11y-js/formatter .
+ * Usage: eslint -f eslint-plugin-a11y/formatter .
  * 
  * This formatter shows a clean summary with file counts, errors, and warnings.
  * It's designed to work automatically when used with ESLint's --format flag.

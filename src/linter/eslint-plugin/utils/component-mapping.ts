@@ -18,7 +18,7 @@ const NATIVE_TAGS = new Set([
  * Plugin settings interface
  */
 export interface A11yPluginSettings {
-  'test-a11y-js'?: {
+  'a11y'?: {
     components?: Record<string, string> // e.g., { Link: 'a', Button: 'button' }
     polymorphicPropNames?: string[] // e.g., ['as', 'component']
     runtimeCheckedComment?: string // e.g., 'a11y-checked-at-runtime'
@@ -32,7 +32,7 @@ export interface A11yPluginSettings {
  * Resolution precedence (documented and tested):
  * 1. Native HTML tag (highest priority)
  * 2. Polymorphic prop (as, component) when it's a static literal
- * 3. settings['test-a11y-js'].components[ComponentName] mapping
+ * 3. settings['a11y'].components[ComponentName] mapping
  * 4. Otherwise unknown (fallback)
  * 
  * @param node - JSX opening element node
@@ -60,7 +60,7 @@ export function getElementRoleFromJSX(
 
   // 2. Check polymorphic props (as, component) - only if static literal
   const settings = (context.settings || {}) as A11yPluginSettings
-  const polymorphicPropNames = settings['test-a11y-js']?.polymorphicPropNames || ['as', 'component']
+  const polymorphicPropNames = settings['a11y']?.polymorphicPropNames || ['as', 'component']
 
   for (const propName of polymorphicPropNames) {
     const propAttr = jsxNode.attributes?.find((attr: any) =>
@@ -76,7 +76,7 @@ export function getElementRoleFromJSX(
   }
 
   // 3. Check component mapping from settings
-  const componentMapping = settings['test-a11y-js']?.components || {}
+  const componentMapping = settings['a11y']?.components || {}
   if (componentMapping[componentName]) {
     const mappedTag = componentMapping[componentName].toLowerCase()
     if (NATIVE_TAGS.has(mappedTag)) {

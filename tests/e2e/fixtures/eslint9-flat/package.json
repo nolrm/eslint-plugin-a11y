@@ -6,7 +6,7 @@
   "type": "module",
   "dependencies": {
     "eslint": "^9.0.0",
-    "eslint-plugin-test-a11y-js": "file:../../../../eslint-plugin-test-a11y-js-0.17.0.tgz",
+    "eslint-plugin-a11y": "file:../../../../eslint-plugin-a11y-1.0.0.tgz",
     "typescript-eslint": "^8.0.0"
   }
 }

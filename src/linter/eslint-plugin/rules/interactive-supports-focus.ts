@@ -24,7 +24,7 @@ const rule: Rule.RuleModule = {
       description: 'Require interactive elements to be focusable',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       interactiveMustBeFocusable: 'Elements with interactive role="{{role}}" must be focusable. Add tabindex="0" to make this element keyboard accessible.'

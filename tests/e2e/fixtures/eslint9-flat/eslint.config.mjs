@@ -1,11 +1,11 @@
-import testA11yJs from 'eslint-plugin-test-a11y-js'
+import a11y from 'eslint-plugin-a11y'
 import tseslint from 'typescript-eslint'
 
 export default [
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      'test-a11y-js': testA11yJs
+      'a11y': a11y
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -13,6 +13,6 @@ export default [
         ecmaFeatures: { jsx: true }
       }
     },
-    ...testA11yJs.configs['flat/recommended']
+    ...a11y.configs['flat/recommended']
   }
 ]

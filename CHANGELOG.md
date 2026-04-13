@@ -7,8 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Planned for 1.0.0
-- After 0.18.0 is validated in production with no issues, the next release will be **1.0.0** with a formal API stability contract (package name, rule names, config names, exports unchanged until next major). See [ROADMAP_1.0.md](./docs/ROADMAP_1.0.md).
+## [1.0.0] - 2026-04-13
+
+### Breaking Changes
+
+- **Package renamed** from `eslint-plugin-test-a11y-js` to `eslint-plugin-a11y`
+- **ESLint short name** changed from `test-a11y-js` to `a11y`
+  - Rule IDs: `test-a11y-js/image-alt` → `a11y/image-alt` (all 43 rules)
+  - Config extends: `plugin:test-a11y-js/recommended` → `plugin:a11y/recommended`
+  - Plugin key: `plugins: ['test-a11y-js']` → `plugins: ['a11y']`
+  - Settings key: `settings['test-a11y-js']` → `settings['a11y']`
+- See [docs/MIGRATION_TO_A11Y.md](./docs/MIGRATION_TO_A11Y.md) for the full migration guide
+
+### Stability Contract
+
+Rule names, config names, and package exports are frozen until v2.0.0. The API is now stable.
+
+## [0.18.1] - 2026-04-12
+
+### Deprecated
+
+- This package has been renamed to `eslint-plugin-a11y`. Please migrate:
+  ```
+  npm uninstall eslint-plugin-a11y
+  npm install --save-dev eslint-plugin-a11y
+  ```
+  See [docs/MIGRATION_TO_A11Y.md](./docs/MIGRATION_TO_A11Y.md) for the full migration guide.
+- The next release will be published as `eslint-plugin-a11y@1.0.0` with a formal API stability contract.
 
 ## [0.18.0] - 2026-03-18
 
@@ -85,7 +110,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ### Fixed (from 0.14.0 unreleased)
-- Fixed `./core` CJS export — `require('eslint-plugin-test-a11y-js/core')` now correctly exports `A11yChecker` instead of the ESLint plugin
+- Fixed `./core` CJS export — `require('eslint-plugin-a11y/core')` now correctly exports `A11yChecker` instead of the ESLint plugin
 - Fixed `bin/eslint-with-progress.js` to work with both ESLint v8 and v9 (removed deprecated `useEslintrc` and `extensions` options)
 - Removed `vitest` from `peerDependencies` (should only be in devDependencies)
 - Replaced `TODO:` placeholder text in `link-text` autofix suggestions with user-friendly text

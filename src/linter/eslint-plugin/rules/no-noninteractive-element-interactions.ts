@@ -19,7 +19,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow event handlers on non-interactive elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noNonInteractiveElementInteractions: 'Non-interactive elements ({{element}}) should not have event handlers. Use an interactive element like <button> or add an appropriate role and tabindex.'

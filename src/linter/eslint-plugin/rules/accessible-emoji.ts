@@ -23,7 +23,7 @@ const rule: Rule.RuleModule = {
       description: 'Require emoji to have role="img" and accessible label',
       category: 'Accessibility',
       recommended: false,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       emojiNeedsRole: 'Emoji must have role="img" for screen reader compatibility.',

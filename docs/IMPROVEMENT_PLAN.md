@@ -1,4 +1,4 @@
-## test-a11y-js – ESLint Plugin Improvement Plan
+## a11y – ESLint Plugin Improvement Plan
 
 > **Status: ✅ All Phases Completed (v0.12.0)**
 > 
@@ -12,7 +12,7 @@
 
 ---
 
-This document captures a multi‑phase plan to evolve `eslint-plugin-test-a11y-js` into a production‑grade, design‑system‑aware, flat‑config‑first accessibility linting solution that pairs tightly with the `A11yChecker` runtime API.
+This document captures a multi‑phase plan to evolve `eslint-plugin-a11y` into a production‑grade, design‑system‑aware, flat‑config‑first accessibility linting solution that pairs tightly with the `A11yChecker` runtime API.
 
 ---
 
@@ -70,7 +70,7 @@ This document captures a multi‑phase plan to evolve `eslint-plugin-test-a11y-j
 - **Goal**: Treat design‑system components like their native equivalents so rules apply to real‑world code (e.g. `<Link>` as `<a>`, `<Button>` as `<button>`).
 - **Settings Design**:
   - Under ESLint `settings`:
-    - `settings: { 'test-a11y-js': { components?: Record<string, 'a' | 'button' | 'img' | string>, polymorphicPropNames?: string[] } }`
+    - `settings: { 'a11y': { components?: Record<string, 'a' | 'button' | 'img' | string>, polymorphicPropNames?: string[] } }`
   - Potential future extension:
     - `polymorphicMap?: Record<string, Record<string, string>>` (e.g. map `Link` + `as` combinations to roles).
 - **Implementation**:
@@ -78,7 +78,7 @@ This document captures a multi‑phase plan to evolve `eslint-plugin-test-a11y-j
     - **Resolves with deterministic precedence** (document and test this order):
       1. Native HTML tag (highest priority)
       2. Polymorphic prop (`as`, `component`) when it's a **static literal** (e.g. `as="a"`)
-      3. `settings['test-a11y-js'].components[ComponentName]` mapping
+      3. `settings['a11y'].components[ComponentName]` mapping
       4. Otherwise unknown (fallback)
     - **Important**: Only treat polymorphic props as meaningful when they resolve to a known tag (`"a"`, `"button"`, etc.). If dynamic (`as={something}`), follow current "warn/don't error" philosophy.
   - Refactor rules like `image-alt`, `button-label`, `link-text` to use this helper instead of checking raw `jsxNode.name.name`.
@@ -195,7 +195,7 @@ This document captures a multi‑phase plan to evolve `eslint-plugin-test-a11y-j
 - **Goal**: Turn the combination of ESLint plugin + `A11yChecker` into an explicit workflow advantage over static‑only plugins.
 - **Convention for "Checked at Runtime"**:
   - Add an opt‑in setting to globally recognize a special comment:
-    - `settings: { 'test-a11y-js': { runtimeCheckedComment?: string, runtimeCheckedMode?: 'downgrade' | 'suppress' } }`
+    - `settings: { 'a11y': { runtimeCheckedComment?: string, runtimeCheckedMode?: 'downgrade' | 'suppress' } }`
     - Default: `runtimeCheckedComment: 'a11y-checked-at-runtime'`, `runtimeCheckedMode: 'downgrade'`.
   - Behavior (per‑rule or shared helper):
     - If a node (or its nearest parent) has a leading comment containing this string:
@@ -229,8 +229,8 @@ This document captures a multi‑phase plan to evolve `eslint-plugin-test-a11y-j
   - Keep `README`, `CONFIGURATION`, `ESLINT_PLUGIN`, and new improvement docs aligned.
   - Add:
     - **Migration guide** from `eslint-plugin-jsx-a11y`:
-      - Rule mapping table: `jsx-a11y/rule-name` → `test-a11y-js/rule-name`.
-      - Config mapping (how to approximate `jsx-a11y/recommended` with `test-a11y-js`).
+      - Rule mapping table: `jsx-a11y/rule-name` → `a11y/rule-name`.
+      - Config mapping (how to approximate `jsx-a11y/recommended` with `a11y`).
       - **Compatibility "bridge" preset**: `plugin.configs['bridge/jsx-a11y']` that approximates common `jsx-a11y/recommended` behavior (even if not exact) to lower switching cost.
     - **Adoption guide** for large codebases (start with `minimal`, then `recommended`, then `strict`).
 - **Testing & CI**:

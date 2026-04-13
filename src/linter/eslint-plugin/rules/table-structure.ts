@@ -13,7 +13,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce table elements have proper accessibility structure (caption, headers, scope)',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingCaption: 'Table must have a caption element or aria-label/aria-labelledby attribute',

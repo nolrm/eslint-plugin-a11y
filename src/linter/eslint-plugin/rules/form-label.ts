@@ -15,7 +15,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce form controls have associated labels',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingLabel: 'Form control must have an associated label (use id/for, aria-label, or aria-labelledby)'

@@ -63,12 +63,12 @@ These docs actively mislead users and potential adopters. They must be fixed bef
 **B1. `docs/MIGRATION_FROM_JSX_A11Y.md` — Critical**
 
 Currently marks **15+ rules as "❌ Not available"** that are fully implemented and registered. Examples:
-- `click-events-have-key-events` → marked ❌, exists as `test-a11y-js/click-events-have-key-events`
-- `heading-has-content` → marked as "different approach", exists as `test-a11y-js/heading-has-content`
-- `html-has-lang` → marked ❌, exists as `test-a11y-js/html-has-lang`
-- `no-access-key` → marked ❌, exists as `test-a11y-js/no-access-key`
-- `no-autofocus` → marked ❌, exists as `test-a11y-js/no-autofocus`
-- `no-distracting-elements` → marked ❌, exists as `test-a11y-js/no-distracting-elements`
+- `click-events-have-key-events` → marked ❌, exists as `a11y/click-events-have-key-events`
+- `heading-has-content` → marked as "different approach", exists as `a11y/heading-has-content`
+- `html-has-lang` → marked ❌, exists as `a11y/html-has-lang`
+- `no-access-key` → marked ❌, exists as `a11y/no-access-key`
+- `no-autofocus` → marked ❌, exists as `a11y/no-autofocus`
+- `no-distracting-elements` → marked ❌, exists as `a11y/no-distracting-elements`
 - `mouse-events-have-key-events` → marked ❌, exists
 - `no-noninteractive-element-interactions` → marked ❌, exists
 - `no-noninteractive-tabindex` → marked ❌, exists
@@ -99,7 +99,7 @@ Action: Replace with a forward-looking section referencing this document and pos
 
 ### Track C — Package Identity (Decide Before Release)
 
-**C1. Package name: `eslint-plugin-test-a11y-js`**
+**C1. Package name: `eslint-plugin-a11y`**
 
 The "test-" prefix makes the package sound like a test utility rather than a production ESLint plugin. If a rename is ever going to happen, it must happen before 1.0 — renaming after means a breaking change and split discoverability.
 
@@ -171,7 +171,7 @@ Capture so they're not forgotten, but explicitly not 1.0 blockers:
 
 ### Track C — Package Identity
 
-- [ ] **C1** Decide: keep `eslint-plugin-test-a11y-js` or rename
+- [ ] **C1** Decide: keep `eslint-plugin-a11y` or rename
 - [ ] **C1** If renaming: update `package.json` name, README, all docs, rule `meta.docs.url` values, publish under new name
 
 ### Track D — Release Polish

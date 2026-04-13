@@ -17,7 +17,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce buttons have labels or aria-label',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingLabel: 'Button must have a label or aria-label',

@@ -17,7 +17,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow autofocus attribute on elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noAutofocus: 'The autofocus attribute can disorient users and reduce accessibility. Remove this attribute.'

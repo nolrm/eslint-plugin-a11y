@@ -36,7 +36,7 @@ function createMockResult(overrides: Record<string, unknown> = {}) {
     filePath: '/src/components/App.tsx',
     messages: [
       {
-        ruleId: 'test-a11y-js/image-alt',
+        ruleId: 'a11y/image-alt',
         severity: 2,
         message: 'img elements must have an alt prop',
         line: 10,
@@ -44,7 +44,7 @@ function createMockResult(overrides: Record<string, unknown> = {}) {
         nodeType: 'JSXOpeningElement',
       },
       {
-        ruleId: 'test-a11y-js/button-label',
+        ruleId: 'a11y/button-label',
         severity: 1,
         message: 'Buttons must have accessible text',
         line: 20,
@@ -97,8 +97,8 @@ describe('Formatter Output', () => {
 
     it('should contain rule IDs from the messages', () => {
       const output = formatterModule.format([createMockResult()], false)
-      expect(output).toContain('test-a11y-js/image-alt')
-      expect(output).toContain('test-a11y-js/button-label')
+      expect(output).toContain('a11y/image-alt')
+      expect(output).toContain('a11y/button-label')
     })
 
     it('should show error and warning counts in summary', () => {
@@ -144,7 +144,7 @@ describe('Formatter With Progress Output', () => {
     it('should contain file path and rule IDs', () => {
       const output = formatterModule.format([createMockResult()], false)
       expect(output).toContain('/src/components/App.tsx')
-      expect(output).toContain('test-a11y-js/image-alt')
+      expect(output).toContain('a11y/image-alt')
     })
 
     it('should show clean output for zero-violation results', () => {

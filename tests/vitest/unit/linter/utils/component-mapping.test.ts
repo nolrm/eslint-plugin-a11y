@@ -30,7 +30,7 @@ describe('Component Mapping', () => {
           {
             code: '<Link href="/about">About Us</Link>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Link: 'a'
                 }
@@ -42,7 +42,7 @@ describe('Component Mapping', () => {
           {
             code: '<Link href="/about">Click here</Link>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Link: 'a'
                 }
@@ -60,7 +60,7 @@ describe('Component Mapping', () => {
           {
             code: '<Button>Click me</Button>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Button: 'button'
                 }
@@ -70,7 +70,7 @@ describe('Component Mapping', () => {
           {
             code: '<Button aria-label="Close">×</Button>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Button: 'button'
                 }
@@ -82,7 +82,7 @@ describe('Component Mapping', () => {
           {
             code: '<Button></Button>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Button: 'button'
                 }
@@ -100,7 +100,7 @@ describe('Component Mapping', () => {
           {
             code: '<Image src="test.jpg" alt="Test" />',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Image: 'img'
                 }
@@ -112,7 +112,7 @@ describe('Component Mapping', () => {
           {
             code: '<Image src="test.jpg" />',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Image: 'img'
                 }
@@ -132,7 +132,7 @@ describe('Component Mapping', () => {
           {
             code: '<Link as="a" href="/about">About Us</Link>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 polymorphicPropNames: ['as']
               }
             }
@@ -142,7 +142,7 @@ describe('Component Mapping', () => {
           {
             code: '<Link as="a" href="/about">Click here</Link>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 polymorphicPropNames: ['as']
               }
             },
@@ -158,7 +158,7 @@ describe('Component Mapping', () => {
           {
             code: '<Button as="button">Click me</Button>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 polymorphicPropNames: ['as']
               }
             }
@@ -168,7 +168,7 @@ describe('Component Mapping', () => {
           {
             code: '<Button as="button"></Button>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 polymorphicPropNames: ['as']
               }
             },
@@ -184,7 +184,7 @@ describe('Component Mapping', () => {
           {
             code: '<Link as={component} href="/about">About Us</Link>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 polymorphicPropNames: ['as']
               }
             }
@@ -202,7 +202,7 @@ describe('Component Mapping', () => {
           {
             code: '<a href="/about">About Us</a>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   a: 'button' // Should be ignored, native tag wins
                 }
@@ -220,7 +220,7 @@ describe('Component Mapping', () => {
           {
             code: '<Link as="a" href="/about">About Us</Link>',
             settings: {
-              'test-a11y-js': {
+              'a11y': {
                 components: {
                   Link: 'button'
                 },

@@ -7,8 +7,7 @@
       "jsx": true
     }
   },
-  "plugins": ["test-a11y-js"],
-  "extends": ["plugin:test-a11y-js/react"],
+  "plugins": ["a11y"],
+  "extends": ["plugin:a11y/react"],
   "root": true
 }
-

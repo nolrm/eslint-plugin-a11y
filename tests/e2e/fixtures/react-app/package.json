@@ -2,6 +2,6 @@
   "name": "test-fixture-react-app",
   "version": "1.0.0",
   "private": true,
-  "description": "Test fixture for E2E testing of eslint-plugin-test-a11y-js"
+  "description": "Test fixture for E2E testing of eslint-plugin-a11y"
 }
 

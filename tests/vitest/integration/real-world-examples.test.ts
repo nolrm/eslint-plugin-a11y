@@ -36,10 +36,10 @@ describe('Real-world Examples', () => {
     eslint = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
-        plugins: ['test-a11y-js'],
+        plugins: ['a11y'],
         parser: require.resolve('@typescript-eslint/parser'),
         parserOptions: {
           ecmaVersion: 2020,
@@ -48,7 +48,7 @@ describe('Real-world Examples', () => {
             jsx: true
           }
         },
-        extends: ['plugin:test-a11y-js/recommended']
+        extends: ['plugin:a11y/recommended']
       }
     })
   })
@@ -77,15 +77,15 @@ describe('Real-world Examples', () => {
     expect(messages.length).toBeGreaterThan(0)
     
     // Should catch image-alt violation
-    expect(messages.some(msg => msg.ruleId === 'test-a11y-js/image-alt')).toBe(true)
+    expect(messages.some(msg => msg.ruleId === 'a11y/image-alt')).toBe(true)
     // Should catch button-label violation
-    expect(messages.some(msg => msg.ruleId === 'test-a11y-js/button-label')).toBe(true)
+    expect(messages.some(msg => msg.ruleId === 'a11y/button-label')).toBe(true)
     // Should catch link-text violation
-    expect(messages.some(msg => msg.ruleId === 'test-a11y-js/link-text')).toBe(true)
+    expect(messages.some(msg => msg.ruleId === 'a11y/link-text')).toBe(true)
     // Should catch form-label violation
-    expect(messages.some(msg => msg.ruleId === 'test-a11y-js/form-label')).toBe(true)
+    expect(messages.some(msg => msg.ruleId === 'a11y/form-label')).toBe(true)
     // Should catch heading-order violation
-    expect(messages.some(msg => msg.ruleId === 'test-a11y-js/heading-order')).toBe(true)
+    expect(messages.some(msg => msg.ruleId === 'a11y/heading-order')).toBe(true)
   })
 
   it('should pass for accessible component', async () => {
@@ -111,7 +111,7 @@ describe('Real-world Examples', () => {
     })
 
     const a11yMessages = results[0].messages.filter(msg => 
-      msg.ruleId?.startsWith('test-a11y-js/')
+      msg.ruleId?.startsWith('a11y/')
     )
     expect(a11yMessages.length).toBe(0)
   })
@@ -139,11 +139,11 @@ describe('Real-world Examples', () => {
     const messages = results[0].messages
     // Should catch the missing alt
     expect(messages.some(msg => 
-      msg.ruleId === 'test-a11y-js/image-alt'
+      msg.ruleId === 'a11y/image-alt'
     )).toBe(true)
     // Should catch non-descriptive link
     expect(messages.some(msg => 
-      msg.ruleId === 'test-a11y-js/link-text'
+      msg.ruleId === 'a11y/link-text'
     )).toBe(true)
   })
 })

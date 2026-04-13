@@ -12,7 +12,7 @@ npm run build
 
 echo "Packing plugin..."
 npm pack
-TARBALL=$(ls "$ROOT"/eslint-plugin-test-a11y-js-*.tgz | head -n 1)
+TARBALL=$(ls "$ROOT"/eslint-plugin-a11y-*.tgz | head -n 1)
 echo "Using tarball: $TARBALL"
 
 run_fixture() {

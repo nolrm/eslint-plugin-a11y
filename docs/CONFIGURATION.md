@@ -1,6 +1,6 @@
 # ESLint Plugin Configuration
 
-The `test-a11y-js` ESLint plugin provides several configuration presets to suit different project needs.
+The `a11y` ESLint plugin provides several configuration presets to suit different project needs.
 
 ## Available Configurations
 
@@ -14,8 +14,8 @@ The minimal configuration enables only the most critical accessibility rules. Us
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/minimal']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/minimal']
 }
 ```
 
@@ -38,8 +38,8 @@ The recommended configuration uses a balanced approach with critical violations 
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended']
 }
 ```
 
@@ -57,8 +57,8 @@ The strict configuration treats all violations as errors for maximum enforcement
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/strict']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/strict']
 }
 ```
 
@@ -80,8 +80,8 @@ module.exports = {
       jsx: true
     }
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/react']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/react']
 }
 ```
 
@@ -103,8 +103,8 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module'
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/vue']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/vue']
 }
 ```
 
@@ -122,28 +122,28 @@ You can also configure rules individually:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   rules: {
     // Override specific rules
-    'test-a11y-js/image-alt': 'error',
-    'test-a11y-js/link-text': 'warn',
+    'a11y/image-alt': 'error',
+    'a11y/link-text': 'warn',
     
     // Disable a rule
-    'test-a11y-js/heading-order': 'off',
+    'a11y/heading-order': 'off',
     
     // Use rule with options
-    'test-a11y-js/image-alt': ['error', {
+    'a11y/image-alt': ['error', {
       allowMissingAltOnDecorative: true,
       decorativeMatcher: {
         markerAttributes: ['data-decorative']
       }
     }],
-    'test-a11y-js/link-text': ['warn', {
+    'a11y/link-text': ['warn', {
       denylist: ['click here', 'read more'],
       caseInsensitive: true
     }],
-    'test-a11y-js/heading-order': ['warn', {
+    'a11y/heading-order': ['warn', {
       allowSameLevel: true,
       maxSkip: 2
     }]
@@ -159,7 +159,7 @@ Configure how decorative images are handled:
 
 ```javascript
 {
-  'test-a11y-js/image-alt': ['error', {
+  'a11y/image-alt': ['error', {
     allowMissingAltOnDecorative: false, // default: false (strict by default)
     decorativeMatcher: {
       requireAriaHidden: false,        // Require aria-hidden="true"
@@ -191,7 +191,7 @@ Configure denylist and matching behavior:
 
 ```javascript
 {
-  'test-a11y-js/link-text': ['warn', {
+  'a11y/link-text': ['warn', {
     denylist: ['click here', 'read more', 'more'], // default
     caseInsensitive: true,                          // default: true
     allowlistPatterns: []                           // Regex patterns to allow
@@ -207,14 +207,14 @@ Configure denylist and matching behavior:
 
 // Custom denylist
 {
-  'test-a11y-js/link-text': ['warn', {
+  'a11y/link-text': ['warn', {
     denylist: ['learn more', 'discover']
   }]
 }
 
 // Case sensitive matching
 {
-  'test-a11y-js/link-text': ['warn', {
+  'a11y/link-text': ['warn', {
     caseInsensitive: false
   }]
 }
@@ -232,7 +232,7 @@ Configure heading hierarchy tolerance:
 
 ```javascript
 {
-  'test-a11y-js/heading-order': ['warn', {
+  'a11y/heading-order': ['warn', {
     allowSameLevel: true,  // default: true
     maxSkip: undefined     // Allow skips up to this level (e.g., 2 allows h1→h3)
   }]
@@ -247,7 +247,7 @@ Configure heading hierarchy tolerance:
 
 // Allow larger skips
 {
-  'test-a11y-js/heading-order': ['warn', {
+  'a11y/heading-order': ['warn', {
     maxSkip: 2  // Allows skipping up to 2 levels
   }]
 }
@@ -264,10 +264,10 @@ Map your design-system components to native HTML elements so rules apply correct
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   settings: {
-    'test-a11y-js': {
+    'a11y': {
       components: {
         Link: 'a',        // Treat <Link> as <a>
         Button: 'button', // Treat <Button> as <button>
@@ -285,7 +285,7 @@ module.exports = {
 <Link href="/about">Click here</Link> // No warning
 
 // With mapping - rules apply
-// .eslintrc.js settings: { 'test-a11y-js': { components: { Link: 'a' } } }
+// .eslintrc.js settings: { 'a11y': { components: { Link: 'a' } } }
 <Link href="/about">Click here</Link> // ⚠️ Warning: nonDescriptive
 ```
 
@@ -296,10 +296,10 @@ Support components that accept an `as` or `component` prop:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   settings: {
-    'test-a11y-js': {
+    'a11y': {
       polymorphicPropNames: ['as', 'component'] // Default: ['as', 'component']
     }
   }
@@ -334,12 +334,12 @@ For ESLint v9+, use flat config format with our presets:
 
 ```javascript
 // eslint.config.js
-import testA11yJs from 'eslint-plugin-test-a11y-js'
+import testA11yJs from 'eslint-plugin-a11y'
 
 export default [
   {
     plugins: {
-      'test-a11y-js': testA11yJs
+      'a11y': testA11yJs
     },
     ...testA11yJs.configs['flat/recommended']
   }
@@ -350,12 +350,12 @@ export default [
 
 ```javascript
 // eslint.config.js
-import testA11yJs from 'eslint-plugin-test-a11y-js'
+import testA11yJs from 'eslint-plugin-a11y'
 
 export default [
   {
     plugins: {
-      'test-a11y-js': testA11yJs
+      'a11y': testA11yJs
     },
     ...testA11yJs.configs['flat/react']
   }
@@ -366,12 +366,12 @@ export default [
 
 ```javascript
 // eslint.config.js
-import testA11yJs from 'eslint-plugin-test-a11y-js'
+import testA11yJs from 'eslint-plugin-a11y'
 
 export default [
   {
     plugins: {
-      'test-a11y-js': testA11yJs
+      'a11y': testA11yJs
     },
     ...testA11yJs.configs['flat/vue']
   }
@@ -391,16 +391,16 @@ export default [
 
 ```javascript
 // eslint.config.js
-import testA11yJs from 'eslint-plugin-test-a11y-js'
+import testA11yJs from 'eslint-plugin-a11y'
 
 export default [
   {
     plugins: {
-      'test-a11y-js': testA11yJs
+      'a11y': testA11yJs
     },
     ...testA11yJs.configs['flat/recommended'],
     settings: {
-      'test-a11y-js': {
+      'a11y': {
         components: {
           Link: 'a',
           Button: 'button'
@@ -440,8 +440,8 @@ module.exports = {
       jsx: true
     }
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/react']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/react']
 }
 ```
 
@@ -454,8 +454,8 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser'
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/vue']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/vue']
 }
 ```
 
@@ -472,10 +472,10 @@ module.exports = {
       jsx: true
     }
   },
-  plugins: ['test-a11y-js', '@typescript-eslint'],
+  plugins: ['a11y', '@typescript-eslint'],
   extends: [
     'plugin:@typescript-eslint/recommended',
-    'plugin:test-a11y-js/recommended'
+    'plugin:a11y/recommended'
   ]
 }
 ```
@@ -488,10 +488,10 @@ If you want to upgrade from recommended to strict:
 
 ```javascript
 // Before
-extends: ['plugin:test-a11y-js/recommended']
+extends: ['plugin:a11y/recommended']
 
 // After
-extends: ['plugin:test-a11y-js/strict']
+extends: ['plugin:a11y/strict']
 ```
 
 This will change `link-text` and `heading-order` from warnings to errors.
@@ -503,11 +503,11 @@ If migrating a React project to Vue:
 ```javascript
 // Before (React)
 parser: '@typescript-eslint/parser',
-extends: ['plugin:test-a11y-js/react']
+extends: ['plugin:a11y/react']
 
 // After (Vue)
 parser: 'vue-eslint-parser',
-extends: ['plugin:test-a11y-js/vue']
+extends: ['plugin:a11y/vue']
 ```
 
 ## Best Practices
@@ -527,8 +527,8 @@ For large codebases, you may want to exclude certain files or directories from a
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   ignorePatterns: [
     // Exclude build outputs
     '**/dist/**',
@@ -584,19 +584,19 @@ For specific files that need exceptions:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   overrides: [
     {
       files: ['**/*.test.{js,ts,jsx,tsx}'],
       rules: {
-        'test-a11y-js/**': 'off' // Disable all a11y rules in tests
+        'a11y/**': 'off' // Disable all a11y rules in tests
       }
     },
     {
       files: ['**/legacy/**'],
       rules: {
-        'test-a11y-js/**': 'warn' // Only warnings in legacy code
+        'a11y/**': 'warn' // Only warnings in legacy code
       }
     }
   ]
@@ -607,7 +607,7 @@ module.exports = {
 
 ### Rules not working
 
-1. Ensure the plugin is installed: `npm install eslint-plugin-test-a11y-js`
+1. Ensure the plugin is installed: `npm install eslint-plugin-a11y`
 2. Verify the plugin is in your ESLint config
 3. Check that your parser supports JSX (for React) or Vue (for Vue)
 4. Ensure file extensions are included in ESLint's file patterns

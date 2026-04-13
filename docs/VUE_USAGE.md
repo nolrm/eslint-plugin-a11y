@@ -1,6 +1,6 @@
 # Vue Support
 
-The `test-a11y-js` ESLint plugin supports Vue Single File Components (SFC) when using `vue-eslint-parser`.
+The `a11y` ESLint plugin supports Vue Single File Components (SFC) when using `vue-eslint-parser`.
 
 ## Installation
 
@@ -23,8 +23,8 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module'
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended']
 }
 ```
 

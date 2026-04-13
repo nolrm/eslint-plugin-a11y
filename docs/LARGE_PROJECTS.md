@@ -1,13 +1,13 @@
 # Large Project Setup Guide
 
-This guide helps you integrate `test-a11y-js` into large codebases with minimal disruption.
+This guide helps you integrate `a11y` into large codebases with minimal disruption.
 
 ## Quick Start for Large Projects
 
 ### Step 1: Install
 
 ```bash
-npm install --save-dev eslint-plugin-test-a11y-js eslint
+npm install --save-dev eslint-plugin-a11y eslint
 ```
 
 ### Step 2: Start with Minimal Configuration
@@ -15,8 +15,8 @@ npm install --save-dev eslint-plugin-test-a11y-js eslint
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/minimal'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/minimal'],
   ignorePatterns: [
     '**/node_modules/**',
     '**/dist/**',
@@ -49,8 +49,8 @@ Enable minimal rules but only check new/modified files:
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/minimal']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/minimal']
 }
 ```
 
@@ -64,8 +64,8 @@ npx eslint $(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|js
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended']
 }
 ```
 
@@ -115,12 +115,12 @@ npx eslint src/ --cache --ignore-pattern '**/*.test.*'
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   rules: {
     // Disable if too slow on large files
-    'test-a11y-js/heading-order': 'off',
-    'test-a11y-js/landmark-roles': 'off'
+    'a11y/heading-order': 'off',
+    'a11y/landmark-roles': 'off'
   }
 }
 ```
@@ -130,19 +130,19 @@ module.exports = {
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   overrides: [
     {
       files: ['src/components/**/*.{js,jsx,ts,tsx}'],
       rules: {
-        'test-a11y-js/**': 'error' // Strict in components
+        'a11y/**': 'error' // Strict in components
       }
     },
     {
       files: ['src/utils/**/*.{js,ts}'],
       rules: {
-        'test-a11y-js/**': 'off' // Disable in utils
+        'a11y/**': 'off' // Disable in utils
       }
     }
   ]
@@ -196,7 +196,7 @@ npx eslint . --cache --max-warnings 100
 
 ## Migration Checklist
 
-- [ ] Install `test-a11y-js`
+- [ ] Install `a11y`
 - [ ] Add minimal config to `.eslintrc.js`
 - [ ] Add ignore patterns for build outputs
 - [ ] Test on small directory first

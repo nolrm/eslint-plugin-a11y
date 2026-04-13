@@ -30,7 +30,7 @@ const rule: Rule.RuleModule = {
       description: 'Flag redundant words in image alt text',
       category: 'Accessibility',
       recommended: false,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       redundantAlt: 'Redundant alt text: "{{word}}" is unnecessary. Screen readers already announce images. Describe the image content instead.'

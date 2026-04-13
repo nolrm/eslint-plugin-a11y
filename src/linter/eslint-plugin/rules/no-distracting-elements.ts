@@ -16,7 +16,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow distracting elements like <blink> and <marquee>',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noDistractingElements: '<{{element}}> elements are distracting, can cause seizures, and are deprecated. Remove or replace with static content.'

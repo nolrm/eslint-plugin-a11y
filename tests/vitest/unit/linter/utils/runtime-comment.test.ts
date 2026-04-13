@@ -34,7 +34,7 @@ describe('runtime-comment utilities', () => {
     it('should return false when runtimeCheckedComment is not set', () => {
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             components: { Link: 'a' }
           }
         },
@@ -57,7 +57,7 @@ describe('runtime-comment utilities', () => {
     it('should detect comment in leading comments', () => {
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'suppress'
           }
@@ -83,7 +83,7 @@ describe('runtime-comment utilities', () => {
     it('should detect comment in trailing comments', () => {
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'downgrade'
           }
@@ -119,7 +119,7 @@ describe('runtime-comment utilities', () => {
 
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'suppress'
           }
@@ -142,7 +142,7 @@ describe('runtime-comment utilities', () => {
     it('should default to downgrade mode when not specified', () => {
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime'
             // runtimeCheckedMode not specified
           }
@@ -212,7 +212,7 @@ describe('runtime-comment utilities', () => {
     it('should downgrade severity when runtime comment present with downgrade mode', () => {
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'downgrade'
           }
@@ -231,7 +231,7 @@ describe('runtime-comment utilities', () => {
     it('should return off when runtime comment present with suppress mode', () => {
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'suppress'
           }
@@ -267,7 +267,7 @@ describe('runtime-comment utilities', () => {
 
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'downgrade'
           }
@@ -312,7 +312,7 @@ describe('runtime-comment utilities', () => {
 
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'suppress'
           }
@@ -345,7 +345,7 @@ describe('runtime-comment utilities', () => {
 
       const mockContext = {
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'downgrade'
           }

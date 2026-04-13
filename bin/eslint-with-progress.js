@@ -5,7 +5,7 @@
  *
  * Compatible with ESLint v8 (.eslintrc) and v9 (flat config).
  *
- * Usage: node node_modules/eslint-plugin-test-a11y-js/bin/eslint-with-progress.js
+ * Usage: node node_modules/eslint-plugin-a11y/bin/eslint-with-progress.js
  * Or: pnpm lint (if configured in package.json)
  */
 

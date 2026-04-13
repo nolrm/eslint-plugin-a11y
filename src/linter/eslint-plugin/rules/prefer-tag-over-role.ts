@@ -83,7 +83,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce using semantic native HTML elements over ARIA role attributes',
       category: 'Accessibility',
       recommended: false,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       preferTag: 'Prefer {{tag}} over role="{{role}}" for better native accessibility semantics.'

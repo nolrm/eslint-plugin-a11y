@@ -18,7 +18,7 @@ const rule: Rule.RuleModule = {
       description: 'Require onClick elements to have keyboard event handlers',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingKeyboardHandler: 'Elements with click handlers must also have a keyboard event handler (onKeyDown, onKeyUp, or onKeyPress) for accessibility. Keyboard users cannot trigger click events.'

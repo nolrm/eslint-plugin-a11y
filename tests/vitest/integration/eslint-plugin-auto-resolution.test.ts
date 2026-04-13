@@ -8,7 +8,7 @@ const require = createRequire(import.meta.url)
 /**
  * Tests that ESLint can automatically resolve the plugin by name
  * 
- * This is the key test after renaming to eslint-plugin-test-a11y-js.
+ * This is the key test after renaming to eslint-plugin-a11y.
  * It verifies that ESLint's plugin resolution mechanism works correctly.
  */
 
@@ -19,7 +19,7 @@ describe('ESLint Plugin Auto-Resolution', () => {
     
     expect(pkg.name).toMatch(/^eslint-plugin-/)
     const pluginName = pkg.name.replace(/^eslint-plugin-/, '')
-    expect(pluginName).toBe('test-a11y-js')
+    expect(pluginName).toBe('a11y')
   })
   
   it('should have main export pointing to ESLint plugin', () => {
@@ -45,7 +45,7 @@ describe('ESLint Plugin Auto-Resolution', () => {
     
     expect(plugin).toBeDefined()
     expect(plugin.meta).toBeDefined()
-    expect(plugin.meta.name).toBe('eslint-plugin-test-a11y-js')
+    expect(plugin.meta.name).toBe('eslint-plugin-a11y')
     expect(plugin.rules).toBeDefined()
     expect(plugin.configs).toBeDefined()
   })

@@ -33,7 +33,7 @@ const rule: Rule.RuleModule = {
       description: 'Flag ambiguous link text',
       category: 'Accessibility',
       recommended: false,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       ambiguousText: 'Ambiguous link text "{{text}}" is not descriptive. Use meaningful text that describes the link destination.'

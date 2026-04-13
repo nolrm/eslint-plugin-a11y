@@ -8,6 +8,6 @@
       "jsx": true
     }
   },
-  "plugins": ["test-a11y-js"],
-  "extends": ["plugin:test-a11y-js/recommended"]
+  "plugins": ["a11y"],
+  "extends": ["plugin:a11y/recommended"]
 }

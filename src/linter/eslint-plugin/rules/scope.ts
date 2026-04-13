@@ -19,7 +19,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce valid use of the scope attribute on table header elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       invalidElement: 'The scope attribute is only valid on <th> elements, not <{{element}}>.',

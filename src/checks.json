@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "checks": {
     "image-alt": {
-      "ruleId": "test-a11y-js/image-alt",
+      "ruleId": "a11y/image-alt",
       "method": "checkImageAlt",
       "elements": ["img"],
       "attributes": {
@@ -35,7 +35,7 @@
       ]
     },
     "button-label": {
-      "ruleId": "test-a11y-js/button-label",
+      "ruleId": "a11y/button-label",
       "method": "checkButtonLabel",
       "elements": ["button"],
       "attributes": {
@@ -63,7 +63,7 @@
       ]
     },
     "link-text": {
-      "ruleId": "test-a11y-js/link-text",
+      "ruleId": "a11y/link-text",
       "method": "checkLinkText",
       "elements": ["a"],
       "attributes": {
@@ -97,7 +97,7 @@
       ]
     },
     "form-label": {
-      "ruleId": "test-a11y-js/form-label",
+      "ruleId": "a11y/form-label",
       "method": "checkFormLabels",
       "elements": ["input", "select", "textarea"],
       "attributes": {
@@ -136,7 +136,7 @@
       ]
     },
     "heading-order": {
-      "ruleId": "test-a11y-js/heading-order",
+      "ruleId": "a11y/heading-order",
       "method": "checkHeadingOrder",
       "elements": ["h1", "h2", "h3", "h4", "h5", "h6"],
       "attributes": {
@@ -160,7 +160,7 @@
       ]
     },
     "iframe-title": {
-      "ruleId": "test-a11y-js/iframe-title",
+      "ruleId": "a11y/iframe-title",
       "method": "checkIframeTitle",
       "elements": ["iframe"],
       "attributes": {
@@ -193,7 +193,7 @@
       ]
     },
     "fieldset-legend": {
-      "ruleId": "test-a11y-js/fieldset-legend",
+      "ruleId": "a11y/fieldset-legend",
       "method": "checkFieldsetLegend",
       "elements": ["fieldset"],
       "attributes": {
@@ -219,7 +219,7 @@
       ]
     },
     "table-structure": {
-      "ruleId": "test-a11y-js/table-structure",
+      "ruleId": "a11y/table-structure",
       "method": "checkTableStructure",
       "elements": ["table"],
       "attributes": {
@@ -251,7 +251,7 @@
       ]
     },
     "details-summary": {
-      "ruleId": "test-a11y-js/details-summary",
+      "ruleId": "a11y/details-summary",
       "method": "checkDetailsSummary",
       "elements": ["details"],
       "attributes": {
@@ -277,7 +277,7 @@
       ]
     },
     "video-captions": {
-      "ruleId": "test-a11y-js/video-captions",
+      "ruleId": "a11y/video-captions",
       "method": "checkVideoCaptions",
       "elements": ["video"],
       "attributes": {

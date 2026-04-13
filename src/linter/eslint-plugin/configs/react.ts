@@ -1,5 +1,5 @@
 /**
- * React-specific ESLint configuration for test-a11y-js
+ * React-specific ESLint configuration for a11y
  * 
  * This configuration is optimized for React/JSX projects.
  * It includes the recommended rules with React-specific parser settings.

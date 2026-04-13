@@ -18,7 +18,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow aria-hidden="true" on focusable elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noAriaHiddenOnFocusable: 'aria-hidden="true" must not be used on focusable elements. This makes the element invisible to screen readers while still being focusable, causing confusion. Either remove aria-hidden or make the element non-focusable with tabindex="-1".'

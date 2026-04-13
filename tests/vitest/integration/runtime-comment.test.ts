@@ -34,10 +34,10 @@ describe('Runtime Comment Integration', () => {
     eslint = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
-        plugins: ['test-a11y-js'],
+        plugins: ['a11y'],
         parser: require.resolve('@typescript-eslint/parser'),
         parserOptions: {
           ecmaVersion: 2020,
@@ -47,15 +47,15 @@ describe('Runtime Comment Integration', () => {
           }
         },
         settings: {
-          'test-a11y-js': {
+          'a11y': {
             runtimeCheckedComment: 'a11y-checked-at-runtime',
             runtimeCheckedMode: 'suppress'
           }
         },
         rules: {
-          'test-a11y-js/image-alt': 'error',
-          'test-a11y-js/button-label': 'error',
-          'test-a11y-js/link-text': 'warn'
+          'a11y/image-alt': 'error',
+          'a11y/button-label': 'error',
+          'a11y/link-text': 'warn'
         }
       }
     })
@@ -87,7 +87,7 @@ describe('Runtime Comment Integration', () => {
 
       const results = await eslint.lintText(code, { filePath: 'test.tsx' })
       expect(results[0].messages).toHaveLength(1)
-      expect(results[0].messages[0].ruleId).toBe('test-a11y-js/image-alt')
+      expect(results[0].messages[0].ruleId).toBe('a11y/image-alt')
     })
 
     it('should suppress error when runtime comment is on parent element', async () => {
@@ -133,7 +133,7 @@ describe('Runtime Comment Integration', () => {
 
       const results = await eslint.lintText(code, { filePath: 'test.tsx' })
       expect(results[0].messages).toHaveLength(1)
-      expect(results[0].messages[0].ruleId).toBe('test-a11y-js/button-label')
+      expect(results[0].messages[0].ruleId).toBe('a11y/button-label')
     })
   })
 
@@ -163,7 +163,7 @@ describe('Runtime Comment Integration', () => {
 
       const results = await eslint.lintText(code, { filePath: 'test.tsx' })
       expect(results[0].messages).toHaveLength(1)
-      expect(results[0].messages[0].ruleId).toBe('test-a11y-js/link-text')
+      expect(results[0].messages[0].ruleId).toBe('a11y/link-text')
     })
   })
 
@@ -176,10 +176,10 @@ describe('Runtime Comment Integration', () => {
       const customEslint = new ESLint({
         useEslintrc: false,
         plugins: {
-          'test-a11y-js': plugin
+          'a11y': plugin
         },
         baseConfig: {
-          plugins: ['test-a11y-js'],
+          plugins: ['a11y'],
           parser: require.resolve('@typescript-eslint/parser'),
           parserOptions: {
             ecmaVersion: 2020,
@@ -189,13 +189,13 @@ describe('Runtime Comment Integration', () => {
             }
           },
           settings: {
-            'test-a11y-js': {
+            'a11y': {
               runtimeCheckedComment: 'checked-in-tests',
               runtimeCheckedMode: 'suppress'
             }
           },
           rules: {
-            'test-a11y-js/image-alt': 'error'
+            'a11y/image-alt': 'error'
           }
         }
       })

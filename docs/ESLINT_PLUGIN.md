@@ -1,6 +1,6 @@
 # ESLint Plugin Documentation
 
-Complete guide to using the `test-a11y-js` ESLint plugin for accessibility linting.
+Complete guide to using the `a11y` ESLint plugin for accessibility linting.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ Complete guide to using the `test-a11y-js` ESLint plugin for accessibility linti
 
 ## Overview
 
-The `test-a11y-js` ESLint plugin provides real-time accessibility linting for your code. It checks for common accessibility violations directly in your editor and during CI/CD builds.
+The `a11y` ESLint plugin provides real-time accessibility linting for your code. It checks for common accessibility violations directly in your editor and during CI/CD builds.
 
 ### Features
 
@@ -30,7 +30,7 @@ The `test-a11y-js` ESLint plugin provides real-time accessibility linting for yo
 ## Installation
 
 ```bash
-npm install --save-dev eslint-plugin-test-a11y-js eslint
+npm install --save-dev eslint-plugin-a11y eslint
 ```
 
 ### Peer Dependencies
@@ -53,7 +53,7 @@ npm install --save-dev vue-eslint-parser
 import js from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import react from 'eslint-plugin-react'
-import testA11y from 'eslint-plugin-test-a11y-js'
+import testA11y from 'eslint-plugin-a11y'
 
 export default [
   js.configs.recommended,
@@ -62,7 +62,7 @@ export default [
   {
     plugins: {
       react,
-      'test-a11y-js': testA11y
+      'a11y': testA11y
     },
     languageOptions: {
       parserOptions: {
@@ -86,7 +86,7 @@ export default [
       }
     },
     plugins: {
-      'test-a11y-js': testA11y
+      'a11y': testA11y
     },
     ...testA11y.configs['flat/vue']
   }
@@ -100,8 +100,8 @@ This is the recommended configuration style for new projects using ESLint v9+.
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended']
 }
 ```
 
@@ -114,8 +114,8 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: { jsx: true }
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/react']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/react']
 }
 ```
 
@@ -128,8 +128,8 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser'
   },
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/vue']
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/vue']
 }
 ```
 
@@ -141,26 +141,26 @@ This table provides a high-level overview of the accessibility rules exposed by 
 
 | Rule | What it checks | Default level | Included in presets (classic + flat) | Closest `eslint-plugin-jsx-a11y` rule |
 |------|----------------|---------------|--------------------------------------|---------------------------------------|
-| `test-a11y-js/image-alt` | `img` alt text, decorative images | `error` | `plugin:test-a11y-js/minimal`, `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `alt-text` |
-| `test-a11y-js/button-label` | Buttons have accessible labels | `error` | `plugin:test-a11y-js/minimal`, `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `button-has-type`, `click-events-have-key-events` |
-| `test-a11y-js/link-text` | Descriptive link text, denylist phrases | `warn` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `anchor-is-valid`, `no-redundant-roles` |
-| `test-a11y-js/form-label` | Form controls have labels | `error` | `plugin:test-a11y-js/minimal`, `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `label-has-associated-control` |
-| `test-a11y-js/heading-order` | Heading hierarchy, skip tolerance | `warn` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (related to `heading-has-content`) |
-| `test-a11y-js/iframe-title` | `iframe` elements have titles | `error` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `iframe-has-title` |
-| `test-a11y-js/fieldset-legend` | `fieldset` elements have legends | `error` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `fieldset-has-label` |
-| `test-a11y-js/table-structure` | Table headers, scopes, structure | `error` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `scope`, `no-noninteractive-element-to-interactive-role` |
-| `test-a11y-js/details-summary` | `details` have visible `summary` | `error` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (pattern-specific) |
-| `test-a11y-js/video-captions` | `<video>` tracks / captions | `error` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `media-has-caption` |
-| `test-a11y-js/audio-captions` | `<audio>` captions / transcripts | `error` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (pattern-specific) |
-| `test-a11y-js/landmark-roles` | Landmarks and regions | `warn` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `landmark-no-duplicate-main`, `aria-roles` |
-| `test-a11y-js/dialog-modal` | Accessible dialogs and modals | `error` | `plugin:test-a11y-js/recommended`, `plugin:test-a11y-js/react`, `plugin:test-a11y-js/vue`, `plugin:test-a11y-js/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `aria-roles`, `aria-props` |
-| `test-a11y-js/aria-validation` | ARIA roles, properties, ID refs (AST-first) | `error` | `plugin:test-a11y-js/strict`, `flat/strict` (opt-in for `plugin:test-a11y-js/recommended`, `flat/recommended`) | `aria-roles`, `aria-props`, `aria-unsupported-elements` |
-| `test-a11y-js/semantic-html` | Prefer semantic elements over generic+role | `error` | `plugin:test-a11y-js/strict`, `flat/strict` (opt-in for `plugin:test-a11y-js/recommended`, `flat/recommended`) | Covers parts of: `no-redundant-roles`, `prefer-tag-over-role` |
-| `test-a11y-js/form-validation` | Required fields, ID refs, validation patterns | `error` | `plugin:test-a11y-js/strict`, `flat/strict` (opt-in for `plugin:test-a11y-js/recommended`, `flat/recommended`) | Covers parts of: `label-has-associated-control`, `aria-props` |
+| `a11y/image-alt` | `img` alt text, decorative images | `error` | `plugin:a11y/minimal`, `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `alt-text` |
+| `a11y/button-label` | Buttons have accessible labels | `error` | `plugin:a11y/minimal`, `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `button-has-type`, `click-events-have-key-events` |
+| `a11y/link-text` | Descriptive link text, denylist phrases | `warn` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `anchor-is-valid`, `no-redundant-roles` |
+| `a11y/form-label` | Form controls have labels | `error` | `plugin:a11y/minimal`, `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `label-has-associated-control` |
+| `a11y/heading-order` | Heading hierarchy, skip tolerance | `warn` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (related to `heading-has-content`) |
+| `a11y/iframe-title` | `iframe` elements have titles | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `iframe-has-title` |
+| `a11y/fieldset-legend` | `fieldset` elements have legends | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `fieldset-has-label` |
+| `a11y/table-structure` | Table headers, scopes, structure | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `scope`, `no-noninteractive-element-to-interactive-role` |
+| `a11y/details-summary` | `details` have visible `summary` | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (pattern-specific) |
+| `a11y/video-captions` | `<video>` tracks / captions | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `media-has-caption` |
+| `a11y/audio-captions` | `<audio>` captions / transcripts | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (pattern-specific) |
+| `a11y/landmark-roles` | Landmarks and regions | `warn` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `landmark-no-duplicate-main`, `aria-roles` |
+| `a11y/dialog-modal` | Accessible dialogs and modals | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `aria-roles`, `aria-props` |
+| `a11y/aria-validation` | ARIA roles, properties, ID refs (AST-first) | `error` | `plugin:a11y/strict`, `flat/strict` (opt-in for `plugin:a11y/recommended`, `flat/recommended`) | `aria-roles`, `aria-props`, `aria-unsupported-elements` |
+| `a11y/semantic-html` | Prefer semantic elements over generic+role | `error` | `plugin:a11y/strict`, `flat/strict` (opt-in for `plugin:a11y/recommended`, `flat/recommended`) | Covers parts of: `no-redundant-roles`, `prefer-tag-over-role` |
+| `a11y/form-validation` | Required fields, ID refs, validation patterns | `error` | `plugin:a11y/strict`, `flat/strict` (opt-in for `plugin:a11y/recommended`, `flat/recommended`) | Covers parts of: `label-has-associated-control`, `aria-props` |
 
 For migration guidance from `eslint-plugin-jsx-a11y`, see the [Migration Guide](./MIGRATION_FROM_JSX_A11Y.md).
 
-### test-a11y-js/image-alt
+### a11y/image-alt
 
 Enforces that images have `alt` attributes for accessibility.
 
@@ -187,7 +187,7 @@ Enforces that images have `alt` attributes for accessibility.
 <img src="photo.jpg" alt={altText} />
 ```
 
-### test-a11y-js/button-label
+### a11y/button-label
 
 Enforces that buttons have labels or `aria-label` attributes.
 
@@ -213,7 +213,7 @@ Enforces that buttons have labels or `aria-label` attributes.
 <button aria-label={dynamicLabel}></button>
 ```
 
-### test-a11y-js/link-text
+### a11y/link-text
 
 Enforces that links have descriptive text.
 
@@ -239,7 +239,7 @@ Enforces that links have descriptive text.
 <a href="/blog">Read our blog posts</a>
 ```
 
-### test-a11y-js/form-label
+### a11y/form-label
 
 Enforces that form controls have associated labels.
 
@@ -266,7 +266,7 @@ Enforces that form controls have associated labels.
 <input type="email" aria-labelledby="email-label" />
 ```
 
-### test-a11y-js/heading-order
+### a11y/heading-order
 
 Enforces proper heading hierarchy (no skipped levels).
 
@@ -293,7 +293,7 @@ Enforces proper heading hierarchy (no skipped levels).
 <h3>Section</h3>
 ```
 
-### test-a11y-js/aria-validation
+### a11y/aria-validation
 
 Validates ARIA roles, properties, and ID references (AST-first, no JSDOM).
 
@@ -322,7 +322,7 @@ Validates ARIA roles, properties, and ID references (AST-first, no JSDOM).
 
 **Note**: This rule is AST-first and validates within the same file only. Cross-file ID references are not validated.
 
-### test-a11y-js/semantic-html
+### a11y/semantic-html
 
 Enforces proper use of semantic HTML elements over generic elements with roles.
 
@@ -345,7 +345,7 @@ Enforces proper use of semantic HTML elements over generic elements with roles.
 <nav>Navigation</nav>
 ```
 
-### test-a11y-js/form-validation
+### a11y/form-validation
 
 Validates form validation patterns and ID references.
 
@@ -388,12 +388,12 @@ Example:
 
 ```js
 // eslint.config.js
-import testA11y from 'eslint-plugin-test-a11y-js'
+import testA11y from 'eslint-plugin-a11y'
 
 export default [
   {
     plugins: {
-      'test-a11y-js': testA11y
+      'a11y': testA11y
     },
     ...testA11y.configs['flat/minimal']
   }
@@ -402,26 +402,26 @@ export default [
 
 ### Legacy Presets (.eslintrc*, ESLint v8)
 
-- `plugin:test-a11y-js/minimal` – 3 critical rules only
-- `plugin:test-a11y-js/recommended` – Balanced approach (default)
-- `plugin:test-a11y-js/strict` – All rules as errors
-- `plugin:test-a11y-js/react` – Optimized for React/JSX
-- `plugin:test-a11y-js/vue` – Optimized for Vue SFC
+- `plugin:a11y/minimal` – 3 critical rules only
+- `plugin:a11y/recommended` – Balanced approach (default)
+- `plugin:a11y/strict` – All rules as errors
+- `plugin:a11y/react` – Optimized for React/JSX
+- `plugin:a11y/vue` – Optimized for Vue SFC
 
 Custom configuration (legacy):
 
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   rules: {
     // Override specific rules
-    'test-a11y-js/image-alt': 'error',
-    'test-a11y-js/link-text': 'warn',
+    'a11y/image-alt': 'error',
+    'a11y/link-text': 'warn',
     
     // Disable a rule
-    'test-a11y-js/heading-order': 'off'
+    'a11y/heading-order': 'off'
   }
 }
 ```
@@ -498,7 +498,7 @@ In VS Code and other editors with ESLint support, suggestions appear as:
 
 ## Static lint + runtime checks (why this exists)
 
-The `test-a11y-js` plugin uniquely supports both static linting (ESLint) and runtime testing (A11yChecker). This allows you to catch issues during development while also ensuring comprehensive test coverage.
+The `a11y` plugin uniquely supports both static linting (ESLint) and runtime testing (A11yChecker). This allows you to catch issues during development while also ensuring comprehensive test coverage.
 
 At a high level:
 
@@ -515,10 +515,10 @@ For patterns that are difficult to validate statically (e.g., dynamic props, com
 ```javascript
 // .eslintrc.js
 module.exports = {
-  plugins: ['test-a11y-js'],
-  extends: ['plugin:test-a11y-js/recommended'],
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
   settings: {
-    'test-a11y-js': {
+    'a11y': {
       runtimeCheckedComment: 'a11y-checked-at-runtime', // Default
       runtimeCheckedMode: 'suppress' // 'suppress' or 'downgrade' (default: 'downgrade')
     }
@@ -539,7 +539,7 @@ function DynamicImage({ src, alt }) {
 }
 
 // In your test file:
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 import { render } from '@testing-library/react'
 
 test('DynamicImage is accessible', async () => {
@@ -566,22 +566,22 @@ Each ESLint rule has a corresponding A11yChecker method for runtime testing:
 
 | ESLint Rule | A11yChecker Method |
 |------------|-------------------|
-| `test-a11y-js/image-alt` | `A11yChecker.checkImageAlt(element)` |
-| `test-a11y-js/button-label` | `A11yChecker.checkButtonLabel(element)` |
-| `test-a11y-js/link-text` | `A11yChecker.checkLinkText(element)` |
-| `test-a11y-js/form-label` | `A11yChecker.checkFormLabels(element)` |
-| `test-a11y-js/heading-order` | `A11yChecker.checkHeadingOrder(element)` |
-| `test-a11y-js/iframe-title` | `A11yChecker.checkIframeTitle(element)` |
-| `test-a11y-js/fieldset-legend` | `A11yChecker.checkFieldsetLegend(element)` |
-| `test-a11y-js/table-structure` | `A11yChecker.checkTableStructure(element)` |
-| `test-a11y-js/details-summary` | `A11yChecker.checkDetailsSummary(element)` |
-| `test-a11y-js/video-captions` | `A11yChecker.checkVideoCaptions(element)` |
-| `test-a11y-js/audio-captions` | `A11yChecker.checkAudioCaptions(element)` |
-| `test-a11y-js/landmark-roles` | `A11yChecker.checkLandmarks(element)` |
-| `test-a11y-js/dialog-modal` | `A11yChecker.checkDialogModal(element)` |
-| `test-a11y-js/aria-validation` | `A11yChecker.checkAriaRoles(element)` |
-| `test-a11y-js/semantic-html` | `A11yChecker.checkSemanticHTML(element)` |
-| `test-a11y-js/form-validation` | `A11yChecker.checkFormValidationMessages(element)` |
+| `a11y/image-alt` | `A11yChecker.checkImageAlt(element)` |
+| `a11y/button-label` | `A11yChecker.checkButtonLabel(element)` |
+| `a11y/link-text` | `A11yChecker.checkLinkText(element)` |
+| `a11y/form-label` | `A11yChecker.checkFormLabels(element)` |
+| `a11y/heading-order` | `A11yChecker.checkHeadingOrder(element)` |
+| `a11y/iframe-title` | `A11yChecker.checkIframeTitle(element)` |
+| `a11y/fieldset-legend` | `A11yChecker.checkFieldsetLegend(element)` |
+| `a11y/table-structure` | `A11yChecker.checkTableStructure(element)` |
+| `a11y/details-summary` | `A11yChecker.checkDetailsSummary(element)` |
+| `a11y/video-captions` | `A11yChecker.checkVideoCaptions(element)` |
+| `a11y/audio-captions` | `A11yChecker.checkAudioCaptions(element)` |
+| `a11y/landmark-roles` | `A11yChecker.checkLandmarks(element)` |
+| `a11y/dialog-modal` | `A11yChecker.checkDialogModal(element)` |
+| `a11y/aria-validation` | `A11yChecker.checkAriaRoles(element)` |
+| `a11y/semantic-html` | `A11yChecker.checkSemanticHTML(element)` |
+| `a11y/form-validation` | `A11yChecker.checkFormValidationMessages(element)` |
 
 **Example Workflow:**
 
@@ -598,7 +598,7 @@ function ProductCard({ product }) {
 }
 
 // Test file
-import { A11yChecker } from 'eslint-plugin-test-a11y-js/core'
+import { A11yChecker } from 'eslint-plugin-a11y/core'
 import { render } from '@testing-library/react'
 
 test('ProductCard is accessible', async () => {
@@ -684,8 +684,8 @@ function GoodComponent() {
 
 ### Rules Not Working
 
-1. **Check installation**: Ensure `test-a11y-js` and `eslint` are installed
-2. **Verify plugin**: Check that `plugins: ['test-a11y-js']` is in your config
+1. **Check installation**: Ensure `a11y` and `eslint` are installed
+2. **Verify plugin**: Check that `plugins: ['a11y']` is in your config
 3. **Check parser**: For React, ensure JSX is enabled. For Vue, ensure `vue-eslint-parser` is used
 4. **File extensions**: Ensure your file extensions (`.jsx`, `.vue`, etc.) are included in ESLint's file patterns
 
@@ -693,11 +693,11 @@ function GoodComponent() {
 
 If you're getting overwhelmed by violations:
 
-1. **Start with recommended**: Use `plugin:test-a11y-js/recommended` which uses warnings for moderate issues
+1. **Start with recommended**: Use `plugin:a11y/recommended` which uses warnings for moderate issues
 2. **Fix incrementally**: Address violations one at a time
 3. **Use disable comments**: Temporarily disable rules for exceptions:
    ```jsx
-   // eslint-disable-next-line test-a11y-js/image-alt
+   // eslint-disable-next-line a11y/image-alt
    <img src="decorative.jpg" alt="" />
    ```
 4. **Gradually increase strictness**: Move to strict configuration once compliant
@@ -756,6 +756,6 @@ Add ESLint to your CI/CD pipeline:
 ## Support
 
 For issues, questions, or contributions, please visit:
-- GitHub: https://github.com/nolrm/eslint-plugin-test-a11y-js
-- Issues: https://github.com/nolrm/eslint-plugin-test-a11y-js/issues
+- GitHub: https://github.com/nolrm/eslint-plugin-a11y
+- Issues: https://github.com/nolrm/eslint-plugin-a11y/issues
 

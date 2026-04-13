@@ -1,6 +1,6 @@
 {
-  "name": "eslint-plugin-test-a11y-js",
-  "version": "0.18.0",
+  "name": "eslint-plugin-a11y",
+  "version": "1.0.0",
   "description": "ESLint accessibility (a11y) plugin for React, Vue, and JSX with flat-config (ESLint v9+) support and a matching runtime A11yChecker API. Alternative to eslint-plugin-jsx-a11y for modern design systems.",
   "main": "dist/linter/eslint-plugin/index.js",
   "module": "dist/linter/eslint-plugin/index.mjs",
@@ -82,12 +82,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nolrm/eslint-plugin-test-a11y-js.git"
+    "url": "git+https://github.com/nolrm/eslint-plugin-a11y.git"
   },
   "bugs": {
-    "url": "https://github.com/nolrm/eslint-plugin-test-a11y-js/issues"
+    "url": "https://github.com/nolrm/eslint-plugin-a11y/issues"
   },
-  "homepage": "https://github.com/nolrm/eslint-plugin-test-a11y-js#readme",
+  "homepage": "https://github.com/nolrm/eslint-plugin-a11y#readme",
   "dependencies": {},
   "peerDependencies": {
     "eslint": ">=8.0.0",

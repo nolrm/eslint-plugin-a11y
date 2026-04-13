@@ -18,7 +18,7 @@ const rule: Rule.RuleModule = {
       description: 'Require heading elements to have accessible content',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       headingMustHaveContent: 'Headings must have text content or an accessible label (aria-label, aria-labelledby, or title).'

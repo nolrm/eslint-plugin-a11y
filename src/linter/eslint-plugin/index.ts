@@ -1,14 +1,14 @@
 /**
- * ESLint plugin for test-a11y-js
- * 
+ * ESLint plugin for a11y
+ *
  * Provides accessibility linting rules for React, Vue, and HTML components.
- * 
+ *
  * @example
  * ```javascript
  * // .eslintrc.js
  * module.exports = {
- *   plugins: ['test-a11y-js'],
- *   extends: ['plugin:test-a11y-js/recommended']
+ *   plugins: ['a11y'],
+ *   extends: ['plugin:a11y/recommended']
  * }
  * ```
  */
@@ -78,7 +78,7 @@ import scope from './rules/scope'
  */
 const plugin: ESLint.Plugin = {
   meta: {
-    name: 'eslint-plugin-test-a11y-js',
+    name: 'eslint-plugin-a11y',
     version: __PACKAGE_VERSION__
   },
   rules: {
@@ -134,19 +134,19 @@ const plugin: ESLint.Plugin = {
   },
   configs: {
     minimal: {
-      plugins: ['test-a11y-js'],
+      plugins: ['a11y'],
       rules: minimal
     },
     recommended: {
-      plugins: ['test-a11y-js'],
+      plugins: ['a11y'],
       rules: recommended
     },
     strict: {
-      plugins: ['test-a11y-js'],
+      plugins: ['a11y'],
       rules: strict
     },
     react: {
-      plugins: ['test-a11y-js'],
+      plugins: ['a11y'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaFeatures: {
@@ -156,7 +156,7 @@ const plugin: ESLint.Plugin = {
       rules: react
     },
     vue: {
-      plugins: ['test-a11y-js'],
+      plugins: ['a11y'],
       parser: 'vue-eslint-parser',
       parserOptions: {
         parser: '@typescript-eslint/parser',

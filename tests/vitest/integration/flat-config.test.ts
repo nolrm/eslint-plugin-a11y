@@ -12,7 +12,7 @@ describe('Flat Config Integration', () => {
     it('should export flat/recommended config', () => {
       expect(testA11yJs.configs['flat/recommended']).toBeDefined()
       expect(testA11yJs.configs['flat/recommended'].rules).toBeDefined()
-      expect(testA11yJs.configs['flat/recommended'].rules['test-a11y-js/image-alt']).toBeDefined()
+      expect(testA11yJs.configs['flat/recommended'].rules['a11y/image-alt']).toBeDefined()
     })
 
     it('should export flat/recommended-react config', () => {
@@ -55,7 +55,7 @@ describe('Flat Config Integration', () => {
     it('should be spreadable into config array', () => {
       const config = {
         plugins: {
-          'test-a11y-js': testA11yJs
+          'a11y': testA11yJs
         },
         ...testA11yJs.configs['flat/recommended']
       }

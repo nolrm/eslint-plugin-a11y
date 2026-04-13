@@ -28,7 +28,7 @@ function getJSDOM(): any {
     // jsdom not available - HTML string parsing will be limited
     if (!jsdomWarningShown) {
       console.warn(
-        '[test-a11y-js] jsdom not found. HTML string parsing will be skipped. ' +
+        '[a11y] jsdom not found. HTML string parsing will be skipped. ' +
         'Install jsdom if you need HTML string accessibility checks: npm install --save-dev jsdom'
       )
       jsdomWarningShown = true

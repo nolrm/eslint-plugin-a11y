@@ -30,7 +30,7 @@ describe('ESLint Suggestions Integration', () => {
     eslint = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
         parser: require.resolve('@typescript-eslint/parser'),
@@ -42,10 +42,10 @@ describe('ESLint Suggestions Integration', () => {
           }
         },
         rules: {
-          'test-a11y-js/iframe-title': 'error',
-          'test-a11y-js/button-label': 'error',
-          'test-a11y-js/link-text': 'warn',
-          'test-a11y-js/heading-order': 'warn'
+          'a11y/iframe-title': 'error',
+          'a11y/button-label': 'error',
+          'a11y/link-text': 'warn',
+          'a11y/heading-order': 'warn'
         }
       }
     })
@@ -78,9 +78,9 @@ describe('ESLint Suggestions Integration', () => {
       }
       
       // Verify rules trigger (at least one should)
-      const hasIframe = messages.some(m => m.ruleId === 'test-a11y-js/iframe-title')
-      const hasButton = messages.some(m => m.ruleId === 'test-a11y-js/button-label')
-      const hasLink = messages.some(m => m.ruleId === 'test-a11y-js/link-text')
+      const hasIframe = messages.some(m => m.ruleId === 'a11y/iframe-title')
+      const hasButton = messages.some(m => m.ruleId === 'a11y/button-label')
+      const hasLink = messages.some(m => m.ruleId === 'a11y/link-text')
       
       // At least one rule should trigger
       expect(hasIframe || hasButton || hasLink).toBe(true)

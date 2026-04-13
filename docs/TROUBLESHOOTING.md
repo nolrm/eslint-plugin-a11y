@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-Common issues and solutions when using the `test-a11y-js` ESLint plugin.
+Common issues and solutions when using the `a11y` ESLint plugin.
 
 ## Table of Contents
 
@@ -25,15 +25,15 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
 
 1. **Verify plugin installation:**
    ```bash
-   npm list eslint-plugin-test-a11y-js eslint
+   npm list eslint-plugin-a11y eslint
    ```
 
 2. **Check ESLint configuration:**
    ```javascript
    // .eslintrc.js
    module.exports = {
-     plugins: ['test-a11y-js'], // Must be included
-     extends: ['plugin:test-a11y-js/recommended']
+     plugins: ['a11y'], // Must be included
+     extends: ['plugin:a11y/recommended']
    }
    ```
 
@@ -60,18 +60,18 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
 ### Issue: Plugin not found
 
 **Symptoms:**
-- Error: "Plugin 'test-a11y-js' was not found"
+- Error: "Plugin 'a11y' was not found"
 
 **Solutions:**
 
 1. **Reinstall the plugin:**
    ```bash
-   npm install --save-dev eslint-plugin-test-a11y-js
+   npm install --save-dev eslint-plugin-a11y
    ```
 
 2. **Check node_modules:**
    ```bash
-   ls node_modules/eslint-plugin-test-a11y-js
+   ls node_modules/eslint-plugin-a11y
    ```
 
 3. **Clear cache:**
@@ -95,7 +95,7 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
    ```javascript
    // .eslintrc.js
    module.exports = {
-     extends: ['plugin:test-a11y-js/recommended'] // Uses warnings for moderate issues
+     extends: ['plugin:a11y/recommended'] // Uses warnings for moderate issues
    }
    ```
 
@@ -104,15 +104,15 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
    // .eslintrc.js
    module.exports = {
      rules: {
-       'test-a11y-js/heading-order': 'off', // Disable temporarily
-       'test-a11y-js/link-text': 'warn' // Change to warning
+       'a11y/heading-order': 'off', // Disable temporarily
+       'a11y/link-text': 'warn' // Change to warning
      }
    }
    ```
 
 3. **Use disable comments for exceptions:**
    ```jsx
-   // eslint-disable-next-line test-a11y-js/image-alt
+   // eslint-disable-next-line a11y/image-alt
    <img src="decorative.jpg" alt="" />
    ```
 
@@ -123,7 +123,7 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
 
 5. **Use file-level disable:**
    ```jsx
-   /* eslint-disable test-a11y-js/heading-order */
+   /* eslint-disable a11y/heading-order */
    // Entire file exempt from heading-order rule
    ```
 
@@ -150,8 +150,8 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
      parserOptions: {
        parser: '@typescript-eslint/parser'
      },
-     plugins: ['test-a11y-js'],
-     extends: ['plugin:test-a11y-js/vue']
+     plugins: ['a11y'],
+     extends: ['plugin:a11y/vue']
    }
    ```
 
@@ -180,7 +180,7 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
 
 2. **Suppress warnings if needed:**
    ```vue
-   <!-- eslint-disable-next-line test-a11y-js/image-alt -->
+   <!-- eslint-disable-next-line a11y/image-alt -->
    <img :src="imageUrl" :alt="altText" />
    ```
 
@@ -218,14 +218,14 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
          jsx: true // Enable JSX
        }
      },
-     plugins: ['test-a11y-js'],
-     extends: ['plugin:test-a11y-js/react']
+     plugins: ['a11y'],
+     extends: ['plugin:a11y/react']
    }
    ```
 
 2. **Use React preset:**
    ```javascript
-   extends: ['plugin:test-a11y-js/react']
+   extends: ['plugin:a11y/react']
    ```
 
 3. **Check file extensions:**
@@ -251,10 +251,10 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
        ecmaFeatures: { jsx: true },
        project: './tsconfig.json'
      },
-     plugins: ['test-a11y-js', '@typescript-eslint'],
+     plugins: ['a11y', '@typescript-eslint'],
      extends: [
        'plugin:@typescript-eslint/recommended',
-       'plugin:test-a11y-js/react'
+       'plugin:a11y/react'
      ]
    }
    ```
@@ -276,7 +276,7 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
 
 2. **Suppress if necessary:**
    ```jsx
-   // eslint-disable-next-line test-a11y-js/image-alt
+   // eslint-disable-next-line a11y/image-alt
    <img src={imageUrl} alt={altText} />
    ```
 
@@ -341,7 +341,7 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
 3. **Disable rules if needed:**
    ```javascript
    rules: {
-     'test-a11y-js/heading-order': 'off' // Disable if too slow
+     'a11y/heading-order': 'off' // Disable if too slow
    }
    ```
 
@@ -362,7 +362,7 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
    ```javascript
    // .eslintrc.ci.js
    module.exports = {
-     extends: ['plugin:test-a11y-js/strict']
+     extends: ['plugin:a11y/strict']
    }
    ```
 
@@ -403,7 +403,7 @@ Common issues and solutions when using the `test-a11y-js` ESLint plugin.
 If you're still experiencing issues:
 
 1. **Check existing issues:**
-   https://github.com/nolrm/eslint-plugin-test-a11y-js/issues
+   https://github.com/nolrm/eslint-plugin-a11y/issues
 
 2. **Create a minimal reproduction:**
    - Small code example
@@ -417,5 +417,5 @@ If you're still experiencing issues:
    - Framework (React/Vue)
 
 4. **Open an issue:**
-   https://github.com/nolrm/eslint-plugin-test-a11y-js/issues/new
+   https://github.com/nolrm/eslint-plugin-a11y/issues/new
 

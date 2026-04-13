@@ -149,7 +149,7 @@ const rule: Rule.RuleModule = {
       description: 'Validate autocomplete attribute values',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       invalidAutocomplete: 'Invalid autocomplete value "{{value}}". Use a valid autocomplete token like "name", "email", "username", etc.',

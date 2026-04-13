@@ -26,7 +26,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow tabindex on non-interactive elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noNonInteractiveTabindex: 'Non-interactive elements ({{element}}) should not have tabindex. Either remove the tabindex or add an interactive role.'

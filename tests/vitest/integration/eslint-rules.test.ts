@@ -36,10 +36,10 @@ describe('ESLint Rules Integration', () => {
     eslint = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
-        plugins: ['test-a11y-js'],
+        plugins: ['a11y'],
         parser: require.resolve('@typescript-eslint/parser'),
         parserOptions: {
           ecmaVersion: 2020,
@@ -49,11 +49,11 @@ describe('ESLint Rules Integration', () => {
           }
         },
         rules: {
-          'test-a11y-js/image-alt': 'error',
-          'test-a11y-js/button-label': 'error',
-          'test-a11y-js/link-text': 'warn',
-          'test-a11y-js/form-label': 'error',
-          'test-a11y-js/heading-order': 'warn'
+          'a11y/image-alt': 'error',
+          'a11y/button-label': 'error',
+          'a11y/link-text': 'warn',
+          'a11y/form-label': 'error',
+          'a11y/heading-order': 'warn'
         }
       }
     })
@@ -68,7 +68,7 @@ describe('ESLint Rules Integration', () => {
 
       expect(results[0].messages.length).toBeGreaterThan(0)
       expect(results[0].messages.some(msg => 
-        msg.ruleId === 'test-a11y-js/image-alt'
+        msg.ruleId === 'a11y/image-alt'
       )).toBe(true)
     })
 
@@ -79,7 +79,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       const imageAltErrors = results[0].messages.filter(msg => 
-        msg.ruleId === 'test-a11y-js/image-alt'
+        msg.ruleId === 'a11y/image-alt'
       )
       expect(imageAltErrors.length).toBe(0)
     })
@@ -94,7 +94,7 @@ describe('ESLint Rules Integration', () => {
 
       expect(results[0].messages.length).toBeGreaterThan(0)
       expect(results[0].messages.some(msg => 
-        msg.ruleId === 'test-a11y-js/button-label'
+        msg.ruleId === 'a11y/button-label'
       )).toBe(true)
     })
 
@@ -105,7 +105,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       const buttonErrors = results[0].messages.filter(msg => 
-        msg.ruleId === 'test-a11y-js/button-label'
+        msg.ruleId === 'a11y/button-label'
       )
       expect(buttonErrors.length).toBe(0)
     })
@@ -119,7 +119,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       expect(results[0].messages.some(msg => 
-        msg.ruleId === 'test-a11y-js/link-text'
+        msg.ruleId === 'a11y/link-text'
       )).toBe(true)
     })
 
@@ -130,7 +130,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       const linkErrors = results[0].messages.filter(msg => 
-        msg.ruleId === 'test-a11y-js/link-text'
+        msg.ruleId === 'a11y/link-text'
       )
       expect(linkErrors.length).toBe(0)
     })
@@ -144,7 +144,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       expect(results[0].messages.some(msg => 
-        msg.ruleId === 'test-a11y-js/form-label'
+        msg.ruleId === 'a11y/form-label'
       )).toBe(true)
     })
 
@@ -155,7 +155,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       const formErrors = results[0].messages.filter(msg => 
-        msg.ruleId === 'test-a11y-js/form-label'
+        msg.ruleId === 'a11y/form-label'
       )
       expect(formErrors.length).toBe(0)
     })
@@ -169,7 +169,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       expect(results[0].messages.some(msg => 
-        msg.ruleId === 'test-a11y-js/heading-order'
+        msg.ruleId === 'a11y/heading-order'
       )).toBe(true)
     })
 
@@ -180,7 +180,7 @@ describe('ESLint Rules Integration', () => {
       })
 
       const headingErrors = results[0].messages.filter(msg => 
-        msg.ruleId === 'test-a11y-js/heading-order'
+        msg.ruleId === 'a11y/heading-order'
       )
       expect(headingErrors.length).toBe(0)
     })

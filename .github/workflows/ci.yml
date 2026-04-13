@@ -69,7 +69,7 @@ jobs:
       - name: Install fixture dependencies + plugin tarball
         working-directory: tests/e2e/fixtures/${{ matrix.fixture }}
         run: |
-          TARBALL=$(ls $GITHUB_WORKSPACE/eslint-plugin-test-a11y-js-*.tgz)
+          TARBALL=$(ls $GITHUB_WORKSPACE/eslint-plugin-a11y-*.tgz)
           npm install
           npm install "$TARBALL"
 

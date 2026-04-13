@@ -1,6 +1,6 @@
 # Roadmap
 
-This document outlines the planned features and improvements for `eslint-plugin-test-a11y-js`.
+This document outlines the planned features and improvements for `eslint-plugin-a11y`.
 
 ## 1.0 and current state
 

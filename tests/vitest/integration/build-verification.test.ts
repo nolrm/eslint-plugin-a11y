@@ -73,7 +73,7 @@ describe('Build Verification', () => {
     it('should have correct package name', () => {
       const pkg = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
 
-      expect(pkg.name).toBe('eslint-plugin-test-a11y-js')
+      expect(pkg.name).toBe('eslint-plugin-a11y')
     })
 
     it('should have correct exports configuration', () => {

@@ -30,7 +30,7 @@ describe('ARIA Validation Integration', () => {
     eslint = new ESLint({
       useEslintrc: false,
       plugins: {
-        'test-a11y-js': plugin
+        'a11y': plugin
       },
       baseConfig: {
         parser: require.resolve('@typescript-eslint/parser'),
@@ -42,7 +42,7 @@ describe('ARIA Validation Integration', () => {
           }
         },
         rules: {
-          'test-a11y-js/aria-validation': 'error'
+          'a11y/aria-validation': 'error'
         }
       }
     })
@@ -55,7 +55,7 @@ describe('ARIA Validation Integration', () => {
 
     expect(results).toHaveLength(1)
     const messages = results[0].messages
-    expect(messages.some(m => m.ruleId === 'test-a11y-js/aria-validation')).toBe(true)
+    expect(messages.some(m => m.ruleId === 'a11y/aria-validation')).toBe(true)
   })
 
   it('should detect redundant role', async () => {
@@ -65,7 +65,7 @@ describe('ARIA Validation Integration', () => {
 
     expect(results).toHaveLength(1)
     const messages = results[0].messages
-    expect(messages.some(m => m.ruleId === 'test-a11y-js/aria-validation')).toBe(true)
+    expect(messages.some(m => m.ruleId === 'a11y/aria-validation')).toBe(true)
   })
 
   it('should validate ID references', async () => {
@@ -75,7 +75,7 @@ describe('ARIA Validation Integration', () => {
 
     expect(results).toHaveLength(1)
     const messages = results[0].messages
-    expect(messages.some(m => m.ruleId === 'test-a11y-js/aria-validation')).toBe(true)
+    expect(messages.some(m => m.ruleId === 'a11y/aria-validation')).toBe(true)
   })
 
   it('should pass for valid ARIA usage', async () => {
@@ -86,7 +86,7 @@ describe('ARIA Validation Integration', () => {
 
     expect(results).toHaveLength(1)
     const messages = results[0].messages
-    const ariaErrors = messages.filter(m => m.ruleId === 'test-a11y-js/aria-validation')
+    const ariaErrors = messages.filter(m => m.ruleId === 'a11y/aria-validation')
     expect(ariaErrors.length).toBe(0)
   })
 })

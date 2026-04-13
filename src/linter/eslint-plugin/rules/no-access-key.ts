@@ -17,7 +17,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow accesskey attribute on elements',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noAccessKey: 'The accesskey attribute creates keyboard shortcuts that conflict with assistive technology. Remove this attribute.'

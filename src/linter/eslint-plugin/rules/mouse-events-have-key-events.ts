@@ -16,7 +16,7 @@ const rule: Rule.RuleModule = {
       description: 'Require mouse event handlers to have keyboard event handlers',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       mouseOverWithoutFocus: 'onMouseOver must be accompanied by onFocus for keyboard accessibility.',

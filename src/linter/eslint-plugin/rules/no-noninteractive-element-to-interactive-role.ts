@@ -53,7 +53,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow interactive ARIA roles on non-interactive elements without keyboard support',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       noNoninteractiveToInteractive: 'Non-interactive element <{{element}}> should not have interactive role="{{role}}" without keyboard support. Add tabIndex and a keyboard event handler (onKeyDown/onKeyUp), or use a native interactive element like <button>.'

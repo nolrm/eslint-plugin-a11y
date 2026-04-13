@@ -1,6 +1,6 @@
 # Implementation Plan: Phase 1 Features
 
-This document provides a detailed implementation plan for the next phase of `test-a11y-js` features.
+This document provides a detailed implementation plan for the next phase of `a11y` features.
 
 ## Related Documents
 

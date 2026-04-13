@@ -105,7 +105,7 @@ const rule: Rule.RuleModule = {
       description: 'Disallow redundant roles that match an element\'s implicit ARIA role',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       redundantRole: 'The role "{{role}}" is redundant for <{{element}}>. It is the element\'s implicit ARIA role and does not need to be specified explicitly.'

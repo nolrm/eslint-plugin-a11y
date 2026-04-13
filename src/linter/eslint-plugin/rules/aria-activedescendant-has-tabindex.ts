@@ -24,7 +24,7 @@ const rule: Rule.RuleModule = {
       description: 'Require elements with aria-activedescendant to have tabindex',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingTabindex: 'Elements with aria-activedescendant must be focusable. Add tabindex="0" or tabindex="-1".'

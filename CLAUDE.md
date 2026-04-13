@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-eslint-plugin-test-a11y-js is an ESLint accessibility (a11y) plugin for React, Vue, and JSX with flat-config (ESLint v9+) support. It provides 43 accessibility rules and a dual API: ESLint plugin for static analysis + A11yChecker runtime API for programmatic testing.
+eslint-plugin-a11y is an ESLint accessibility (a11y) plugin for React, Vue, and JSX with flat-config (ESLint v9+) support. It provides 43 accessibility rules and a dual API: ESLint plugin for static analysis + A11yChecker runtime API for programmatic testing.
 
 ## Common Commands
 
@@ -61,7 +61,7 @@ Each rule in `src/linter/eslint-plugin/rules/` follows ESLint standard:
 Design system components can be mapped to native HTML elements via settings:
 ```javascript
 settings: {
-  'test-a11y-js': {
+  'a11y': {
     components: { Link: 'a', Button: 'button', Image: 'img' },
     polymorphicPropNames: ['as', 'component']
   }
@@ -76,10 +76,10 @@ tsup generates dual format outputs:
 
 ### Package Exports
 ```
-eslint-plugin-test-a11y-js          # Main ESLint plugin
-eslint-plugin-test-a11y-js/core     # A11yChecker runtime API
-eslint-plugin-test-a11y-js/formatter
-eslint-plugin-test-a11y-js/formatter-progress
+eslint-plugin-a11y          # Main ESLint plugin
+eslint-plugin-a11y/core     # A11yChecker runtime API
+eslint-plugin-a11y/formatter
+eslint-plugin-a11y/formatter-progress
 ```
 
 ## Testing

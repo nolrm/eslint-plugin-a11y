@@ -26,7 +26,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce anchor elements have valid href attributes',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingHref: 'Anchor element must have an href attribute to be a valid link. Use a <button> for clickable actions.',

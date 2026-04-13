@@ -1,6 +1,6 @@
 # Examples
 
-Real-world examples of using the `test-a11y-js` ESLint plugin.
+Real-world examples of using the `a11y` ESLint plugin.
 
 ## Table of Contents
 

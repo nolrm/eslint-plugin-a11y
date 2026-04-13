@@ -24,7 +24,7 @@ function getJSDOM(): any {
     // jsdom not available - Vue checks will be limited
     if (!jsdomWarningShown) {
       console.warn(
-        '[test-a11y-js] jsdom not found. Vue element conversion will be skipped. ' +
+        '[a11y] jsdom not found. Vue element conversion will be skipped. ' +
         'Install jsdom if you need Vue accessibility checks: npm install --save-dev jsdom'
       )
       jsdomWarningShown = true

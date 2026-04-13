@@ -13,7 +13,7 @@ const rule: Rule.RuleModule = {
       description: 'Enforce audio elements have caption tracks or transcripts',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://github.com/nolrm/eslint-plugin-test-a11y-js'
+      url: 'https://github.com/nolrm/eslint-plugin-a11y'
     },
     messages: {
       missingCaptions: 'Audio element must have track elements or a transcript link',

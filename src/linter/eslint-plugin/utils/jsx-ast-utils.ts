@@ -26,7 +26,7 @@ function getJSDOM(): any {
     // jsdom not available - JSX checks will be limited
     if (!jsdomWarningShown) {
       console.warn(
-        '[test-a11y-js] jsdom not found. JSX element conversion will be skipped. ' +
+        '[a11y] jsdom not found. JSX element conversion will be skipped. ' +
         'Install jsdom if you need JSX accessibility checks: npm install --save-dev jsdom'
       )
       jsdomWarningShown = true
