@@ -282,6 +282,8 @@ Many rules provide **suggestions** that appear in your editor, allowing you to q
 - **button-label**: Suggests adding `aria-label=""` for icon-only buttons
 - **link-text**: Suggests replacing non-descriptive text
 - **heading-order**: Suggests correct heading level
+- **no-redundant-roles**: Suggests removing the redundant `role` attribute (JSX and Vue)
+- **scope**: Suggests removing the invalid `scope` attribute
 
 In VS Code and other editors with ESLint support, suggestions appear as Quick Fix options (Cmd/Ctrl + .).
 

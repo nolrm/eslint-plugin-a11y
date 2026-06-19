@@ -25,7 +25,7 @@ const rule: Rule.RuleModule = {
       invalidElement: 'The scope attribute is only valid on <th> elements, not <{{element}}>.',
       invalidValue: 'Invalid scope value "{{value}}". Must be one of: col, row, colgroup, rowgroup.'
     },
-    hasSuggestions: false,
+    hasSuggestions: true,
     fixable: undefined,
     schema: []
   },
@@ -38,19 +38,27 @@ const rule: Rule.RuleModule = {
         if (!hasJSXAttribute(jsxNode, 'scope')) return
 
         const tagName = jsxNode.name.name?.toLowerCase()
+        const scopeAttr = getJSXAttribute(jsxNode, 'scope')
 
         // scope is only valid on <th>
         if (tagName !== 'th') {
           context.report({
             node,
             messageId: 'invalidElement',
-            data: { element: tagName }
+            data: { element: tagName },
+            suggest: scopeAttr ? [
+              {
+                desc: 'Remove the scope attribute',
+                fix(fixer) {
+                  return fixer.remove(scopeAttr as any)
+                }
+              }
+            ] : []
           })
           return
         }
 
         // Validate scope value
-        const scopeAttr = getJSXAttribute(jsxNode, 'scope')
         if (!scopeAttr?.value) return
 
         let scopeValue: string | null = null
@@ -67,7 +75,15 @@ const rule: Rule.RuleModule = {
           context.report({
             node: scopeAttr as any,
             messageId: 'invalidValue',
-            data: { value: scopeValue }
+            data: { value: scopeValue },
+            suggest: [
+              {
+                desc: 'Remove the scope attribute',
+                fix(fixer) {
+                  return fixer.remove(scopeAttr as any)
+                }
+              }
+            ]
           })
         }
       },
@@ -78,25 +94,42 @@ const rule: Rule.RuleModule = {
 
         if (!hasVueAttribute(vueNode, 'scope')) return
 
+        const scopeAttr = getVueAttribute(vueNode, 'scope')
+
         // scope is only valid on <th>
         if (tagName !== 'th') {
           context.report({
             node,
             messageId: 'invalidElement',
-            data: { element: tagName }
+            data: { element: tagName },
+            suggest: scopeAttr ? [
+              {
+                desc: 'Remove the scope attribute',
+                fix(fixer) {
+                  return fixer.remove(scopeAttr as any)
+                }
+              }
+            ] : []
           })
           return
         }
 
         // Validate scope value
-        const scopeAttr = getVueAttribute(vueNode, 'scope')
         const scopeValue = scopeAttr?.value?.value?.toLowerCase()
 
         if (scopeValue !== undefined && scopeValue !== null && !VALID_SCOPE_VALUES.has(scopeValue)) {
           context.report({
             node: scopeAttr as any,
             messageId: 'invalidValue',
-            data: { value: scopeValue }
+            data: { value: scopeValue },
+            suggest: [
+              {
+                desc: 'Remove the scope attribute',
+                fix(fixer) {
+                  return fixer.remove(scopeAttr as any)
+                }
+              }
+            ]
           })
         }
       }

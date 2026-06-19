@@ -54,4 +54,12 @@ export const anchorAmbiguousText = getRule('anchor-ambiguous-text')
 export const imgRedundantAlt = getRule('img-redundant-alt')
 export const accessibleEmoji = getRule('accessible-emoji')
 export const htmlHasLang = getRule('html-has-lang')
+// Phase 6 rules
+export const anchorIsValid = getRule('anchor-is-valid')
+export const controlHasAssociatedLabel = getRule('control-has-associated-label')
+export const noInteractiveElementToNoninteractiveRole = getRule('no-interactive-element-to-noninteractive-role')
+export const noNoninteractiveElementToInteractiveRole = getRule('no-noninteractive-element-to-interactive-role')
+export const noRedundantRoles = getRule('no-redundant-roles')
+export const preferTagOverRole = getRule('prefer-tag-over-role')
+export const scope = getRule('scope')
 

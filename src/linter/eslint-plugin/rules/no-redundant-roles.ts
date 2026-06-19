@@ -188,7 +188,15 @@ const rule: Rule.RuleModule = {
           context.report({
             node: roleAttr as any,
             messageId: 'redundantRole',
-            data: { role: explicitRole, element: tagName }
+            data: { role: explicitRole, element: tagName },
+            suggest: [
+              {
+                desc: `Remove redundant role="${explicitRole}"`,
+                fix(fixer) {
+                  return fixer.remove(roleAttr as any)
+                }
+              }
+            ]
           })
         }
       }

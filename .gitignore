@@ -54,3 +54,4 @@ Thumbs.db
 
 # Optional eslint cache
 .eslintcache 
+.claude/settings.local.json
