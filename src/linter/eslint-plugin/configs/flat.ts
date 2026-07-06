@@ -57,6 +57,10 @@ function createFlatConfig(
  * ```js
  * { plugins: { 'a11y': a11y }, ...flatRecommended }
  * ```
+ *
+ * Note: this derives its rule set directly from `./recommended` (the classic config) rather than
+ * hardcoding a separate rule list, so any addition there (e.g. `a11y/aria-validation`) is picked
+ * up automatically — no change needed here when `recommended.ts`'s rule set changes.
  */
 export const flatRecommended: FlatConfig = createFlatConfig(recommended as any)
 

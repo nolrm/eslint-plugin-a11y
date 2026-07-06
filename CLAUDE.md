@@ -103,7 +103,7 @@ eslint-plugin-a11y/formatter-progress
 This project uses [ContextKit](https://github.com/nolrm/contextkit) for AI development standards.
 
 ## ContextKit
-Version: 1.0.1
+Version: 1.1.6
 
 ## Project Standards
 

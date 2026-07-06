@@ -5,7 +5,7 @@
  * working purely on AST nodes.
  */
 
-import { ARIA_ROLES, ARIA_PROPERTIES, ARIA_IN_HTML, DEPRECATED_ARIA } from '../../../core/aria-spec'
+import { ARIA_ROLES, ARIA_PROPERTIES, ARIA_IN_HTML, DEPRECATED_ARIA, ARIA_UNSUPPORTED_ELEMENTS } from '../../../core/aria-spec'
 import { getJSXAttribute } from './jsx-ast-utils'
 import { getVueAttribute } from './vue-ast-utils'
 
@@ -203,6 +203,91 @@ export function validateAriaProperty(
 }
 
 /**
+ * Validate that a role's spec-required properties are present on the element.
+ *
+ * Checks presence only (not value correctness — that's `validateAriaProperty`'s job).
+ * `requiredProperties` uses "one of" semantics (any single alternative satisfies, e.g.
+ * aria-label OR aria-labelledby); `requiredPropertiesAll` uses "all of" semantics (every
+ * listed property must independently be present, e.g. scrollbar's aria-controls AND
+ * aria-valuenow).
+ *
+ * @param role - The static ARIA role value
+ * @param presentAriaPropNames - Set of aria-* attribute names present on the element
+ *   (static or dynamic value — presence is what's checked here)
+ * @param tagName - Host tag name, used for the native-heading-element exception
+ */
+export function validateRoleRequiredProperties(
+  role: string,
+  presentAriaPropNames: Set<string>,
+  tagName?: string
+): AriaValidationIssue[] {
+  const issues: AriaValidationIssue[] = []
+  const roleDef = ARIA_ROLES[role]
+  if (!roleDef) return issues
+
+  // Native heading elements (h1-h6) get an implicit level from the host-language tag;
+  // authors aren't required to also provide aria-level (WAI-ARIA 1.2 heading role note).
+  if (role === 'heading' && tagName && /^h[1-6]$/.test(tagName)) {
+    return issues
+  }
+
+  if (roleDef.requiredProperties.length > 0) {
+    const hasRequired = roleDef.requiredProperties.some(prop => presentAriaPropNames.has(prop))
+    if (!hasRequired) {
+      const propList = roleDef.requiredProperties.map(p => `"${p}"`).join(' or ')
+      issues.push({
+        id: 'aria-role-missing-required-props',
+        message: `ARIA role "${role}" is missing required property: ${propList}`,
+        severity: 'error'
+      })
+    }
+  }
+
+  if (roleDef.requiredPropertiesAll) {
+    for (const prop of roleDef.requiredPropertiesAll) {
+      if (!presentAriaPropNames.has(prop)) {
+        issues.push({
+          id: 'aria-role-missing-required-props',
+          message: `ARIA role "${role}" is missing required property: "${prop}"`,
+          severity: 'error'
+        })
+      }
+    }
+  }
+
+  return issues
+}
+
+/**
+ * Validate that `role`/`aria-*` attributes are not placed on elements that don't support ARIA
+ * at all (per HTML-AAM). Presence alone is the violation — the attribute's value (or whether
+ * it's static or dynamic) doesn't matter, since assistive technology ignores the attribute
+ * entirely regardless of what it's set to.
+ *
+ * @param tagName - Host tag name (already lowercased by the caller)
+ * @param offendingAttributeNames - Ordered list of `role`/`aria-*` attribute names present on
+ *   the element
+ * @returns One issue per offending attribute name
+ */
+export function validateAriaUnsupportedElement(
+  tagName: string,
+  offendingAttributeNames: string[]
+): AriaValidationIssue[] {
+  const issues: AriaValidationIssue[] = []
+  if (!ARIA_UNSUPPORTED_ELEMENTS.includes(tagName)) return issues
+
+  for (const attributeName of offendingAttributeNames) {
+    issues.push({
+      id: 'aria-unsupported-element',
+      message: `<${tagName}> does not support ARIA attributes; "${attributeName}" will be ignored by assistive technology`,
+      severity: 'error'
+    })
+  }
+
+  return issues
+}
+
+/**
  * Validate ID references (aria-labelledby, aria-describedby, etc.)
  * Only checks within the same file
  */
@@ -239,19 +324,22 @@ export function validateJSXAria(
   const issues: AriaValidationIssue[] = []
   const tagName = getJSXTagName(node)
   const role = getJSXRole(node)
-  
+
   // Validate role
   if (role) {
     issues.push(...validateRole(role, tagName))
   }
-  
+
   // Validate all aria-* attributes
+  const presentAriaPropNames = new Set<string>()
   if (node.attributes) {
     for (const attr of node.attributes) {
       if (attr.name?.name?.startsWith('aria-')) {
         const propName = attr.name.name
+        // Presence counts regardless of whether the value is static or dynamic.
+        presentAriaPropNames.add(propName)
         let propValue: string | null = null
-        
+
         if (attr.value) {
           if (attr.value.type === 'Literal' && typeof attr.value.value === 'string') {
             propValue = attr.value.value
@@ -260,20 +348,39 @@ export function validateJSXAria(
             continue
           }
         }
-        
+
         // Validate property
         issues.push(...validateAriaProperty(propName, propValue, tagName, role))
-        
+
         // Validate ID references
-        if ((propName === 'aria-labelledby' || propName === 'aria-describedby' || 
-             propName === 'aria-controls' || propName === 'aria-owns' || 
+        if ((propName === 'aria-labelledby' || propName === 'aria-describedby' ||
+             propName === 'aria-controls' || propName === 'aria-owns' ||
              propName === 'aria-activedescendant') && propValue) {
           issues.push(...validateIdReference(propName, propValue, allIds))
         }
       }
     }
   }
-  
+
+  // Validate role-required properties (presence-only; only for a statically-resolved role)
+  if (role) {
+    issues.push(...validateRoleRequiredProperties(role, presentAriaPropNames, tagName))
+  }
+
+  // Validate elements that don't support ARIA at all (presence alone is the violation,
+  // regardless of static/dynamic value, and regardless of whether `role` resolved statically)
+  if (ARIA_UNSUPPORTED_ELEMENTS.includes(tagName) && node.attributes) {
+    const offendingAttributeNames: string[] = []
+    for (const attr of node.attributes) {
+      if (attr.type === 'JSXSpreadAttribute') continue
+      const attrName = attr.name?.name
+      if (attrName === 'role' || attrName?.startsWith('aria-')) {
+        offendingAttributeNames.push(attrName)
+      }
+    }
+    issues.push(...validateAriaUnsupportedElement(tagName, offendingAttributeNames))
+  }
+
   return issues
 }
 
@@ -287,20 +394,23 @@ export function validateVueAria(
   const issues: AriaValidationIssue[] = []
   const tagName = getVueTagName(node)
   const role = getVueRole(node)
-  
+
   // Validate role
   if (role) {
     issues.push(...validateRole(role, tagName))
   }
-  
+
   // Validate all aria-* attributes
+  const presentAriaPropNames = new Set<string>()
   if (node.startTag?.attributes) {
     for (const attr of node.startTag.attributes) {
       const attrName = attr.key?.name || attr.key?.argument
       if (attrName?.startsWith('aria-')) {
         const propName = attrName
+        // Presence counts regardless of whether the value is static or dynamic.
+        presentAriaPropNames.add(propName)
         let propValue: string | null = null
-        
+
         if (attr.value) {
           if (attr.value.value && typeof attr.value.value === 'string') {
             propValue = attr.value.value
@@ -309,19 +419,37 @@ export function validateVueAria(
             continue
           }
         }
-        
+
         // Validate property
         issues.push(...validateAriaProperty(propName, propValue, tagName, role))
-        
+
         // Validate ID references
-        if ((propName === 'aria-labelledby' || propName === 'aria-describedby' || 
-             propName === 'aria-controls' || propName === 'aria-owns' || 
+        if ((propName === 'aria-labelledby' || propName === 'aria-describedby' ||
+             propName === 'aria-controls' || propName === 'aria-owns' ||
              propName === 'aria-activedescendant') && propValue) {
           issues.push(...validateIdReference(propName, propValue, allIds))
         }
       }
     }
   }
-  
+
+  // Validate role-required properties (presence-only; only for a statically-resolved role)
+  if (role) {
+    issues.push(...validateRoleRequiredProperties(role, presentAriaPropNames, tagName))
+  }
+
+  // Validate elements that don't support ARIA at all (presence alone is the violation,
+  // regardless of static/dynamic value, and regardless of whether `role` resolved statically)
+  if (ARIA_UNSUPPORTED_ELEMENTS.includes(tagName) && node.startTag?.attributes) {
+    const offendingAttributeNames: string[] = []
+    for (const attr of node.startTag.attributes) {
+      const attrName = attr.key?.name || attr.key?.argument
+      if (attrName === 'role' || attrName?.startsWith('aria-')) {
+        offendingAttributeNames.push(attrName)
+      }
+    }
+    issues.push(...validateAriaUnsupportedElement(tagName, offendingAttributeNames))
+  }
+
   return issues
 }

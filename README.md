@@ -307,9 +307,9 @@ The plugin provides **43 accessibility rules**:
 - `a11y/audio-captions` - Enforce audio elements have tracks or transcripts
 - `a11y/landmark-roles` - Enforce proper use of landmark elements
 - `a11y/dialog-modal` - Enforce dialog elements have proper accessibility attributes
-- `a11y/aria-validation` - Validate ARIA roles, properties, and ID references (AST-first)
-- `a11y/semantic-html` - Enforce proper use of semantic HTML elements (AST-first)
-- `a11y/form-validation` - Validate form validation patterns (AST-first)
+- `a11y/aria-validation` - Validate ARIA roles, properties, ID references, role-required properties, and unsupported-element usage (AST-first) — included in `recommended` and `strict`
+- `a11y/semantic-html` - Enforce proper use of semantic HTML elements (AST-first) — `strict` only
+- `a11y/form-validation` - Validate form validation patterns (AST-first) — `strict` only
 
 **Attribute & document rules:**
 - `a11y/no-access-key` - Disallow accessKey on elements

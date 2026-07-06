@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-06
+
+### Added
+
+- `a11y/aria-validation`: new role-required-properties check (e.g. `role="checkbox"` without
+  `aria-checked`) and new unsupported-element check (`role`/`aria-*` on elements that don't
+  support ARIA at all, e.g. `<meta>`, `<script>`, `<title>`).
+
+### Changed
+
+- **Behavior change for `recommended`/`flat/recommended` consumers**: `a11y/aria-validation` is
+  now included in the `recommended` preset (previously `strict`-only). Projects using
+  `plugin:a11y/recommended` or `flat/recommended` may see new lint errors surface where ARIA
+  roles/properties are misused, including the two new checks above. Set `a11y/aria-validation: 'off'`
+  locally if you need to opt out temporarily while addressing findings.
+
 ## [1.0.1] - 2026-04-13
 
 ### Fixed

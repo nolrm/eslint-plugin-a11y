@@ -68,10 +68,10 @@ describe('ESLint Config Presets', () => {
   })
 
   describe('Recommended Config', () => {
-    it('should have exactly 30 rules', () => {
+    it('should have exactly 31 rules', () => {
       const rules = plugin.configs.recommended.rules
       const ruleCount = Object.keys(rules).length
-      expect(ruleCount).toBe(30)
+      expect(ruleCount).toBe(31)
     })
 
     it('should have critical rules as error', () => {
@@ -82,6 +82,11 @@ describe('ESLint Config Presets', () => {
       expect(rules['a11y/iframe-title']).toBe('error')
       expect(rules['a11y/video-captions']).toBe('error')
       expect(rules['a11y/audio-captions']).toBe('error')
+    })
+
+    it('should include aria-validation as error (graduated from strict)', () => {
+      const rules = plugin.configs.recommended.rules
+      expect(rules['a11y/aria-validation']).toBe('error')
     })
 
     it('should have moderate rules as warn', () => {

@@ -46,10 +46,14 @@ const recommended: RuleConfig = {
   'a11y/no-noninteractive-element-to-interactive-role': 'warn',
   'a11y/no-redundant-roles': 'warn',
   'a11y/control-has-associated-label': 'error',
-  'a11y/scope': 'error'
+  'a11y/scope': 'error',
+
+  // ARIA validation (AST-first) - graduated from opt-in once role-required-properties and
+  // unsupported-element checks landed and were validated against JSX/Vue fixtures.
+  'a11y/aria-validation': 'error'
 
   // Not included in recommended (available in strict):
-  // - aria-validation, semantic-html, form-validation
+  // - semantic-html, form-validation
   //   These rules are broad and may produce noise in typical projects.
   //   Enable individually or use the strict preset for full coverage.
 }

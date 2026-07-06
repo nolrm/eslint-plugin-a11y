@@ -6,7 +6,14 @@
  */
 
 export interface AriaRoleDefinition {
+  // "One of" semantics: the requirement is satisfied if ANY one of these properties is present
+  // (e.g. accessible name via aria-label OR aria-labelledby). See a11y-checker.ts's
+  // `roleDef.requiredProperties.some(...)` runtime check, which shares this convention.
   requiredProperties: string[]
+  // "All of" semantics: every property listed here must independently be present.
+  // Used only for roles where the spec lists multiple, unrelated required properties
+  // (e.g. scrollbar needs both aria-controls AND aria-valuenow).
+  requiredPropertiesAll?: string[]
   allowedProperties: string[]
   allowedOn: string[] // '*' means all elements
   requiredContext?: string | string[] // Parent role required
@@ -35,6 +42,24 @@ export const DEPRECATED_ARIA = {
   properties: ['aria-dropeffect', 'aria-grabbed'],
   states: ['aria-grabbed']
 }
+
+/**
+ * Elements that do not support ARIA at all (HTML-AAM "Allowed ARIA roles, states and
+ * properties" table lists these as permitting no role / no aria-* attributes). Assistive
+ * technology ignores `role` and `aria-*` attributes placed on these elements entirely.
+ *
+ * https://www.w3.org/TR/html-aam-1.0/#html-element-role-mappings
+ */
+export const ARIA_UNSUPPORTED_ELEMENTS: string[] = [
+  'meta',
+  'html',
+  'head',
+  'script',
+  'style',
+  'title',
+  'base',
+  'param'
+]
 
 // ARIA-in-HTML restrictions
 export const ARIA_IN_HTML = {
@@ -118,21 +143,24 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     abstract: false
   },
   'checkbox': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §checkbox: Required States and Properties: aria-checked.
+    requiredProperties: ['aria-checked'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-checked', 'aria-required', 'aria-disabled'],
     allowedOn: ['input', 'div', 'span'],
     deprecated: false,
     abstract: false
   },
   'radio': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §radio: Required States and Properties: aria-checked.
+    requiredProperties: ['aria-checked'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-checked', 'aria-required', 'aria-disabled'],
     allowedOn: ['input', 'div', 'span'],
     deprecated: false,
     abstract: false
   },
   'switch': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §switch: Required States and Properties: aria-checked.
+    requiredProperties: ['aria-checked'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-checked', 'aria-required', 'aria-disabled'],
     allowedOn: ['button', 'div', 'span'],
     deprecated: false,
@@ -154,14 +182,19 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     abstract: false
   },
   'combobox': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §combobox: Required States and Properties: aria-expanded.
+    // (aria-controls is spec-required only while aria-expanded="true"; not enforced statically
+    // here since this check validates presence, not cross-attribute conditional value logic.)
+    requiredProperties: ['aria-expanded'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-expanded', 'aria-controls', 'aria-autocomplete', 'aria-required'],
     allowedOn: ['input', 'select', 'div', 'span'],
     deprecated: false,
     abstract: false
   },
   'slider': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §slider: Required States and Properties: aria-valuenow.
+    // (aria-valuemax/aria-valuemin default to 100/0 per spec, so are not required.)
+    requiredProperties: ['aria-valuenow'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-valuemin', 'aria-valuemax', 'aria-valuenow', 'aria-valuetext', 'aria-orientation'],
     allowedOn: ['input', 'div', 'span'],
     deprecated: false,
@@ -171,6 +204,17 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     requiredProperties: [],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-valuemin', 'aria-valuemax', 'aria-valuenow', 'aria-valuetext', 'aria-required'],
     allowedOn: ['input', 'div', 'span'],
+    deprecated: false,
+    abstract: false
+  },
+  'scrollbar': {
+    // WAI-ARIA 1.2 §scrollbar: Required States and Properties: aria-controls, aria-valuenow.
+    // Both are independently required (not alternatives), hence requiredPropertiesAll rather
+    // than requiredProperties. aria-valuemax/aria-valuemin default to 100/0 per spec.
+    requiredProperties: [],
+    requiredPropertiesAll: ['aria-controls', 'aria-valuenow'],
+    allowedProperties: ['aria-controls', 'aria-valuenow', 'aria-valuemin', 'aria-valuemax', 'aria-orientation', 'aria-disabled'],
+    allowedOn: ['div', 'span'],
     deprecated: false,
     abstract: false
   },
@@ -197,7 +241,8 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     abstract: false
   },
   'menuitemcheckbox': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §menuitemcheckbox: Required States and Properties: aria-checked.
+    requiredProperties: ['aria-checked'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-checked', 'aria-disabled'],
     allowedOn: ['li', 'div', 'span'],
     requiredContext: ['menu', 'menubar'],
@@ -205,7 +250,8 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     abstract: false
   },
   'menuitemradio': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §menuitemradio: Required States and Properties: aria-checked.
+    requiredProperties: ['aria-checked'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-checked', 'aria-disabled'],
     allowedOn: ['li', 'div', 'span'],
     requiredContext: ['menu', 'menubar'],
@@ -417,7 +463,11 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     abstract: false
   },
   'heading': {
-    requiredProperties: [],
+    // WAI-ARIA 1.2 §heading: Required States and Properties: aria-level.
+    // Native h1-h6 elements get an implicit level from the host-language tag, so the static
+    // validator (validateRoleRequiredProperties) skips this requirement when the role is on a
+    // native heading element; it only applies when role="heading" is used on a generic element.
+    requiredProperties: ['aria-level'],
     allowedProperties: ['aria-label', 'aria-labelledby', 'aria-level'],
     allowedOn: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'span'],
     deprecated: false,

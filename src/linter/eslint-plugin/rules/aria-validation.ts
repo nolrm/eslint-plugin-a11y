@@ -5,6 +5,15 @@
 
 import { Rule } from 'eslint'
 import { validateJSXAria, validateVueAria } from '../utils/aria-ast-validation'
+import { hasRuntimeCheckedComment } from '../utils/runtime-comment'
+
+// Issue ids that respect the `a11y-checked-at-runtime` suppression comment (mode: 'suppress').
+// Only newly-added checks opt into this; pre-existing issue ids keep their established
+// (non-suppressible) behavior to avoid changing behavior outside this task's scope.
+const RUNTIME_SUPPRESSIBLE_ISSUE_IDS = new Set<string>([
+  'aria-role-missing-required-props',
+  'aria-unsupported-element'
+])
 
 const rule: Rule.RuleModule = {
   meta: {
@@ -12,7 +21,8 @@ const rule: Rule.RuleModule = {
     docs: {
       description: 'Enforce valid ARIA attributes, roles, and properties',
       category: 'Accessibility',
-      recommended: false // Start as opt-in, graduate to recommended once stable
+      recommended: true // Graduated from opt-in: role-required-properties and
+      // unsupported-element checks landed and were validated against JSX/Vue fixtures.
     },
     messages: {
       ariaViolation: '{{message}}'
@@ -66,6 +76,12 @@ const rule: Rule.RuleModule = {
         for (const node of jsxNodes) {
           const issues = validateJSXAria(node, allIds)
           for (const issue of issues) {
+            if (RUNTIME_SUPPRESSIBLE_ISSUE_IDS.has(issue.id)) {
+              const runtimeComment = hasRuntimeCheckedComment(context, node)
+              if (runtimeComment.hasComment && runtimeComment.mode === 'suppress') {
+                continue
+              }
+            }
             context.report({
               node,
               messageId: 'ariaViolation',
@@ -75,11 +91,17 @@ const rule: Rule.RuleModule = {
             })
           }
         }
-        
+
         // Validate Vue elements
         for (const node of vueNodes) {
           const issues = validateVueAria(node, allIds)
           for (const issue of issues) {
+            if (RUNTIME_SUPPRESSIBLE_ISSUE_IDS.has(issue.id)) {
+              const runtimeComment = hasRuntimeCheckedComment(context, node)
+              if (runtimeComment.hasComment && runtimeComment.mode === 'suppress') {
+                continue
+              }
+            }
             context.report({
               node,
               messageId: 'ariaViolation',

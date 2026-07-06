@@ -154,7 +154,7 @@ This table provides a high-level overview of the accessibility rules exposed by 
 | `a11y/audio-captions` | `<audio>` captions / transcripts | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (pattern-specific) |
 | `a11y/landmark-roles` | Landmarks and regions | `warn` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `landmark-no-duplicate-main`, `aria-roles` |
 | `a11y/dialog-modal` | Accessible dialogs and modals | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `aria-roles`, `aria-props` |
-| `a11y/aria-validation` | ARIA roles, properties, ID refs (AST-first) | `error` | `plugin:a11y/strict`, `flat/strict` (opt-in for `plugin:a11y/recommended`, `flat/recommended`) | `aria-roles`, `aria-props`, `aria-unsupported-elements` |
+| `a11y/aria-validation` | ARIA roles, properties, ID refs, required properties, unsupported-element usage (AST-first) | `error` | `plugin:a11y/recommended`, `plugin:a11y/strict`, `flat/recommended`, `flat/strict` | `aria-role`, `aria-props`, `aria-proptypes`, `aria-unsupported-elements`, `role-has-required-aria-props`, `role-supports-aria-props` |
 | `a11y/semantic-html` | Prefer semantic elements over generic+role | `error` | `plugin:a11y/strict`, `flat/strict` (opt-in for `plugin:a11y/recommended`, `flat/recommended`) | Covers parts of: `no-redundant-roles`, `prefer-tag-over-role` |
 | `a11y/form-validation` | Required fields, ID refs, validation patterns | `error` | `plugin:a11y/strict`, `flat/strict` (opt-in for `plugin:a11y/recommended`, `flat/recommended`) | Covers parts of: `label-has-associated-control`, `aria-props` |
 
@@ -295,12 +295,12 @@ Enforces proper heading hierarchy (no skipped levels).
 
 ### a11y/aria-validation
 
-Validates ARIA roles, properties, and ID references (AST-first, no JSDOM).
+Validates ARIA roles, properties, ID references, role-required properties, and unsupported-element usage (AST-first, no JSDOM).
 
-**Severity:** `error` (strict preset, opt-in for recommended)
+**Severity:** `error` (recommended, strict presets)
 
 **Messages:**
-- `ariaViolation` - ARIA validation error (invalid role, property, or reference)
+- `ariaViolation` - ARIA validation error (invalid role, property, reference, missing required property, or unsupported-element usage)
 
 **Examples:**
 
@@ -314,10 +314,17 @@ Validates ARIA roles, properties, and ID references (AST-first, no JSDOM).
 // ❌ Invalid ID reference
 <input aria-labelledby="missing-id" />
 
+// ❌ Missing required property for role
+<div role="checkbox">Agree to terms</div>
+
+// ❌ ARIA on an element that doesn't support it
+<meta aria-label="description" />
+
 // ✅ Valid
 <div role="dialog" aria-label="Modal">Content</div>
 <label id="email-label">Email</label>
 <input aria-labelledby="email-label" />
+<div role="checkbox" aria-checked="false">Agree to terms</div>
 ```
 
 **Note**: This rule is AST-first and validates within the same file only. Cross-file ID references are not validated.
