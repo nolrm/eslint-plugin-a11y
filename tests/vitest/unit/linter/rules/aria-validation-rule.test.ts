@@ -216,6 +216,36 @@ describe('aria-validation rule - JSX', () => {
     })
   })
 
+  describe('previously-missing WAI-ARIA 1.2 roles', () => {
+    it('should pass for role="group" and other roles that were missing from the role table', () => {
+      ruleTester.run('aria-validation', ariaValidation, {
+        valid: [
+          { code: '<div role="group">Content</div>' },
+          { code: '<fieldset role="group">Content</fieldset>' },
+          { code: '<div role="radiogroup">Content</div>' },
+          { code: '<div role="list"><div role="listitem">Item</div></div>' },
+          { code: '<div role="table"><div role="row"><div role="cell">1</div></div></div>' },
+          { code: '<div role="row"><div role="gridcell" aria-rowindex="1">1</div></div>' },
+          { code: '<div role="figure">Fig 1</div>' },
+          { code: '<div role="note">Aside content</div>' }
+        ],
+        invalid: []
+      })
+    })
+
+    it('should still warn for the deprecated "directory" role', () => {
+      ruleTester.run('aria-validation', ariaValidation, {
+        valid: [],
+        invalid: [
+          {
+            code: '<div role="directory">Links</div>',
+            errors: [{ messageId: 'ariaViolation' }]
+          }
+        ]
+      })
+    })
+  })
+
   describe('aria-unsupported-elements', () => {
     it('should pass for unsupported elements with no role/aria attributes', () => {
       ruleTester.run('aria-validation', ariaValidation, {
@@ -323,6 +353,18 @@ describe('aria-validation rule - Vue', () => {
       vueRuleTester.run('aria-validation', ariaValidation, {
         valid: [
           { code: '<template><a role="button">Click</a></template>' }
+        ],
+        invalid: []
+      })
+    })
+  })
+
+  describe('previously-missing WAI-ARIA 1.2 roles', () => {
+    it('should pass for role="group" and other roles that were missing from the role table', () => {
+      vueRuleTester.run('aria-validation', ariaValidation, {
+        valid: [
+          { code: '<template><div role="group">Content</div></template>' },
+          { code: '<template><div role="list"><div role="listitem">Item</div></div></template>' }
         ],
         invalid: []
       })

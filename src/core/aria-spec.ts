@@ -324,6 +324,13 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     deprecated: false,
     abstract: false
   },
+  'radiogroup': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-disabled', 'aria-required', 'aria-readonly'],
+    allowedOn: ['div', 'fieldset', 'ul', 'span'],
+    deprecated: false,
+    abstract: false
+  },
   // Document Structure Roles
   'article': {
     requiredProperties: [],
@@ -386,6 +393,186 @@ export const ARIA_ROLES: Record<string, AriaRoleDefinition> = {
     allowedProperties: ['aria-label', 'aria-labelledby'],
     allowedOn: ['section', 'div'],
     deprecated: false,
+    abstract: false
+  },
+  'group': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-disabled', 'aria-activedescendant'],
+    allowedOn: ['div', 'fieldset', 'section', 'ul', 'ol', 'span'],
+    deprecated: false,
+    abstract: false
+  },
+  'generic': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['div', 'span'],
+    deprecated: false,
+    abstract: false
+  },
+  'document': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-expanded'],
+    allowedOn: ['div', 'article', 'section', 'span'],
+    deprecated: false,
+    abstract: false
+  },
+  'feed': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-busy'],
+    allowedOn: ['div', 'section'],
+    requiredOwned: ['article'],
+    deprecated: false,
+    abstract: false
+  },
+  'list': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['ul', 'ol', 'div'],
+    requiredOwned: ['listitem'],
+    deprecated: false,
+    abstract: false
+  },
+  'listitem': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-level', 'aria-posinset', 'aria-setsize'],
+    allowedOn: ['li', 'div'],
+    requiredContext: 'list',
+    deprecated: false,
+    abstract: false
+  },
+  'table': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-colcount', 'aria-rowcount'],
+    allowedOn: ['table', 'div'],
+    deprecated: false,
+    abstract: false
+  },
+  'row': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-level', 'aria-selected', 'aria-expanded', 'aria-disabled', 'aria-rowindex'],
+    allowedOn: ['tr', 'div'],
+    requiredContext: ['rowgroup', 'grid', 'treegrid', 'table'],
+    requiredOwned: ['cell', 'columnheader', 'rowheader', 'gridcell'],
+    deprecated: false,
+    abstract: false
+  },
+  'rowgroup': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['thead', 'tbody', 'tfoot', 'div'],
+    requiredContext: ['table', 'grid', 'treegrid'],
+    requiredOwned: ['row'],
+    deprecated: false,
+    abstract: false
+  },
+  'cell': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-colindex', 'aria-colspan', 'aria-rowindex', 'aria-rowspan'],
+    allowedOn: ['td', 'div'],
+    requiredContext: 'row',
+    deprecated: false,
+    abstract: false
+  },
+  'gridcell': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-selected', 'aria-readonly', 'aria-required', 'aria-expanded', 'aria-colindex', 'aria-colspan', 'aria-rowindex', 'aria-rowspan'],
+    allowedOn: ['td', 'div'],
+    requiredContext: 'row',
+    deprecated: false,
+    abstract: false
+  },
+  'columnheader': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-sort', 'aria-selected', 'aria-readonly', 'aria-required', 'aria-expanded', 'aria-colindex', 'aria-colspan', 'aria-rowindex', 'aria-rowspan'],
+    allowedOn: ['th', 'td', 'div'],
+    requiredContext: 'row',
+    deprecated: false,
+    abstract: false
+  },
+  'rowheader': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby', 'aria-sort', 'aria-selected', 'aria-readonly', 'aria-required', 'aria-expanded', 'aria-colindex', 'aria-colspan', 'aria-rowindex', 'aria-rowspan'],
+    allowedOn: ['th', 'td', 'div'],
+    requiredContext: 'row',
+    deprecated: false,
+    abstract: false
+  },
+  'caption': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['caption', 'div', 'span'],
+    deprecated: false,
+    abstract: false
+  },
+  'figure': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['figure', 'div', 'section'],
+    deprecated: false,
+    abstract: false
+  },
+  'note': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['div', 'aside', 'section'],
+    deprecated: false,
+    abstract: false
+  },
+  'definition': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['dd', 'div', 'section'],
+    deprecated: false,
+    abstract: false
+  },
+  'term': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['dt', 'div', 'span'],
+    deprecated: false,
+    abstract: false
+  },
+  'paragraph': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['p', 'div'],
+    deprecated: false,
+    abstract: false
+  },
+  'blockquote': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['blockquote', 'div', 'section'],
+    deprecated: false,
+    abstract: false
+  },
+  'deletion': {
+    requiredProperties: [],
+    allowedProperties: [],
+    allowedOn: ['del', 'span', 'div'],
+    deprecated: false,
+    abstract: false
+  },
+  'insertion': {
+    requiredProperties: [],
+    allowedProperties: [],
+    allowedOn: ['ins', 'span', 'div'],
+    deprecated: false,
+    abstract: false
+  },
+  'math': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['div', 'span'],
+    deprecated: false,
+    abstract: false
+  },
+  // Deprecated in WAI-ARIA 1.2 in favor of a plain list (role="list")
+  'directory': {
+    requiredProperties: [],
+    allowedProperties: ['aria-label', 'aria-labelledby'],
+    allowedOn: ['div', 'ol', 'ul'],
+    deprecated: true,
     abstract: false
   },
   // Landmark Roles
@@ -783,6 +970,43 @@ export const ARIA_PROPERTIES: Record<string, AriaPropertyDefinition> = {
     type: 'integer',
     required: false,
     allowedOn: ['*'],
+    deprecated: false
+  },
+  // Table/Grid Properties (support the row/cell/table/rowgroup roles)
+  'aria-colcount': {
+    type: 'integer',
+    required: false,
+    allowedOn: ['table', 'div'],
+    deprecated: false
+  },
+  'aria-rowcount': {
+    type: 'integer',
+    required: false,
+    allowedOn: ['table', 'div'],
+    deprecated: false
+  },
+  'aria-colindex': {
+    type: 'integer',
+    required: false,
+    allowedOn: ['tr', 'td', 'th', 'div'],
+    deprecated: false
+  },
+  'aria-colspan': {
+    type: 'integer',
+    required: false,
+    allowedOn: ['td', 'th', 'div'],
+    deprecated: false
+  },
+  'aria-rowindex': {
+    type: 'integer',
+    required: false,
+    allowedOn: ['tr', 'td', 'th', 'div'],
+    deprecated: false
+  },
+  'aria-rowspan': {
+    type: 'integer',
+    required: false,
+    allowedOn: ['td', 'th', 'div'],
     deprecated: false
   }
 }

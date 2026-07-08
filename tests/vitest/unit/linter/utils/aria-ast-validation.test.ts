@@ -402,4 +402,27 @@ describe('aria-ast-validation', () => {
       expect(issues).toHaveLength(0)
     })
   })
+
+  describe('previously-missing WAI-ARIA 1.2 roles (ARIA_ROLES completeness)', () => {
+    // Regression coverage: these roles are valid per the WAI-ARIA 1.2 spec but were absent
+    // from ARIA_ROLES, so validateRole incorrectly flagged them as 'aria-invalid-role'
+    // (e.g. role="group" on a <div>, reported via a real eslint-disable workaround).
+    const roles = [
+      'group', 'radiogroup', 'generic', 'document', 'feed', 'list', 'listitem',
+      'table', 'row', 'rowgroup', 'cell', 'gridcell', 'columnheader', 'rowheader',
+      'caption', 'figure', 'note', 'definition', 'term', 'paragraph', 'blockquote',
+      'deletion', 'insertion', 'math', 'directory'
+    ]
+
+    it.each(roles)('45. does not flag role="%s" as an invalid/unknown role', (role) => {
+      const issues = validateRole(role, 'div')
+      expect(issues.some(i => i.id === 'aria-invalid-role')).toBe(false)
+    })
+
+    it('46. flags the deprecated "directory" role as deprecated, not invalid', () => {
+      const issues = validateRole('directory', 'div')
+      expect(issues.some(i => i.id === 'aria-invalid-role')).toBe(false)
+      expect(issues.some(i => i.id === 'aria-deprecated-role')).toBe(true)
+    })
+  })
 })

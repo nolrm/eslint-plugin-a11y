@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-07-09
+
+### Added
+
+- `a11y/aria-validation`: recognized 25 previously-missing WAI-ARIA 1.2 roles that were
+  incorrectly flagged as invalid (`group`, `radiogroup`, `generic`, `document`, `feed`,
+  `list`, `listitem`, `table`, `row`, `rowgroup`, `cell`, `gridcell`, `columnheader`,
+  `rowheader`, `caption`, `figure`, `note`, `definition`, `term`, `paragraph`,
+  `blockquote`, `deletion`, `insertion`, `math`, and the deprecated `directory`), along
+  with the 6 supporting properties they need (`aria-colcount`, `aria-rowcount`,
+  `aria-colindex`, `aria-colspan`, `aria-rowindex`, `aria-rowspan`).
+
+### Fixed
+
+- `tests/vitest/integration/aria-validation.test.ts`: the ESLint integration harness was
+  missing `plugins: ['a11y']` in its config, so the `a11y/aria-validation` rule silently
+  never ran — every test in the file passed only because its assertions were weak enough
+  to also match ESLint's "rule not found" placeholder message. Fixed the config and
+  tightened the assertions to check real message content.
+
 ## [1.2.0] - 2026-07-08
 
 ### Added
