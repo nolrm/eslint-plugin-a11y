@@ -255,6 +255,54 @@ Configure heading hierarchy tolerance:
 // <h1>Title</h1><h4>Subsection</h4> // ⚠️ Warning (skip of 3 > maxSkip)
 ```
 
+### anchor-is-valid Options
+
+Configure alternate href-equivalent props and which checks are active:
+
+```javascript
+{
+  'a11y/anchor-is-valid': ['error', {
+    specialLink: [],                                    // default: [] - extra prop/attribute names checked as href aliases
+    aspects: ['noHref', 'invalidHref', 'preferButton']   // default: all three
+  }]
+}
+```
+
+**`specialLink`** lets a mapped Link component (see [Component Mapping](#component-mapping--polymorphic-support) below) use a different prop name for its URL, e.g. React Router's `to`:
+
+```javascript
+// eslint config
+{
+  settings: {
+    'a11y': { components: { Link: 'a' } }
+  },
+  rules: {
+    'a11y/anchor-is-valid': ['error', { specialLink: ['to'] }]
+  }
+}
+```
+
+```jsx
+<Link to="/home">Home</Link>       // ✅ Passes (to recognized as href-equivalent)
+<Link to="#">Home</Link>           // ❌ invalidHref
+<Link>Home</Link>                 // ❌ missingHref
+```
+
+**`aspects`** toggles individual checks on or off. For example, to only validate href values without requiring href to be present at all:
+
+```javascript
+{
+  'a11y/anchor-is-valid': ['error', {
+    aspects: ['invalidHref']  // disables noHref and preferButton checks
+  }]
+}
+```
+
+```jsx
+<a>No link</a>                     // ✅ Passes (noHref check disabled)
+<a href="#">Bad link</a>           // ❌ invalidHref (still enabled)
+```
+
 ## Component Mapping & Polymorphic Support
 
 Map your design-system components to native HTML elements so rules apply correctly.

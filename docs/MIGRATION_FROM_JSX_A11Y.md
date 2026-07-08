@@ -18,7 +18,7 @@ Audited against `src/linter/eslint-plugin/index.ts` (43 rules). Config Preset in
 | jsx-a11y Rule | a11y Rule | Config Preset | Notes |
 |---------------|-------------------|---------------|-------|
 | `jsx-a11y/alt-text` | `a11y/image-alt` | minimal, recommended, strict | Enhanced with decorative image options |
-| `jsx-a11y/anchor-is-valid` | `a11y/anchor-is-valid` | recommended, strict | Href/link validation; see also `link-text` for descriptive text |
+| `jsx-a11y/anchor-is-valid` | `a11y/anchor-is-valid` | recommended, strict | Href/link validation; supports `specialLink` (alternate href-equivalent props, e.g. router `to`) and `aspects` options; see also `link-text` for descriptive text |
 | `jsx-a11y/aria-activedescendant-has-tabindex` | `a11y/aria-activedescendant-has-tabindex` | recommended, strict | ✅ Available (AST-based) |
 | `jsx-a11y/aria-props` | `a11y/aria-validation` | recommended, strict | ✅ Available (AST-based) |
 | `jsx-a11y/aria-proptypes` | `a11y/aria-validation` | recommended, strict | ✅ Available (AST-based) |
@@ -115,12 +115,12 @@ module.exports = {
   plugins: ['a11y'],
   rules: {
     // Map jsx-a11y rules to a11y
-    'a11y/image-alt': 'error',        // was: jsx-a11y/alt-text
-    'a11y/link-text': 'warn',         // was: jsx-a11y/anchor-is-valid
-    'a11y/form-label': 'error',       // was: jsx-a11y/label-has-associated-control
-    'a11y/iframe-title': 'error',    // was: jsx-a11y/iframe-has-title
-    'a11y/heading-order': 'warn',    // was: jsx-a11y/heading-has-content
-    'a11y/table-structure': 'error'   // was: jsx-a11y/scope
+    'a11y/image-alt': 'error',           // was: jsx-a11y/alt-text
+    'a11y/anchor-is-valid': 'error',     // was: jsx-a11y/anchor-is-valid
+    'a11y/form-label': 'error',          // was: jsx-a11y/label-has-associated-control
+    'a11y/iframe-title': 'error',        // was: jsx-a11y/iframe-has-title
+    'a11y/heading-has-content': 'error', // was: jsx-a11y/heading-has-content
+    'a11y/table-structure': 'error'      // was: jsx-a11y/scope
   }
 }
 ```

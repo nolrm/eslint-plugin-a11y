@@ -144,6 +144,7 @@ This table provides a high-level overview of the accessibility rules exposed by 
 | `a11y/image-alt` | `img` alt text, decorative images | `error` | `plugin:a11y/minimal`, `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `alt-text` |
 | `a11y/button-label` | Buttons have accessible labels | `error` | `plugin:a11y/minimal`, `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `button-has-type`, `click-events-have-key-events` |
 | `a11y/link-text` | Descriptive link text, denylist phrases | `warn` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | Covers parts of: `anchor-is-valid`, `no-redundant-roles` |
+| `a11y/anchor-is-valid` | Anchor has a valid `href` (or `specialLink` prop), no `javascript:`/`#`/empty values | `error` | `plugin:a11y/recommended`, `plugin:a11y/strict`, `flat/recommended`, `flat/strict` | `anchor-is-valid` |
 | `a11y/form-label` | Form controls have labels | `error` | `plugin:a11y/minimal`, `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/minimal`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `label-has-associated-control` |
 | `a11y/heading-order` | Heading hierarchy, skip tolerance | `warn` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | No direct equivalent (related to `heading-has-content`) |
 | `a11y/iframe-title` | `iframe` elements have titles | `error` | `plugin:a11y/recommended`, `plugin:a11y/react`, `plugin:a11y/vue`, `plugin:a11y/strict`, `flat/recommended`, `flat/recommended-react`, `flat/react`, `flat/vue`, `flat/strict` | `iframe-has-title` |
@@ -185,6 +186,43 @@ Enforces that images have `alt` attributes for accessibility.
 
 // ⚠️ Dynamic (warning)
 <img src="photo.jpg" alt={altText} />
+```
+
+### a11y/anchor-is-valid
+
+Enforces that anchor elements have valid href attributes. Anchors without a real href are not valid links and should use a `<button>` element instead for clickable actions.
+
+**Severity:** `error` (recommended, strict)
+
+**Messages:**
+- `missingHref` - Anchor element must have an href attribute to be a valid link
+- `invalidHref` - The href value is not a valid URL (empty, `#`, or `javascript:`)
+- `preferButton` - Anchor elements with click handlers but no href should be `<button>` elements
+
+**Options:**
+- `specialLink` (`string[]`, default `[]`) - Extra prop/attribute names checked as href aliases, e.g. `['to']` for React Router's `<Link to="...">` (used together with `settings['a11y'].components` to map the component to `a`; see [Configuration Guide](./CONFIGURATION.md#anchor-is-valid-options))
+- `aspects` (default: all three) - Toggle individual checks on/off: `'noHref'`, `'invalidHref'`, `'preferButton'`
+
+**Examples:**
+
+```jsx
+// ❌ Missing href
+<a>Click me</a>
+
+// ❌ Invalid href
+<a href="#">Link</a>
+<a href="javascript:void(0)">Click</a>
+
+// ❌ Click handler without href - use a button instead
+<a onClick={handleClick}>Action</a>
+
+// ✅ Valid
+<a href="/home">Home</a>
+
+// ✅ Valid with specialLink option + component mapping
+// settings: { 'a11y': { components: { Link: 'a' } } }
+// rules: { 'a11y/anchor-is-valid': ['error', { specialLink: ['to'] }] }
+<Link to="/home">Home</Link>
 ```
 
 ### a11y/button-label

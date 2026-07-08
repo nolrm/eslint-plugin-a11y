@@ -32,6 +32,14 @@ export interface HeadingOrderOptions {
 }
 
 /**
+ * Anchor is valid rule options
+ */
+export interface AnchorIsValidOptions {
+  specialLink?: string[] // default: [] - extra prop/attribute names checked as href aliases (e.g. ['to'])
+  aspects?: Array<'noHref' | 'invalidHref' | 'preferButton'> // default: all three
+}
+
+/**
  * Get rule options with defaults
  */
 export function getImageAltOptions(options: unknown[] = []): ImageAltOptions {
@@ -60,6 +68,16 @@ export function getHeadingOrderOptions(options: unknown[] = []): HeadingOrderOpt
   return {
     allowSameLevel: opts.allowSameLevel ?? true,
     maxSkip: opts.maxSkip
+  }
+}
+
+export function getAnchorIsValidOptions(options: unknown[] = []): Required<AnchorIsValidOptions> {
+  const opts = (options[0] || {}) as AnchorIsValidOptions
+  return {
+    specialLink: opts.specialLink || [],
+    aspects: opts.aspects && opts.aspects.length > 0
+      ? opts.aspects
+      : ['noHref', 'invalidHref', 'preferButton']
   }
 }
 

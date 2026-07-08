@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-07-08
+
+### Added
+
+- `a11y/anchor-is-valid`: new `specialLink` option to check alternate prop/attribute
+  names (e.g. React Router's `to`) as href aliases on components already mapped via
+  `settings['a11y'].components` (e.g. `{ Link: 'a' }`), and a new `aspects` option to
+  toggle individual checks (`noHref`, `invalidHref`, `preferButton`) on or off,
+  matching `eslint-plugin-jsx-a11y`'s option names for easier migration. Default
+  behavior is unchanged.
+
+### Fixed
+
+- Corrected stale claims in `docs/MISSING_RULES_GAP_ANALYSIS.md` that `anchor-is-valid`
+  href validation, `heading-has-content`, `img-redundant-alt`, `anchor-ambiguous-text`,
+  and `accessible-emoji` were missing — all have been implemented since prior releases;
+  condensed the doc's "missing rules" sections to reflect actual current state.
+- Fixed stale code comments in `docs/MIGRATION_FROM_JSX_A11Y.md`'s migration example
+  that contradicted the accurate `anchor-is-valid`/`heading-has-content` mappings in
+  the rule table above it.
+
 ## [1.1.0] - 2026-07-06
 
 ### Added

@@ -194,6 +194,21 @@ Many rules support configuration options for fine-tuned control:
 }
 ```
 
+**anchor-is-valid - Router Link support:**
+```javascript
+{
+  settings: {
+    'a11y': { components: { Link: 'a' } }
+  },
+  rules: {
+    'a11y/anchor-is-valid': ['error', {
+      specialLink: ['to'],  // recognizes <Link to="..."> as a valid href
+      aspects: ['noHref', 'invalidHref', 'preferButton']
+    }]
+  }
+}
+```
+
 See [Configuration Guide](./docs/CONFIGURATION.md) for all options.
 
 ### Component Mapping
