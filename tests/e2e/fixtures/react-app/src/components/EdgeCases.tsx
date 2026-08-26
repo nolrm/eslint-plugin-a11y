@@ -144,6 +144,34 @@ export function ValidButtons() {
   )
 }
 
+// A design-system Button wrapper, named to match the common convention this
+// rule auto-detects (case-insensitively) as a native <button> - see
+// getElementRoleFromJSX. Its accessible name comes from a `label` prop
+// instead of children, which is why button-label needs labelPropNames support.
+const Button = (props: any) => <button {...props} />
+
+/**
+ * Custom Button component using a `label` prop - Should pass with zero config
+ */
+export function ValidCustomButtonLabel() {
+  return (
+    <div>
+      <Button label="Cancel" />
+    </div>
+  )
+}
+
+/**
+ * Custom Button component with no accessible name at all - Should still be caught
+ */
+export function MissingCustomButtonLabel() {
+  return (
+    <div>
+      <Button />
+    </div>
+  )
+}
+
 /**
  * Heading Order Issues - Should be caught
  */
@@ -181,6 +209,7 @@ export function AllEdgeCases() {
       <ValidLabels />
       <ValidAlt />
       <ValidButtons />
+      <ValidCustomButtonLabel />
       <ValidHeadingOrder />
     </>
   )

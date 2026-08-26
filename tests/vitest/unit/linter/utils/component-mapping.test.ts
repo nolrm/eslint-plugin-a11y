@@ -125,6 +125,47 @@ describe('Component Mapping', () => {
     })
   })
 
+  describe('label prop support', () => {
+    it('1. should treat custom Button label prop as accessible name with zero config', () => {
+      ruleTester.run('button-label', buttonLabel, {
+        valid: [
+          {
+            code: '<Button label="Cancel" />'
+          }
+        ],
+        invalid: []
+      })
+    })
+
+    it('2. should downgrade dynamic label prop values to dynamicLabel', () => {
+      ruleTester.run('button-label', buttonLabel, {
+        valid: [],
+        invalid: [
+          {
+            code: '<Button label={cancelLabel ?? defaultCancelLabel} />',
+            errors: [{ messageId: 'dynamicLabel' }]
+          }
+        ]
+      })
+    })
+
+    it('3. should respect a custom labelPropNames setting', () => {
+      ruleTester.run('button-label', buttonLabel, {
+        valid: [
+          {
+            code: '<Button text="Cancel" />',
+            settings: {
+              'a11y': {
+                labelPropNames: ['text']
+              }
+            }
+          }
+        ],
+        invalid: []
+      })
+    })
+  })
+
   describe('polymorphic components', () => {
     it('should treat polymorphic Link as anchor when as="a"', () => {
       ruleTester.run('link-text', linkText, {

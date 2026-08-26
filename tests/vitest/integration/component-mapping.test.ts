@@ -21,7 +21,7 @@ function getProjectRoot(): string {
 
 /**
  * Component mapping integration tests
- * 
+ *
  * These tests verify that component mapping works with ESLint
  */
 describe('Component Mapping Integration', () => {
@@ -30,7 +30,7 @@ describe('Component Mapping Integration', () => {
     const projectRoot = getProjectRoot()
     const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
     const plugin = require(pluginPath).default
-    
+
     const eslintWithSettings = new ESLint({
       useEslintrc: false,
       plugins: {
@@ -45,6 +45,7 @@ describe('Component Mapping Integration', () => {
             jsx: true
           }
         },
+        plugins: ['a11y'],
         rules: {
           'a11y/link-text': 'warn'
         },
@@ -65,14 +66,15 @@ describe('Component Mapping Integration', () => {
 
     expect(results).toHaveLength(1)
     const linkTextErrors = results[0].messages.filter(m => m.ruleId === 'a11y/link-text')
-    expect(linkTextErrors.length).toBeGreaterThan(0)
+    expect(linkTextErrors).toHaveLength(1)
+    expect(linkTextErrors[0].messageId).toBe('nonDescriptive')
   })
 
   it('should lint custom Button component as button', async () => {
     const projectRoot = getProjectRoot()
     const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
     const plugin = require(pluginPath).default
-    
+
     const eslintWithSettings = new ESLint({
       useEslintrc: false,
       plugins: {
@@ -87,6 +89,7 @@ describe('Component Mapping Integration', () => {
             jsx: true
           }
         },
+        plugins: ['a11y'],
         rules: {
           'a11y/button-label': 'error'
         },
@@ -107,14 +110,89 @@ describe('Component Mapping Integration', () => {
 
     expect(results).toHaveLength(1)
     const buttonErrors = results[0].messages.filter(m => m.ruleId === 'a11y/button-label')
-    expect(buttonErrors.length).toBeGreaterThan(0)
+    expect(buttonErrors).toHaveLength(1)
+    expect(buttonErrors[0].messageId).toBe('missingLabel')
+  })
+
+  it('should not flag a custom Button component with a static label prop, with zero settings', async () => {
+    const projectRoot = getProjectRoot()
+    const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
+    const plugin = require(pluginPath).default
+
+    const eslintWithoutSettings = new ESLint({
+      useEslintrc: false,
+      plugins: {
+        'a11y': plugin
+      },
+      baseConfig: {
+        parser: require.resolve('@typescript-eslint/parser'),
+        parserOptions: {
+          ecmaVersion: 2020,
+          sourceType: 'module',
+          ecmaFeatures: {
+            jsx: true
+          }
+        },
+        plugins: ['a11y'],
+        rules: {
+          'a11y/button-label': 'error'
+        }
+        // Intentionally no settings['a11y'] block - this must work out of the box.
+      }
+    })
+
+    const results = await eslintWithoutSettings.lintText(
+      '<Button label="Cancel" />',
+      { filePath: 'test.tsx' }
+    )
+
+    expect(results).toHaveLength(1)
+    const buttonErrors = results[0].messages.filter(m => m.ruleId === 'a11y/button-label')
+    expect(buttonErrors).toHaveLength(0)
+  })
+
+  it('should downgrade a dynamic Button label prop to a runtime-check warning, with zero settings', async () => {
+    const projectRoot = getProjectRoot()
+    const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
+    const plugin = require(pluginPath).default
+
+    const eslintWithoutSettings = new ESLint({
+      useEslintrc: false,
+      plugins: {
+        'a11y': plugin
+      },
+      baseConfig: {
+        parser: require.resolve('@typescript-eslint/parser'),
+        parserOptions: {
+          ecmaVersion: 2020,
+          sourceType: 'module',
+          ecmaFeatures: {
+            jsx: true
+          }
+        },
+        plugins: ['a11y'],
+        rules: {
+          'a11y/button-label': 'error'
+        }
+      }
+    })
+
+    const results = await eslintWithoutSettings.lintText(
+      '<Button label={cancelLabel ?? defaultCancelLabel} />',
+      { filePath: 'test.tsx' }
+    )
+
+    expect(results).toHaveLength(1)
+    const buttonErrors = results[0].messages.filter(m => m.ruleId === 'a11y/button-label')
+    expect(buttonErrors).toHaveLength(1)
+    expect(buttonErrors[0].messageId).toBe('dynamicLabel')
   })
 
   it('should handle polymorphic components', async () => {
     const projectRoot = getProjectRoot()
     const pluginPath = resolve(projectRoot, 'dist/linter/eslint-plugin/index.js')
     const plugin = require(pluginPath).default
-    
+
     const eslintWithSettings = new ESLint({
       useEslintrc: false,
       plugins: {
@@ -129,6 +207,7 @@ describe('Component Mapping Integration', () => {
             jsx: true
           }
         },
+        plugins: ['a11y'],
         rules: {
           'a11y/link-text': 'warn'
         },
@@ -147,6 +226,7 @@ describe('Component Mapping Integration', () => {
 
     expect(results).toHaveLength(1)
     const linkTextErrors = results[0].messages.filter(m => m.ruleId === 'a11y/link-text')
-    expect(linkTextErrors.length).toBeGreaterThan(0)
+    expect(linkTextErrors).toHaveLength(1)
+    expect(linkTextErrors[0].messageId).toBe('nonDescriptive')
   })
 })

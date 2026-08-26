@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-08-26
+
+### Added
+
+- `a11y/button-label`: new `settings['a11y'].labelPropNames` option (default `['label']`)
+  recognizes an accessible name carried by a custom prop on non-native button-like
+  components (e.g. `<Button label="Cancel" />`), instead of requiring `aria-label` or
+  JSX children. Works out of the box with no config for the common `label` prop
+  convention. A dynamic value (`label={cancelLabel}`) reports `dynamicLabel` instead of
+  `missingLabel`, matching existing dynamic `aria-label` handling.
+
+### Fixed
+
+- `a11y/button-label`: no longer false-positives on custom components whose accessible
+  name comes from a `label`-style prop rather than children or `aria-label`. This
+  previously affected any component whose name case-insensitively matches a native tag
+  (e.g. a component literally named `Button`) - that name-based auto-match happens with
+  no settings configured, so the false positive did too; see the new `labelPropNames`
+  setting above.
+- `tests/vitest/integration/component-mapping.test.ts`: the ESLint integration harness
+  was missing `plugins: ['a11y']` in its `baseConfig` (declarative plugin list), so every
+  `a11y/*` rule silently failed to load and ESLint reported its "rule not found"
+  placeholder instead - previously masked because the file's assertions only checked
+  `length > 0`, which the placeholder message also satisfies. Added the missing
+  declaration and tightened assertions to check real `messageId` values.
+
 ## [1.3.0] - 2026-07-09
 
 ### Added

@@ -103,6 +103,33 @@ describe('ESLint - End-to-End with Real Files', () => {
     })
   })
 
+  describe('Custom Button label prop (zero config)', () => {
+    it('1. should not flag a custom Button component labeled via its label prop', async () => {
+      const filePath = join(reactAppDir, 'src/components/EdgeCases.tsx')
+      const results = await eslint.lintFiles([filePath])
+      const messages = results[0].messages
+
+      // ValidCustomButtonLabel's <Button label="Cancel" /> (line 159) must not
+      // appear as a button-label violation, with no settings['a11y']
+      // configured anywhere in this fixture's .eslintrc.json.
+      const buttonLabelViolations = messages.filter((m: any) =>
+        m.ruleId === 'a11y/button-label' && m.line === 159
+      )
+      expect(buttonLabelViolations.length).toBe(0)
+    })
+
+    it('2. should still flag a custom Button component with no accessible name', async () => {
+      const filePath = join(reactAppDir, 'src/components/EdgeCases.tsx')
+      const results = await eslint.lintFiles([filePath])
+      const messages = results[0].messages
+
+      const buttonLabelViolations = messages.filter((m: any) =>
+        m.ruleId === 'a11y/button-label' && m.messageId === 'missingLabel'
+      )
+      expect(buttonLabelViolations.length).toBeGreaterThan(0)
+    })
+  })
+
   describe('Form Components', () => {
     it('should pass valid form patterns', async () => {
       const filePath = join(reactAppDir, 'src/components/Form.tsx')

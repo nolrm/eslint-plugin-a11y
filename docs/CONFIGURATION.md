@@ -374,6 +374,54 @@ Component resolution follows this order (highest to lowest priority):
 3. **Settings mapping** - `components: { Link: 'a' }`
 4. **Unknown** - Component not recognized
 
+**Note:** step 1 matches case-insensitively against the JSX identifier itself, before any
+settings are consulted. A component literally named `Button`, `Nav`, `Header`, `Table`,
+`H1`-`H6`, etc. is treated as that native element automatically - **no `components`
+mapping is required**. This is convenient for conventionally-named design-system
+components, but it means rules like `button-label` (see below) apply to them
+out of the box too, so it's worth knowing about even if you never touch `settings`.
+
+### Label Prop Support
+
+`button-label` recognizes an accessible name from JSX/attribute children or
+`aria-label`/`aria-labelledby` on native `<button>` elements. Custom button components
+(matched via the case-insensitive name rule above, or via `components` mapping) often
+carry their accessible name through a different prop instead, e.g.:
+
+```jsx
+<Button label="Cancel" />
+```
+
+By default, `button-label` also checks a `label` prop on non-native button-like
+components - **no configuration needed** for this common convention. If your design
+system uses a different prop name, configure it:
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
+  settings: {
+    'a11y': {
+      labelPropNames: ['text'] // Default: ['label']
+    }
+  }
+}
+```
+
+**Behavior:**
+
+- A static string value (`label="Cancel"`) counts as a valid accessible name.
+- A dynamic value (`label={cancelLabel}`) can't be verified as non-empty at lint time,
+  so it's reported as `dynamicLabel` (not `missingLabel`) - the same treatment already
+  given to a dynamic `aria-label`. Suppress it with an
+  [`a11y-checked-at-runtime`](./ESLINT_PLUGIN.md) comment once you've verified it.
+- An empty string (`label=""`) or a missing prop still reports `missingLabel`.
+- This only applies to non-native components - a literal `<button>` element's behavior
+  is unchanged (children/`aria-label`/`aria-labelledby` only).
+- Vue custom-component mapping isn't implemented yet (see Resolution Precedence above -
+  it's JSX-only today), so `labelPropNames` currently has no effect on `VElement` nodes.
+
 ## Flat Config (ESLint v9+)
 
 For ESLint v9+, use flat config format with our presets:
@@ -650,6 +698,38 @@ module.exports = {
   ]
 }
 ```
+
+### Relaxing interaction rules in stories and tests
+
+Rules like `click-events-have-key-events` check every `onClick` handler, including ones
+in Storybook stories and test files where the handler is test/demo plumbing rather than
+a real interactive control. This rule has no file-path awareness by design (matching
+`eslint-plugin-jsx-a11y`'s equivalent rules) - scoping it is a config concern, not
+something the rule itself should guess at. Rather than disabling all `a11y/*` rules in
+those files (which also hides real issues, e.g. in a story that's meant to demonstrate
+accessible usage), relax just the interaction-heavy rules:
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  plugins: ['a11y'],
+  extends: ['plugin:a11y/recommended'],
+  overrides: [
+    {
+      files: ['**/*.stories.{js,ts,jsx,tsx}', '**/*.test.{js,ts,jsx,tsx}'],
+      rules: {
+        'a11y/click-events-have-key-events': 'off',
+        'a11y/mouse-events-have-key-events': 'off'
+      }
+    }
+  ]
+}
+```
+
+If you're evaluating this plugin against a baseline (e.g. `eslint-plugin-jsx-a11y`) that
+already has this kind of override in place, add the equivalent override before comparing
+violation counts - otherwise the comparison counts noise that the baseline configuration
+was already filtering out.
 
 ## Troubleshooting
 

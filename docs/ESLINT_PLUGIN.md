@@ -249,7 +249,13 @@ Enforces that buttons have labels or `aria-label` attributes.
 
 // ⚠️ Dynamic (warning)
 <button aria-label={dynamicLabel}></button>
+
+// ✅ Valid with custom component (settings: { 'a11y': { labelPropNames: ['label'] } })
+// 'label' is checked by default, no settings needed
+<Button label="Cancel" />
 ```
+
+See [Configuration Guide](./CONFIGURATION.md#label-prop-support) for `labelPropNames` details.
 
 ### a11y/link-text
 

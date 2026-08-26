@@ -21,6 +21,7 @@ export interface A11yPluginSettings {
   'a11y'?: {
     components?: Record<string, string> // e.g., { Link: 'a', Button: 'button' }
     polymorphicPropNames?: string[] // e.g., ['as', 'component']
+    labelPropNames?: string[] // e.g., ['label', 'text'] - Default: ['label']
     runtimeCheckedComment?: string // e.g., 'a11y-checked-at-runtime'
     runtimeCheckedMode?: 'downgrade' | 'suppress' // Default: 'downgrade'
   }

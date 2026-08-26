@@ -226,7 +226,8 @@ module.exports = {
         Button: 'button', // Treat <Button> as <button>
         Image: 'img'      // Treat <Image> as <img>
       },
-      polymorphicPropNames: ['as', 'component'] // Support <Link as="a">
+      polymorphicPropNames: ['as', 'component'], // Support <Link as="a">
+      labelPropNames: ['label'] // Default - recognizes <Button label="..."> as a valid name
     }
   }
 }
@@ -236,6 +237,7 @@ Now rules apply to your components:
 ```jsx
 <Link href="/about">Click here</Link> // ⚠️ Warning: nonDescriptive
 <Button></Button> // ❌ Error: missingLabel
+<Button label="Cancel" /> // ✅ Valid (labelPropNames)
 ```
 
 ### Quick start with ESLint flat config (v9+)
