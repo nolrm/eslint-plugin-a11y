@@ -103,7 +103,7 @@ eslint-plugin-a11y/formatter-progress
 This project uses [ContextKit](https://github.com/nolrm/contextkit) for AI development standards.
 
 ## ContextKit
-Version: 1.1.7
+Version: 1.7.0
 
 ## Project Standards
 
@@ -112,7 +112,7 @@ The following standards are auto-loaded into context via @imports:
 - @.contextkit/standards/code-style.md — Coding conventions and style rules
 - @.contextkit/standards/architecture.md — Architecture decisions and patterns
 
-Loaded on demand via skills, not always-loaded: testing.md (`test` skill), workflows.md (`agent-push-checklist` skill), ai-guidelines.md and glossary.md (`standards-aware` skill), decisions.md and roadmap.md (`product-context` skill).
+Loaded on demand via skills, not always-loaded: testing.md (`squad-test` skill), workflows.md (`agent-push-checklist` skill), ai-guidelines.md and glossary.md (`standards-aware` skill), decisions.md and roadmap.md (`product-context` skill).
 
 ## Product Context
 
@@ -123,7 +123,6 @@ Loaded on demand via skills, not always-loaded: testing.md (`test` skill), workf
 - `.contextkit/commands/dev/analyze.md` — Analyze and customize standards
 - `.contextkit/commands/dev/create-component.md` — Create components
 - `.contextkit/commands/dev/create-feature.md` — Create features
-- `.contextkit/commands/dev/run-tests.md` — Run tests
 - `.contextkit/commands/dev/quality-check.md` — Quality checks
 
 Corrections log (`.contextkit/corrections.md`) is loaded on demand via the `standards-aware` skill, not always-loaded.
@@ -131,4 +130,6 @@ Corrections log (`.contextkit/corrections.md`) is loaded on demand via the `stan
 ## Quick Reference
 
 Before writing code, check the relevant standards files above. Always follow the project's established patterns and conventions.
+
+Chat terseness and doc diagrams are configurable per-project — see `.contextkit/config.yml` `response_style` block and `ai-guidelines.md` § Response Style.
 <!-- End ContextKit -->
